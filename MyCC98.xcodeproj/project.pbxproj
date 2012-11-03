@@ -1,0 +1,369 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF564A481644E2450027EB04 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF564A471644E2450027EB04 /* UIKit.framework */; };
+		BF564A4A1644E2450027EB04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF564A491644E2450027EB04 /* Foundation.framework */; };
+		BF564A4C1644E2450027EB04 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF564A4B1644E2450027EB04 /* CoreGraphics.framework */; };
+		BF564A521644E2450027EB04 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF564A501644E2450027EB04 /* InfoPlist.strings */; };
+		BF564A541644E2450027EB04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A531644E2450027EB04 /* main.m */; };
+		BF564A581644E2450027EB04 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A571644E2450027EB04 /* AppDelegate.m */; };
+		BF564A5B1644E2450027EB04 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF564A591644E2450027EB04 /* MainStoryboard.storyboard */; };
+		BF564A681644E2A60027EB04 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A651644E2A60027EB04 /* ECSlidingViewController.m */; };
+		BF564A691644E2A60027EB04 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A671644E2A60027EB04 /* UIImage+ImageWithUIView.m */; };
+		BF564A721644E38A0027EB04 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A711644E38A0027EB04 /* InitialSlidingViewController.m */; };
+		BF564A751644EA8C0027EB04 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A741644EA8C0027EB04 /* MenuViewController.m */; };
+		BF564A781644EB440027EB04 /* CustomBoardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A771644EB440027EB04 /* CustomBoardNavigationController.m */; };
+		BF564A7A1644EEBD0027EB04 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF564A791644EEBD0027EB04 /* QuartzCore.framework */; };
+		BF564A811644F23A0027EB04 /* HotTopicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A801644F23A0027EB04 /* HotTopicTableViewController.m */; };
+		BF564A851644F24C0027EB04 /* BoardListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A841644F24C0027EB04 /* BoardListTableViewController.m */; };
+		BF564A901644F68D0027EB04 /* CustomBoardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A8F1644F68D0027EB04 /* CustomBoardTableViewController.m */; };
+		BF564A97164522070027EB04 /* HotTopicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A96164522070027EB04 /* HotTopicNavigationController.m */; };
+		BF564A9F1645238F0027EB04 /* BoardListNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF564A9E1645238F0027EB04 /* BoardListNavigationController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BF564A431644E2450027EB04 /* MyCC98.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCC98.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF564A471644E2450027EB04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BF564A491644E2450027EB04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BF564A4B1644E2450027EB04 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BF564A4F1644E2450027EB04 /* MyCC98-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyCC98-Info.plist"; sourceTree = "<group>"; };
+		BF564A531644E2450027EB04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BF564A551644E2450027EB04 /* MyCC98-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyCC98-Prefix.pch"; sourceTree = "<group>"; };
+		BF564A561644E2450027EB04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BF564A571644E2450027EB04 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BF564A641644E2A60027EB04 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingViewController.h; path = Vendor/ECSlidingViewController/ECSlidingViewController.h; sourceTree = "<group>"; };
+		BF564A651644E2A60027EB04 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingViewController.m; path = Vendor/ECSlidingViewController/ECSlidingViewController.m; sourceTree = "<group>"; };
+		BF564A661644E2A60027EB04 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageWithUIView.h"; path = "Vendor/ECSlidingViewController/UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		BF564A671644E2A60027EB04 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageWithUIView.m"; path = "Vendor/ECSlidingViewController/UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		BF564A701644E38A0027EB04 /* InitialSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialSlidingViewController.h; sourceTree = "<group>"; };
+		BF564A711644E38A0027EB04 /* InitialSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialSlidingViewController.m; sourceTree = "<group>"; };
+		BF564A731644EA8C0027EB04 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		BF564A741644EA8C0027EB04 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		BF564A761644EB440027EB04 /* CustomBoardNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBoardNavigationController.h; sourceTree = "<group>"; };
+		BF564A771644EB440027EB04 /* CustomBoardNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBoardNavigationController.m; sourceTree = "<group>"; };
+		BF564A791644EEBD0027EB04 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BF564A7F1644F23A0027EB04 /* HotTopicTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicTableViewController.h; sourceTree = "<group>"; };
+		BF564A801644F23A0027EB04 /* HotTopicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicTableViewController.m; sourceTree = "<group>"; };
+		BF564A831644F24C0027EB04 /* BoardListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardListTableViewController.h; sourceTree = "<group>"; };
+		BF564A841644F24C0027EB04 /* BoardListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardListTableViewController.m; sourceTree = "<group>"; };
+		BF564A8E1644F68D0027EB04 /* CustomBoardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBoardTableViewController.h; sourceTree = "<group>"; };
+		BF564A8F1644F68D0027EB04 /* CustomBoardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBoardTableViewController.m; sourceTree = "<group>"; };
+		BF564A95164522070027EB04 /* HotTopicNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicNavigationController.h; sourceTree = "<group>"; };
+		BF564A96164522070027EB04 /* HotTopicNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicNavigationController.m; sourceTree = "<group>"; };
+		BF564A9D1645238F0027EB04 /* BoardListNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardListNavigationController.h; sourceTree = "<group>"; };
+		BF564A9E1645238F0027EB04 /* BoardListNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardListNavigationController.m; sourceTree = "<group>"; };
+		BF564AA3164526890027EB04 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		BF564AA4164526890027EB04 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF564A401644E2450027EB04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF564A7A1644EEBD0027EB04 /* QuartzCore.framework in Frameworks */,
+				BF564A481644E2450027EB04 /* UIKit.framework in Frameworks */,
+				BF564A4A1644E2450027EB04 /* Foundation.framework in Frameworks */,
+				BF564A4C1644E2450027EB04 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF564A381644E2450027EB04 = {
+			isa = PBXGroup;
+			children = (
+				BF564A4D1644E2450027EB04 /* MyCC98 */,
+				BF564A461644E2450027EB04 /* Frameworks */,
+				BF564A441644E2450027EB04 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF564A441644E2450027EB04 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF564A431644E2450027EB04 /* MyCC98.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF564A461644E2450027EB04 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF564A791644EEBD0027EB04 /* QuartzCore.framework */,
+				BF564A471644E2450027EB04 /* UIKit.framework */,
+				BF564A491644E2450027EB04 /* Foundation.framework */,
+				BF564A4B1644E2450027EB04 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF564A4D1644E2450027EB04 /* MyCC98 */ = {
+			isa = PBXGroup;
+			children = (
+				BF564A6C1644E2E10027EB04 /* Controllers */,
+				BF564A6A1644E2B60027EB04 /* Vendor */,
+				BF564A561644E2450027EB04 /* AppDelegate.h */,
+				BF564A571644E2450027EB04 /* AppDelegate.m */,
+				BF564A591644E2450027EB04 /* MainStoryboard.storyboard */,
+				BF564A4E1644E2450027EB04 /* Supporting Files */,
+			);
+			path = MyCC98;
+			sourceTree = "<group>";
+		};
+		BF564A4E1644E2450027EB04 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BF564A4F1644E2450027EB04 /* MyCC98-Info.plist */,
+				BF564A501644E2450027EB04 /* InfoPlist.strings */,
+				BF564A531644E2450027EB04 /* main.m */,
+				BF564A551644E2450027EB04 /* MyCC98-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF564A6A1644E2B60027EB04 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				BF564A6B1644E2BE0027EB04 /* ECSlidingViewController */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		BF564A6B1644E2BE0027EB04 /* ECSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BF564A641644E2A60027EB04 /* ECSlidingViewController.h */,
+				BF564A651644E2A60027EB04 /* ECSlidingViewController.m */,
+				BF564A661644E2A60027EB04 /* UIImage+ImageWithUIView.h */,
+				BF564A671644E2A60027EB04 /* UIImage+ImageWithUIView.m */,
+			);
+			name = ECSlidingViewController;
+			sourceTree = "<group>";
+		};
+		BF564A6C1644E2E10027EB04 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BF564A701644E38A0027EB04 /* InitialSlidingViewController.h */,
+				BF564A711644E38A0027EB04 /* InitialSlidingViewController.m */,
+				BF564A731644EA8C0027EB04 /* MenuViewController.h */,
+				BF564A741644EA8C0027EB04 /* MenuViewController.m */,
+				BF564A761644EB440027EB04 /* CustomBoardNavigationController.h */,
+				BF564A771644EB440027EB04 /* CustomBoardNavigationController.m */,
+				BF564A7F1644F23A0027EB04 /* HotTopicTableViewController.h */,
+				BF564A801644F23A0027EB04 /* HotTopicTableViewController.m */,
+				BF564A831644F24C0027EB04 /* BoardListTableViewController.h */,
+				BF564A841644F24C0027EB04 /* BoardListTableViewController.m */,
+				BF564A8E1644F68D0027EB04 /* CustomBoardTableViewController.h */,
+				BF564A8F1644F68D0027EB04 /* CustomBoardTableViewController.m */,
+				BF564A95164522070027EB04 /* HotTopicNavigationController.h */,
+				BF564A96164522070027EB04 /* HotTopicNavigationController.m */,
+				BF564A9D1645238F0027EB04 /* BoardListNavigationController.h */,
+				BF564A9E1645238F0027EB04 /* BoardListNavigationController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF564A421644E2450027EB04 /* MyCC98 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF564A611644E2450027EB04 /* Build configuration list for PBXNativeTarget "MyCC98" */;
+			buildPhases = (
+				BF564A3F1644E2450027EB04 /* Sources */,
+				BF564A401644E2450027EB04 /* Frameworks */,
+				BF564A411644E2450027EB04 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyCC98;
+			productName = MyCC98;
+			productReference = BF564A431644E2450027EB04 /* MyCC98.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF564A3A1644E2450027EB04 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = VINCENT;
+			};
+			buildConfigurationList = BF564A3D1644E2450027EB04 /* Build configuration list for PBXProject "MyCC98" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BF564A381644E2450027EB04;
+			productRefGroup = BF564A441644E2450027EB04 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF564A421644E2450027EB04 /* MyCC98 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF564A411644E2450027EB04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF564A521644E2450027EB04 /* InfoPlist.strings in Resources */,
+				BF564A5B1644E2450027EB04 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF564A3F1644E2450027EB04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF564A541644E2450027EB04 /* main.m in Sources */,
+				BF564A581644E2450027EB04 /* AppDelegate.m in Sources */,
+				BF564A681644E2A60027EB04 /* ECSlidingViewController.m in Sources */,
+				BF564A691644E2A60027EB04 /* UIImage+ImageWithUIView.m in Sources */,
+				BF564A721644E38A0027EB04 /* InitialSlidingViewController.m in Sources */,
+				BF564A751644EA8C0027EB04 /* MenuViewController.m in Sources */,
+				BF564A781644EB440027EB04 /* CustomBoardNavigationController.m in Sources */,
+				BF564A811644F23A0027EB04 /* HotTopicTableViewController.m in Sources */,
+				BF564A851644F24C0027EB04 /* BoardListTableViewController.m in Sources */,
+				BF564A901644F68D0027EB04 /* CustomBoardTableViewController.m in Sources */,
+				BF564A97164522070027EB04 /* HotTopicNavigationController.m in Sources */,
+				BF564A9F1645238F0027EB04 /* BoardListNavigationController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BF564A501644E2450027EB04 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF564AA4164526890027EB04 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BF564A591644E2450027EB04 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF564AA3164526890027EB04 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BF564A5F1644E2450027EB04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BF564A601644E2450027EB04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BF564A621644E2450027EB04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MyCC98/MyCC98-Prefix.pch";
+				INFOPLIST_FILE = "MyCC98/MyCC98-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BF564A631644E2450027EB04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MyCC98/MyCC98-Prefix.pch";
+				INFOPLIST_FILE = "MyCC98/MyCC98-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF564A3D1644E2450027EB04 /* Build configuration list for PBXProject "MyCC98" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF564A5F1644E2450027EB04 /* Debug */,
+				BF564A601644E2450027EB04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF564A611644E2450027EB04 /* Build configuration list for PBXNativeTarget "MyCC98" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF564A621644E2450027EB04 /* Debug */,
+				BF564A631644E2450027EB04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BF564A3A1644E2450027EB04 /* Project object */;
+}
