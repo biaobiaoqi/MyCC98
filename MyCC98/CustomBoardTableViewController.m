@@ -7,7 +7,7 @@
 //
 
 #import "CustomBoardTableViewController.h"
-#import "CC98API.h"
+#import "CC98PathManager.h"
 
 @interface CustomBoardTableViewController ()
 @property (nonatomic, strong) NSArray *sampleItems;
@@ -18,7 +18,8 @@
 
 - (void)awakeFromNib
 {
-    [[CC98API sharedInstance] index];
+    CC98PathManager *pathmanager = [[CC98PathManager alloc] init];
+    NSLog(@"%@", [pathmanager getUserProfilePath:@"欧阳"]);
     self.sampleItems = [NSArray arrayWithObjects:@"One", @"Two", @"Three", nil];
 }
 

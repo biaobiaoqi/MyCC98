@@ -54,6 +54,28 @@
     return [[user objectForKey:@"IdUser"] intValue] > 0;
 }
 
+-(void)login
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"a", @"i",
+                            @"u", @"348191",
+                            @"p", @"69ad7dfbd3684e8d",
+                            @"userhidden", @"2",
+                            nil];
+    
+    NSMutableURLRequest *loginRequest = [self multipartFormRequestWithMethod:@"POST" path:@"/sign.asp" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //
+    }];
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:loginRequest];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *aString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",aString);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Failure");
+    }];
+    [operation start];
+}
+
 -(void)index
 {
     NSMutableURLRequest *apiRequest = [self requestWithMethod:@"GET" path:@"/" parameters:nil];

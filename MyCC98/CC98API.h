@@ -15,7 +15,7 @@ typedef void (^JSONResponseBlock)(NSDictionary* json);
 @property (strong, nonatomic) NSDictionary* user;
 
 -(BOOL)isAuthorized;
-
+-(void)login;
 -(void)index;
 //-(void)commandWithParams:(NSMutableDictionary*)params onCompletion:(JSONResponseBlock)completionBlock;
 
