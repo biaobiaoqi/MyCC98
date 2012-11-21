@@ -7,6 +7,7 @@
 //
 
 #import "CustomBoardTableViewController.h"
+#import "CC98API.h"
 
 @interface CustomBoardTableViewController ()
 @property (nonatomic, strong) NSArray *sampleItems;
@@ -17,6 +18,7 @@
 
 - (void)awakeFromNib
 {
+    [[CC98API sharedInstance] index];
     self.sampleItems = [NSArray arrayWithObjects:@"One", @"Two", @"Three", nil];
 }
 
