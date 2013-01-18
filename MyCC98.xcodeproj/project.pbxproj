@@ -46,6 +46,8 @@
 		BFBB5AEE16A99C7900CBF9A1 /* HotTopicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AED16A99C7900CBF9A1 /* HotTopicNavigationController.m */; };
 		BFBB5AF216A99CC300CBF9A1 /* HotTopicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */; };
 		BFBB5AF516A99F6300CBF9A1 /* HotTopicEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */; };
+		BFBB5AFC16A9AFCA00CBF9A1 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBB5AFB16A9AFC900CBF9A1 /* icon.png */; };
+		BFBB5AFE16A9AFD100CBF9A1 /* icon_r.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBB5AFD16A9AFD100CBF9A1 /* icon_r.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +119,8 @@
 		BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicTableViewController.m; sourceTree = "<group>"; };
 		BFBB5AF316A99F6200CBF9A1 /* HotTopicEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicEntity.h; sourceTree = "<group>"; };
 		BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicEntity.m; sourceTree = "<group>"; };
+		BFBB5AFB16A9AFC900CBF9A1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		BFBB5AFD16A9AFD100CBF9A1 /* icon_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_r.png; path = ../icon_r.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +249,8 @@
 		BF76335816A830F200FFA131 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BFBB5AFD16A9AFD100CBF9A1 /* icon_r.png */,
+				BFBB5AFB16A9AFC900CBF9A1 /* icon.png */,
 				BF97057016A917AD00FECBFD /* logo.png */,
 				BF76335916A830F200FFA131 /* MyCC98-Info.plist */,
 				BF76335A16A830F200FFA131 /* InfoPlist.strings */,
@@ -293,6 +299,7 @@
 				BF76334716A830F200FFA131 /* Sources */,
 				BF76334816A830F200FFA131 /* Frameworks */,
 				BF76334916A830F200FFA131 /* Resources */,
+				BFBB5AF616A9AC0700CBF9A1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -340,10 +347,28 @@
 				BF76336816A830F200FFA131 /* Default-568h@2x.png in Resources */,
 				BF76336B16A830F200FFA131 /* MainStoryboard.storyboard in Resources */,
 				BF97057116A917AD00FECBFD /* logo.png in Resources */,
+				BFBB5AFC16A9AFCA00CBF9A1 /* icon.png in Resources */,
+				BFBB5AFE16A9AFD100CBF9A1 /* icon_r.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BFBB5AF616A9AC0700CBF9A1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BF76334716A830F200FFA131 /* Sources */ = {
@@ -454,9 +479,11 @@
 		BF76337816A830F200FFA131 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyCC98/MyCC98-Prefix.pch";
 				INFOPLIST_FILE = "MyCC98/MyCC98-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -465,9 +492,11 @@
 		BF76337916A830F200FFA131 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyCC98/MyCC98-Prefix.pch";
 				INFOPLIST_FILE = "MyCC98/MyCC98-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
