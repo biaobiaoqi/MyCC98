@@ -1,29 +1,29 @@
 //
-//  CustomBoardTableViewController.m
+//  HotTopicTableViewController.m
 //  MyCC98
 //
 //  Created by Yan Chen on 1/18/13.
 //  Copyright (c) 2013 Zhejiang University. All rights reserved.
 //
 
-#import "CustomBoardTableViewController.h"
+#import "HotTopicTableViewController.h"
 #import "CC98API.h"
 
-@interface CustomBoardTableViewController ()
+@interface HotTopicTableViewController ()
 
 @end
 
-@implementation CustomBoardTableViewController
+@implementation HotTopicTableViewController
 @synthesize items;
 
 - (void)awakeFromNib
 {
-    [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getIndexPath] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getHotTopicPath] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSMutableArray *boardlist = [[CC98Parser alloc] parseCustomBoardList:webcontent];
+        NSMutableArray *boardlist = [[CC98Parser alloc] parseHottopicList:webcontent];
         items = [[NSMutableArray alloc] init];
-        for (BoardEntity *entity in boardlist) {
-            [items addObject:[entity getBoardName]];
+        for (HotTopicEntity *entity in boardlist) {
+            [items addObject:[entity getTopicName]];
         }
         [self.tableView reloadData];
         //NSLog(@"%@", items);

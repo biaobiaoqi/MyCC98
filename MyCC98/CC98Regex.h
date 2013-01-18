@@ -10,3 +10,11 @@
 #define P_BOARD_LAST_REPLY_LINK_REGEX @"(?<=日期：<a href=\").*?(?=#bottom\")"
 #define P_BOARD_BOARD_MASTER_REGEX @"版主：.*?</a>(?=&nbsp;</TD>)"
 #define P_BOARD_POST_NUMBER_TODAY @"(?<=<font color=#FF0000>).*?(?=</font></td>)"
+
+#define HOT_TOPIC_WRAPPER @"&nbsp;<a href=\".*?(</td></tr><TR><TD align=middle|</td></tr><!--data)"
+#define HOT_TOPIC_NAME_REGEX @"(?<=\\<font color=#000066>).*?(?=\\</font>)"
+#define HOT_TOPIC_ID_REGEX @"(?<=&id=).*?(?=\" )"
+#define HOT_TOPIC_BOARD_ID_REGEX @"(?<=boardid=)\\d{0,5}?(?=&id=)"
+#define HOT_TOPIC_BOARD_NAME_WITH_AUTHOR_REGEX @"(?<=target=\"_blank\">).{0,30}?(?=</a></td><td height=20)"
+#define HOT_TOPIC_POST_TIME_REGEX @"(?<=\">).{5,18}?(?=</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)"
+#define HOT_TOPIC_CLICK_REGEX @"(?<=align=middle class=tablebody\\d>).*?(?=</td>)"

@@ -8,6 +8,7 @@
 
 #import "CC98Parser.h"
 #import "BoardEntity.h"
+#import "HotTopicEntity.h"
 #import "CC98Regex.h"
 
 @implementation CC98Parser
@@ -76,14 +77,50 @@
         //NSLog(@"%@ %@ %@ %@", boardName, boardId, boardIntro, boardMaster);
         
     }
-    /*
-    NSArray *boardInfoArray = [boardInfoRegex matchesInString:html options:0 range:NSMakeRange(0, html.length)];
-    NSTextCheckingResult *boardInfoCheckingResult = boardInfoArray[0];
-    NSString *boardInfo = [html substringWithRange:boardInfoCheckingResult.range];*/
-    //NSLog(@"%@", boardInfo);
-    
-    
     return boardlist;
+}
+
+-(NSMutableArray*)parseHottopicList:(NSString*)html
+{
+    //NSLog(@"%@", html);
+    NSMutableArray *hottopiclist = [[NSMutableArray alloc] init];
+    
+    NSRegularExpression *topicListRegex = [[NSRegularExpression alloc]
+                                           initWithPattern:HOT_TOPIC_WRAPPER
+                                           options:NSRegularExpressionCaseInsensitive
+                                           error:nil];
+    NSArray *topicListArray = [topicListRegex matchesInString:html options:0 range:NSMakeRange(0, html.length)];
+    for (NSTextCheckingResult *topicListResult in topicListArray) {
+        NSString *topic = [html substringWithRange:topicListResult.range];
+        //NSLog(@"%@", topic);
+        
+        NSRegularExpression *topicNameRegex = [[NSRegularExpression alloc]
+                                               initWithPattern:HOT_TOPIC_NAME_REGEX
+                                               options:NSRegularExpressionCaseInsensitive
+                                               error:nil];
+        NSRange topicNameRange = [topicNameRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *topicName = [topic substringWithRange:topicNameRange];
+        //NSLog(@"%@", topicName);
+        
+        NSRegularExpression *topicIdRegex = [[NSRegularExpression alloc]
+                                               initWithPattern:HOT_TOPIC_ID_REGEX
+                                               options:NSRegularExpressionCaseInsensitive
+                                               error:nil];
+        NSRange topicIdRange = [topicIdRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *topicId = [topic substringWithRange:topicIdRange];
+        //NSLog(@"%@", topicId);
+        
+        
+        HotTopicEntity *entity = [HotTopicEntity alloc];
+        [entity setTopicName:topicName];
+        [entity setPostId:topicId];
+        
+        [hottopiclist addObject:entity];
+    }
+    //NSLog(@"%@", topicList);
+    
+    
+    return hottopiclist;
 }
 
 @end

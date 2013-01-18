@@ -11,5 +11,6 @@
 @interface CC98Parser : NSObject
 
 -(NSMutableArray*)parseCustomBoardList:(NSString*)html;
+-(NSMutableArray*)parseHottopicList:(NSString*)html;
 
 @end

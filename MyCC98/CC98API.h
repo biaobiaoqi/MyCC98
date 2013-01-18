@@ -10,6 +10,7 @@
 #import "CC98UrlManager.h"
 #import "CC98Parser.h"
 #import "BoardEntity.h"
+#import "HotTopicEntity.h"
 
 @interface CC98API : AFHTTPClient
 

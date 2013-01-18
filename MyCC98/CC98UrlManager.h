@@ -12,5 +12,6 @@
 
 -(NSString*) getIndexPath;
 -(NSString*) getLoginPath;
+-(NSString*) getHotTopicPath;
 
 @end

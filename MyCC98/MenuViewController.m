@@ -69,6 +69,9 @@
         case 0:
             identifier = @"CustomBoard";
             break;
+        case 1:
+            identifier = @"HotTopic";
+            break;
         default:
             identifier = @"CustomBoard";
             break;

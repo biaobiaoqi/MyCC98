@@ -96,6 +96,53 @@
             </objects>
             <point key="canvasLocation" x="672" y="240"/>
         </scene>
+        <!--Hot Topic Table View Controller - 热门话题-->
+        <scene sceneID="FP2-cl-l1k">
+            <objects>
+                <tableViewController id="9wo-pc-l8v" customClass="HotTopicTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ePp-6t-dQY">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="WJn-1X-T00">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="热门话题" id="wdT-nN-ra9">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="cw1-NH-6Y8">
+                            <connections>
+                                <action selector="revealMenu:" destination="9wo-pc-l8v" id="zre-Tw-1FX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NhQ-4i-QgS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1588" y="-479"/>
+        </scene>
+        <!--Hot Topic Navigation Controller-->
+        <scene sceneID="Bqd-M1-YTC">
+            <objects>
+                <navigationController storyboardIdentifier="HotTopic" definesPresentationContext="YES" id="Gqp-V2-h1L" customClass="HotTopicNavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gaa-Co-f5F">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9wo-pc-l8v" kind="relationship" relationship="rootViewController" id="4gX-ze-G8i"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="orB-Lj-MlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1073" y="-479"/>
+        </scene>
         <!--Custom Board Table View Controller - 个人定制区-->
         <scene sceneID="Kpc-Rl-TeT">
             <objects>
@@ -199,6 +246,15 @@
         </class>
         <class className="ECSlidingViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
+        </class>
+        <class className="HotTopicNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HotTopicNavigationController.h"/>
+        </class>
+        <class className="HotTopicTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HotTopicTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+            </relationships>
         </class>
         <class className="InitialSlidingViewController" superclassName="ECSlidingViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialSlidingViewController.h"/>

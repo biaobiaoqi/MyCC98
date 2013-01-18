@@ -43,6 +43,9 @@
 		BF9705A816A9276600FECBFD /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BF97059E16A9276600FECBFD /* AFXMLRequestOperation.m */; };
 		BF9705A916A9276600FECBFD /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9705A016A9276600FECBFD /* UIImageView+AFNetworking.m */; };
 		BF9705AD16A92B4A00FECBFD /* CC98API.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9705AC16A92B4A00FECBFD /* CC98API.m */; };
+		BFBB5AEE16A99C7900CBF9A1 /* HotTopicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AED16A99C7900CBF9A1 /* HotTopicNavigationController.m */; };
+		BFBB5AF216A99CC300CBF9A1 /* HotTopicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */; };
+		BFBB5AF516A99F6300CBF9A1 /* HotTopicEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +111,12 @@
 		BF9705A016A9276600FECBFD /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		BF9705AB16A92B4A00FECBFD /* CC98API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC98API.h; sourceTree = "<group>"; };
 		BF9705AC16A92B4A00FECBFD /* CC98API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC98API.m; sourceTree = "<group>"; };
+		BFBB5AEC16A99C7900CBF9A1 /* HotTopicNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicNavigationController.h; sourceTree = "<group>"; };
+		BFBB5AED16A99C7900CBF9A1 /* HotTopicNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicNavigationController.m; sourceTree = "<group>"; };
+		BFBB5AF016A99CC200CBF9A1 /* HotTopicTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicTableViewController.h; sourceTree = "<group>"; };
+		BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicTableViewController.m; sourceTree = "<group>"; };
+		BFBB5AF316A99F6200CBF9A1 /* HotTopicEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicEntity.h; sourceTree = "<group>"; };
+		BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicEntity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +160,8 @@
 				BF217BA016A969B9004867FE /* BoardEntity.h */,
 				BF217BA116A969B9004867FE /* BoardEntity.m */,
 				BF217BA316A96CF6004867FE /* CC98Regex.h */,
+				BFBB5AF316A99F6200CBF9A1 /* HotTopicEntity.h */,
+				BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */,
 			);
 			name = CC98LIB;
 			sourceTree = "<group>";
@@ -177,6 +188,10 @@
 				BF217B9516A94F3E004867FE /* CustomBoardNavigationController.m */,
 				BF217B9716A95294004867FE /* CustomBoardTableViewController.h */,
 				BF217B9816A95294004867FE /* CustomBoardTableViewController.m */,
+				BFBB5AEC16A99C7900CBF9A1 /* HotTopicNavigationController.h */,
+				BFBB5AED16A99C7900CBF9A1 /* HotTopicNavigationController.m */,
+				BFBB5AF016A99CC200CBF9A1 /* HotTopicTableViewController.h */,
+				BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -358,6 +373,9 @@
 				BF217B9616A94F3E004867FE /* CustomBoardNavigationController.m in Sources */,
 				BF217B9916A95294004867FE /* CustomBoardTableViewController.m in Sources */,
 				BF217BA216A969BA004867FE /* BoardEntity.m in Sources */,
+				BFBB5AEE16A99C7900CBF9A1 /* HotTopicNavigationController.m in Sources */,
+				BFBB5AF216A99CC300CBF9A1 /* HotTopicTableViewController.m in Sources */,
+				BFBB5AF516A99F6300CBF9A1 /* HotTopicEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

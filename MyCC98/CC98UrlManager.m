@@ -20,4 +20,9 @@
     return @"/sign.asp";
 }
 
+-(NSString*) getHotTopicPath
+{
+    return @"/hottopic.asp";
+}
+
 @end
