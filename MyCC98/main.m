@@ -2,8 +2,8 @@
 //  main.m
 //  MyCC98
 //
-//  Created by Yan Chen on 11/3/12.
-//  Copyright (c) 2012 VINCENT. All rights reserved.
+//  Created by Yan Chen on 1/17/13.
+//  Copyright (c) 2013 Zhejiang University. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

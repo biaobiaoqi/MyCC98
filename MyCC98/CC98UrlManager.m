@@ -1,18 +1,23 @@
 //
-//  CC98API.h
+//  CC98UrlManager.m
 //  MyCC98
 //
 //  Created by Yan Chen on 1/18/13.
 //  Copyright (c) 2013 Zhejiang University. All rights reserved.
 //
 
-#import "AFHTTPClient.h"
 #import "CC98UrlManager.h"
-#import "CC98Parser.h"
-#import "BoardEntity.h"
 
-@interface CC98API : AFHTTPClient
+@implementation CC98UrlManager
 
-+(CC98API*)sharedInstance;
+-(NSString*) getIndexPath
+{
+    return @"/";
+}
+
+-(NSString*) getLoginPath
+{
+    return @"/sign.asp";
+}
 
 @end

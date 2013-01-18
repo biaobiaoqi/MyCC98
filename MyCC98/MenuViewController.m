@@ -2,14 +2,14 @@
 //  MenuViewController.m
 //  MyCC98
 //
-//  Created by Yan Chen on 11/3/12.
-//  Copyright (c) 2012 VINCENT. All rights reserved.
+//  Created by Yan Chen on 1/18/13.
+//  Copyright (c) 2013 Zhejiang University. All rights reserved.
 //
 
 #import "MenuViewController.h"
 
-@interface MenuViewController()
-@property (nonatomic, strong) NSArray *menuItems;
+@interface MenuViewController ()
+
 @end
 
 @implementation MenuViewController
@@ -17,15 +17,30 @@
 
 - (void)awakeFromNib
 {
-    self.menuItems = [NSArray arrayWithObjects:@"个人定制版块", @"热门话题", @"版块列表", nil];
+    self.menuItems = [NSArray arrayWithObjects:@"个人定制区", @"热门话题", @"版块列表", nil];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+	// Do any additional setup after loading the view.
     [self.slidingViewController setAnchorRightRevealAmount:280.0f];
     self.slidingViewController.underLeftWidthLayout = ECFullWidth;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
@@ -54,13 +69,8 @@
         case 0:
             identifier = @"CustomBoard";
             break;
-        case 1:
-            identifier = @"HotTopic";
-            break;
-        case 2:
-            identifier = @"BoardList";
-            break;
         default:
+            identifier = @"CustomBoard";
             break;
     }
     
@@ -73,4 +83,7 @@
         [self.slidingViewController resetTopView];
     }];
 }
+
+
 @end
+ 

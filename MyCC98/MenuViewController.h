@@ -2,13 +2,15 @@
 //  MenuViewController.h
 //  MyCC98
 //
-//  Created by Yan Chen on 11/3/12.
-//  Copyright (c) 2012 VINCENT. All rights reserved.
+//  Created by Yan Chen on 1/18/13.
+//  Copyright (c) 2013 Zhejiang University. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
 
 @interface MenuViewController : UIViewController <UITableViewDataSource, UITabBarControllerDelegate>
+
+@property (nonatomic, strong) NSArray *menuItems;
 
 @end

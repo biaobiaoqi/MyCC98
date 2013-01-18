@@ -2,17 +2,22 @@
 //  InitialSlidingViewController.m
 //  MyCC98
 //
-//  Created by Yan Chen on 11/3/12.
-//  Copyright (c) 2012 VINCENT. All rights reserved.
+//  Created by Yan Chen on 1/18/13.
+//  Copyright (c) 2013 Zhejiang University. All rights reserved.
 //
 
 #import "InitialSlidingViewController.h"
 
+@interface InitialSlidingViewController ()
+
+@end
+
 @implementation InitialSlidingViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
+	// Do any additional setup after loading the view.
     UIStoryboard *storyboard;
     
     //if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -22,9 +27,10 @@
     self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"CustomBoard"];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void)didReceiveMemoryWarning
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

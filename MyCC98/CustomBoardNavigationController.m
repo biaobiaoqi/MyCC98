@@ -1,9 +1,9 @@
 //
-//  HomeViewController.m
+//  CustomBoardNavigationController.m
 //  MyCC98
 //
-//  Created by Yan Chen on 11/3/12.
-//  Copyright (c) 2012 VINCENT. All rights reserved.
+//  Created by Yan Chen on 1/18/13.
+//  Copyright (c) 2013 Zhejiang University. All rights reserved.
 //
 
 #import "CustomBoardNavigationController.h"
@@ -13,6 +13,27 @@
 @end
 
 @implementation CustomBoardNavigationController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
