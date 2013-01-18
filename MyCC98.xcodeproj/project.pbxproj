@@ -14,6 +14,8 @@
 		BF217B9616A94F3E004867FE /* CustomBoardNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF217B9516A94F3E004867FE /* CustomBoardNavigationController.m */; };
 		BF217B9916A95294004867FE /* CustomBoardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF217B9816A95294004867FE /* CustomBoardTableViewController.m */; };
 		BF217BA216A969BA004867FE /* BoardEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BF217BA116A969B9004867FE /* BoardEntity.m */; };
+		BF2B0A9C16A9BAE200B17631 /* icon_r.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2B0A9A16A9BAE100B17631 /* icon_r.png */; };
+		BF2B0A9D16A9BAE200B17631 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2B0A9B16A9BAE100B17631 /* icon.png */; };
 		BF76335016A830F200FFA131 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF76334F16A830F200FFA131 /* UIKit.framework */; };
 		BF76335216A830F200FFA131 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF76335116A830F200FFA131 /* Foundation.framework */; };
 		BF76335416A830F200FFA131 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF76335316A830F200FFA131 /* CoreGraphics.framework */; };
@@ -46,8 +48,6 @@
 		BFBB5AEE16A99C7900CBF9A1 /* HotTopicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AED16A99C7900CBF9A1 /* HotTopicNavigationController.m */; };
 		BFBB5AF216A99CC300CBF9A1 /* HotTopicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */; };
 		BFBB5AF516A99F6300CBF9A1 /* HotTopicEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */; };
-		BFBB5AFC16A9AFCA00CBF9A1 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBB5AFB16A9AFC900CBF9A1 /* icon.png */; };
-		BFBB5AFE16A9AFD100CBF9A1 /* icon_r.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBB5AFD16A9AFD100CBF9A1 /* icon_r.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +66,8 @@
 		BF217BA016A969B9004867FE /* BoardEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardEntity.h; sourceTree = "<group>"; };
 		BF217BA116A969B9004867FE /* BoardEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardEntity.m; sourceTree = "<group>"; };
 		BF217BA316A96CF6004867FE /* CC98Regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC98Regex.h; sourceTree = "<group>"; };
+		BF2B0A9A16A9BAE100B17631 /* icon_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_r.png; sourceTree = "<group>"; };
+		BF2B0A9B16A9BAE100B17631 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		BF76334B16A830F200FFA131 /* MyCC98.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCC98.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF76334F16A830F200FFA131 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BF76335116A830F200FFA131 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -119,8 +121,6 @@
 		BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicTableViewController.m; sourceTree = "<group>"; };
 		BFBB5AF316A99F6200CBF9A1 /* HotTopicEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicEntity.h; sourceTree = "<group>"; };
 		BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicEntity.m; sourceTree = "<group>"; };
-		BFBB5AFB16A9AFC900CBF9A1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
-		BFBB5AFD16A9AFD100CBF9A1 /* icon_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_r.png; path = ../icon_r.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,8 +249,8 @@
 		BF76335816A830F200FFA131 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BFBB5AFD16A9AFD100CBF9A1 /* icon_r.png */,
-				BFBB5AFB16A9AFC900CBF9A1 /* icon.png */,
+				BF2B0A9A16A9BAE100B17631 /* icon_r.png */,
+				BF2B0A9B16A9BAE100B17631 /* icon.png */,
 				BF97057016A917AD00FECBFD /* logo.png */,
 				BF76335916A830F200FFA131 /* MyCC98-Info.plist */,
 				BF76335A16A830F200FFA131 /* InfoPlist.strings */,
@@ -347,8 +347,8 @@
 				BF76336816A830F200FFA131 /* Default-568h@2x.png in Resources */,
 				BF76336B16A830F200FFA131 /* MainStoryboard.storyboard in Resources */,
 				BF97057116A917AD00FECBFD /* logo.png in Resources */,
-				BFBB5AFC16A9AFCA00CBF9A1 /* icon.png in Resources */,
-				BFBB5AFE16A9AFD100CBF9A1 /* icon_r.png in Resources */,
+				BF2B0A9C16A9BAE200B17631 /* icon_r.png in Resources */,
+				BF2B0A9D16A9BAE200B17631 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
