@@ -8,6 +8,7 @@
 
 #import "HotTopicTableViewController.h"
 #import "CC98API.h"
+#import "CC98Store.h"
 
 @interface HotTopicTableViewController ()
 
@@ -16,7 +17,7 @@
 @implementation HotTopicTableViewController
 @synthesize items;
 
-- (void)awakeFromNib
+/*- (void)awakeFromNib
 {
     [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getHotTopicPath] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -31,7 +32,7 @@
         NSLog(@"%@", error);
     }];
     //self.items = [NSArray arrayWithObjects:@"One", @"Two", @"Three", nil];
-}
+}*/
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -63,7 +64,7 @@
 	//  update the last update date
 	[_refreshHeaderView refreshLastUpdatedDate];
     
-    
+    [self reloadTableViewDataSource];
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,6 +165,16 @@
 	
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
+    [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getHotTopicPath] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSMutableArray *boardlist = [[CC98Parser alloc] parseHottopicList:webcontent];
+        [[CC98Store sharedInstance] updateHotTopic:boardlist];
+        items = [[CC98Store sharedInstance] getHotTopic];
+        [self doneLoadingTableViewData];
+        //NSLog(@"%@", items);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+    }];
 	_reloading = YES;
 	
 }
@@ -172,6 +183,7 @@
 {
 	
 	//  model should call this when its done loading
+    [self.tableView reloadData];
 	_reloading = NO;
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 	
@@ -184,7 +196,7 @@
 {
 	
 	[self reloadTableViewDataSource];
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+	//[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
 	
 }
 

@@ -39,6 +39,7 @@
 		BF8699F516AA3B3300BA5307 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF8699EC16AA3B3300BA5307 /* grayArrow@2x.png */; };
 		BF8699F616AA3B3300BA5307 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BF8699ED16AA3B3300BA5307 /* whiteArrow.png */; };
 		BF8699F716AA3B3300BA5307 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF8699EE16AA3B3300BA5307 /* whiteArrow@2x.png */; };
+		BF869A0616AA4E0A00BA5307 /* CC98Store.m in Sources */ = {isa = PBXBuildFile; fileRef = BF869A0516AA4E0A00BA5307 /* CC98Store.m */; };
 		BF97057116A917AD00FECBFD /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BF97057016A917AD00FECBFD /* logo.png */; };
 		BF97057816A9233900FECBFD /* CC98Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = BF97057716A9233900FECBFD /* CC98Parser.m */; };
 		BF97057B16A9238C00FECBFD /* CC98UrlManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF97057A16A9238C00FECBFD /* CC98UrlManager.m */; };
@@ -107,6 +108,8 @@
 		BF8699EC16AA3B3300BA5307 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		BF8699ED16AA3B3300BA5307 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		BF8699EE16AA3B3300BA5307 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
+		BF869A0416AA4E0A00BA5307 /* CC98Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC98Store.h; sourceTree = "<group>"; };
+		BF869A0516AA4E0A00BA5307 /* CC98Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC98Store.m; sourceTree = "<group>"; };
 		BF97057016A917AD00FECBFD /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		BF97057616A9233900FECBFD /* CC98Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC98Parser.h; sourceTree = "<group>"; };
 		BF97057716A9233900FECBFD /* CC98Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC98Parser.m; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 				BF217BA316A96CF6004867FE /* CC98Regex.h */,
 				BFBB5AF316A99F6200CBF9A1 /* HotTopicEntity.h */,
 				BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */,
+				BF869A0416AA4E0A00BA5307 /* CC98Store.h */,
+				BF869A0516AA4E0A00BA5307 /* CC98Store.m */,
 			);
 			name = CC98LIB;
 			sourceTree = "<group>";
@@ -475,6 +480,7 @@
 				BFBB5AF216A99CC300CBF9A1 /* HotTopicTableViewController.m in Sources */,
 				BFBB5AF516A99F6300CBF9A1 /* HotTopicEntity.m in Sources */,
 				BF8699EF16AA3B3300BA5307 /* EGORefreshTableHeaderView.m in Sources */,
+				BF869A0616AA4E0A00BA5307 /* CC98Store.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

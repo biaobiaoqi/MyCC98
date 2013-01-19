@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CC98Store.h"
 
 @implementation AppDelegate
 
@@ -20,6 +21,8 @@
     /*UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;*/
+    [CC98Store sharedInstance].managedObjectContext = self.managedObjectContext;
+    
     return YES;
 }
 							
