@@ -12,5 +12,6 @@
 
 -(NSMutableArray*)parseCustomBoardList:(NSString*)html;
 -(NSMutableArray*)parseHottopicList:(NSString*)html;
+-(NSString*)parseUserProfile:(NSString*)html;
 
 @end

@@ -25,4 +25,9 @@
     return @"/hottopic.asp";
 }
 
+-(NSString*) getUserProfilePath:(NSString*)userName
+{
+    return [[NSString alloc] initWithString:[NSString stringWithFormat:@"/dispuser.asp?name=%@",[userName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+}
+
 @end

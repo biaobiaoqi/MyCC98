@@ -154,4 +154,15 @@
     return hottopiclist;
 }
 
+-(NSString*)parseUserProfile:(NSString*)html
+{
+    NSRegularExpression *userAvatarRegex = [[NSRegularExpression alloc]
+                                           initWithPattern:USER_PROFILE_AVATAR_REGEX
+                                           options:NSRegularExpressionCaseInsensitive
+                                           error:nil];
+    NSRange userAvatarRange = [userAvatarRegex rangeOfFirstMatchInString:html options:0 range:NSMakeRange(0, html.length)];
+    NSString *userAvatar = [html substringWithRange:userAvatarRange];
+    return userAvatar;
+}
+
 @end

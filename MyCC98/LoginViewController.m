@@ -30,6 +30,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //[self performSegueWithIdentifier:@"login" sender:self];
+    NSString *un = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *pw32 = [[NSUserDefaults standardUserDefaults] objectForKey:@"pw32"];
+    if (un != nil && pw32 != nil) {
+        NSDictionary* loginData;
+        loginData = [NSDictionary dictionaryWithObjectsAndKeys:
+                     @"i", @"a",
+                     un, @"u",
+                     pw32, @"p",
+                     @"2", @"userhidden",
+                     nil];
+        [self loginAction:loginData];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,7 +75,11 @@
                  pw32, @"p",
                  @"2", @"userhidden",
                  nil];
-    
+    [self loginAction:loginData];
+}
+
+-(void)loginAction:(NSDictionary*)loginData
+{
     [[CC98API sharedInstance] postPath:[[CC98UrlManager alloc] getLoginPath] parameters:loginData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if ([webcontent rangeOfString:@"1003"].location != NSNotFound) {
@@ -73,6 +89,8 @@
         }
         else if ([webcontent rangeOfString:@"9898"].location != NSNotFound) {
             //NSLog(@"Login Success");
+            [[NSUserDefaults standardUserDefaults] setObject:[loginData objectForKey:@"u"] forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setObject:[loginData objectForKey:@"p"] forKey:@"pw32"];
             [self performSegueWithIdentifier:@"login" sender:self];
         }
         

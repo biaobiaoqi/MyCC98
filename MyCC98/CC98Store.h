@@ -17,6 +17,9 @@
 -(void)updateCustomBoard:(NSMutableArray*)array;
 -(NSMutableArray*)getCustomBoard;
 
+/*-(void)storeImageFile:(NSData*)data withUrl:(NSString*)url;
+-(NSData*)fetchImageFileWithUrl:(NSString*)url;*/
+
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

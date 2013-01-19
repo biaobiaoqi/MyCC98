@@ -7,6 +7,9 @@
 //
 
 #import "MenuViewController.h"
+#import "CC98Store.h"
+#import "CC98API.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface MenuViewController ()
 
@@ -17,7 +20,7 @@
 
 - (void)awakeFromNib
 {
-    self.menuItems = [NSArray arrayWithObjects:@"个人定制区", @"热门话题", @"版块列表", nil];
+    self.menuItems = [NSArray arrayWithObjects:@"个人定制区", @"热门话题", nil];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,6 +38,21 @@
 	// Do any additional setup after loading the view.
     [self.slidingViewController setAnchorRightRevealAmount:280.0f];
     self.slidingViewController.underLeftWidthLayout = ECFullWidth;
+    
+    customBoard = (UINavigationController*)self.slidingViewController.topViewController;
+    //menuTable.layer.borderWidth = 2.0;
+    //menuTable.layer.borderColor = [UIColor whiteColor].CGColor;
+    //[avatarImage setImageWithURL:[NSURL URLWithString: @"http://file.cc98.org/uploadface/348191.png"]];
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    [profile setTitle:username forState:UIControlStateNormal];
+    [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getUserProfilePath:username] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSString *avatarUrl = [[CC98Parser alloc] parseUserProfile:webcontent];
+        [avatarImage setImageWithURL:[NSURL URLWithString:avatarUrl]];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,6 +123,7 @@
 
 -(IBAction)logout:(id)sender
 {
+    [[NSUserDefaults standardUserDefaults] setPersistentDomain:[NSDictionary dictionary] forName:[[NSBundle mainBundle] bundleIdentifier]];
     [self performSegueWithIdentifier:@"logout" sender:self];
 }
 

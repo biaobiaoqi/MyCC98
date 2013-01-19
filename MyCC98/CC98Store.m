@@ -146,4 +146,33 @@
     return customboard;
 }
 
+/*-(void)storeImageFile:(NSData*)data withUrl:(NSString*)url
+{
+    NSError *error;
+    NSManagedObject *new = [NSEntityDescription insertNewObjectForEntityForName:@"Images" inManagedObjectContext:managedObjectContext];
+    [new setValue:data forKey:@"image"];
+    [new setValue:url forKey:@"url"];
+    [managedObjectContext save:&error];
+}
+-(NSData*)fetchImageFileWithUrl:(NSString*)url
+{
+    NSEntityDescription *imageEntity = [NSEntityDescription entityForName:@"Images" inManagedObjectContext:self.managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:imageEntity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", url];
+    [fetchRequest setPredicate:predicate];
+    NSError *error;
+    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
+    if (mutableFetchResults) {
+        NSManagedObject *result = [mutableFetchResults objectAtIndex:0];
+        NSData *data = [result valueForKey:@"image"];
+        return data;
+    }
+    else {
+        return nil;
+    }
+}*/
+
+
+
 @end

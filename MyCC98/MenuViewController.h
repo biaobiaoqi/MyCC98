@@ -14,6 +14,9 @@
 {
     UINavigationController *customBoard;
     UINavigationController *hotTopic;
+    IBOutlet UIImageView *avatarImage;
+    IBOutlet UITableView *menuTable;
+    IBOutlet UIButton *profile;
 }
 
 -(IBAction)logout:(id)sender;

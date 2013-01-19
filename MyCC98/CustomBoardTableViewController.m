@@ -9,6 +9,8 @@
 #import "CustomBoardTableViewController.h"
 #import "CC98API.h"
 #import "CC98Store.h"
+#import "BoardEntity.h"
+#import "PostListTableViewController.h"
 
 @interface CustomBoardTableViewController ()
 
@@ -187,6 +189,17 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
     NSLog(@"%d", indexPath.row);
+    
+    BoardEntity *entity = [items objectAtIndex:indexPath.row];
+    
+    UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    
+    PostListTableViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"PostList"];
+    
+    nextViewController.boardInfo = entity;
+    
+    [self.navigationController pushViewController:nextViewController animated:YES];
+    //[self performSegueWithIdentifier:@"postList" sender:self];
 }
 
 - (IBAction)revealMenu:(id)sender

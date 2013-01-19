@@ -15,5 +15,6 @@
 }
 
 -(IBAction)login:(id)sender;
+-(void)loginAction:(NSDictionary*)loginData;
 
 @end

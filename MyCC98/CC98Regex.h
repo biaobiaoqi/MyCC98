@@ -18,3 +18,9 @@
 #define HOT_TOPIC_BOARD_NAME_WITH_AUTHOR_REGEX @"(?<=target=\"_blank\">).{0,30}?(?=</a></td><td height=20)"
 #define HOT_TOPIC_POST_TIME_REGEX @"(?<=\">).{5,18}?(?=</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)"
 #define HOT_TOPIC_CLICK_REGEX @"(?<=align=middle class=tablebody\\d>).*?(?=</td>)"
+
+#define USER_PROFILE_AVATAR_REGEX @"(?<=&nbsp;\\<img src=).*?(?= )"
+#define USER_PROFILE_GENERAL_PROFILE_REGEX @"用户头衔：.*?最后登录：.*?<br>"
+#define USER_PROFILE_PERSON_PROFILE_REGEX @"性 别.*?主 页.*?</font>"
+#define USER_PROFILE_BBS_MASTER_INFO_REGEX @"(?<=<font align=left>)论坛职务：</font><br>.*?(?=<td  class=tablebody1)"
+#define USER_PROFILE_ONLINE_INFO_REGEX @"(?<=&nbsp;&nbsp;状态：).*?\\]"

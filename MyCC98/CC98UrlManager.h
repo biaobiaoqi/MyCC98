@@ -13,5 +13,6 @@
 -(NSString*) getIndexPath;
 -(NSString*) getLoginPath;
 -(NSString*) getHotTopicPath;
+-(NSString*) getUserProfilePath:(NSString*)userName;
 
 @end
