@@ -99,6 +99,10 @@
     }
 
     //CONFIGURE CELL
+    for (UIView *subView in cell.contentView.subviews)
+    {
+        [subView removeFromSuperview];
+    }
     
     CGRect titleFrame = CGRectMake(2, 2, 200, 30);
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
