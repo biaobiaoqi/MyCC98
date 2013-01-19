@@ -72,8 +72,11 @@
     
     if(mutableFetchResults) {
         for (NSManagedObject *result in mutableFetchResults) {
+            HotTopicEntity *topicEntity = [HotTopicEntity alloc];
+            [topicEntity setTopicName:[result valueForKey:@"topicName"]];
+            [topicEntity setPostId:[result valueForKey:@"postId"]];
             //NSLog(@"%@", [result valueForKey:@"topicName"]);
-            [hottopic addObject:[result valueForKey:@"topicName"]];
+            [hottopic addObject:topicEntity];
         }
     }
     //NSLog(@"%@", hottopic);

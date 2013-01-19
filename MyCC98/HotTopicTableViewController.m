@@ -95,7 +95,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [self.items objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[self.items objectAtIndex:indexPath.row] getTopicName];
     
     return cell;
 }
