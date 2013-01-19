@@ -67,11 +67,42 @@
             boardMaster = [board substringWithRange:boardMasterRange];
         }
         
+        NSRegularExpression *postNumberRegex = [[NSRegularExpression alloc]
+                                                initWithPattern:P_BOARD_POST_NUMBER_TODAY
+                                                options:NSRegularExpressionCaseInsensitive
+                                                error:nil];
+        NSRange postNumberRange = [postNumberRegex rangeOfFirstMatchInString:board options:0 range:NSMakeRange(0, board.length)];
+        NSString *postNumber = [board substringWithRange:postNumberRange];
+        
+        NSRegularExpression *lastReplyAuthorRegex = [[NSRegularExpression alloc]
+                                                initWithPattern:P_BOARD_LAST_REPLY_AUTHOR_REGEX
+                                                options:NSRegularExpressionCaseInsensitive
+                                                error:nil];
+        NSRange lastReplyAuthorRange = [lastReplyAuthorRegex rangeOfFirstMatchInString:board options:0 range:NSMakeRange(0, board.length)];
+        NSString *lastReplyAuthor = [board substringWithRange:lastReplyAuthorRange];
+        
+        NSRegularExpression *lastReplyTimeRegex = [[NSRegularExpression alloc]
+                                                     initWithPattern:P_BOARD_LAST_REPLY_TIME_REGEX
+                                                     options:NSRegularExpressionCaseInsensitive
+                                                     error:nil];
+        NSRange lastReplyTimeRange = [lastReplyTimeRegex rangeOfFirstMatchInString:board options:0 range:NSMakeRange(0, board.length)];
+        NSString *lastReplyTime = [board substringWithRange:lastReplyTimeRange];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+        [formatter setAMSymbol:@"AM"];
+        [formatter setPMSymbol:@"PM"];
+        [formatter setDateFormat:@"M/d/yyyy h:mm:ss aaa"];
+        NSDate *lastReplyTimeInDate = [formatter dateFromString:lastReplyTime];
+        
         BoardEntity *entity = [BoardEntity alloc];
         [entity setBoardName:boardName];
         [entity setBoardId:boardId];
         [entity setBoardInto:boardIntro];
         [entity setBoardMaster:boardMaster];
+        [entity setPostNumberToday:[postNumber intValue]];
+        [entity setLastReplyAuthor:lastReplyAuthor];
+        [entity setLastReplyTime:lastReplyTimeInDate];
+        //NSLog(@"%@", lastReplyTimeInDate);
         [boardlist addObject:entity];
         
         //NSLog(@"%@ %@ %@ %@", boardName, boardId, boardIntro, boardMaster);

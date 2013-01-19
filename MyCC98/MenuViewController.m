@@ -64,27 +64,43 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString *identifier; // = [self.menuItems objectAtIndex:indexPath.row];
+    //NSString *identifier; // = [self.menuItems objectAtIndex:indexPath.row];
     switch (indexPath.row) {
         case 0:
-            identifier = @"CustomBoard";
+        {
+            if (customBoard == nil) {
+                customBoard = [self.storyboard instantiateViewControllerWithIdentifier:@"CustomBoard"];
+            }
+            [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+                CGRect frame = self.slidingViewController.topViewController.view.frame;
+                self.slidingViewController.topViewController = customBoard;
+                self.slidingViewController.topViewController.view.frame = frame;
+                [self.slidingViewController resetTopView];
+            }];
+        }
             break;
         case 1:
-            identifier = @"HotTopic";
+        {
+            if (hotTopic == nil) {
+                hotTopic = [self.storyboard instantiateViewControllerWithIdentifier:@"HotTopic"];
+            }
+            [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+                CGRect frame = self.slidingViewController.topViewController.view.frame;
+                self.slidingViewController.topViewController = hotTopic;
+                self.slidingViewController.topViewController.view.frame = frame;
+                [self.slidingViewController resetTopView];
+            }];
+        }
             break;
         default:
-            identifier = @"CustomBoard";
+            //identifier = @"CustomBoard";
             break;
     }
     
-    UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
+    //UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
     
-    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-        CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = newTopViewController;
-        self.slidingViewController.topViewController.view.frame = frame;
-        [self.slidingViewController resetTopView];
-    }];
+    
+    
 }
 
 -(IBAction)logout:(id)sender

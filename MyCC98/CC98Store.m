@@ -105,6 +105,10 @@
         NSManagedObject *new = [NSEntityDescription insertNewObjectForEntityForName:@"CustomBoard" inManagedObjectContext:managedObjectContext];
         [new setValue:[entity getBoardName] forKey:@"boardName"];
         [new setValue:[entity getBoardId] forKey:@"boardId"];
+        [new setValue:[entity getBoardIntro] forKey:@"boardIntro"];
+        [new setValue:[NSNumber numberWithInteger:[entity getPostNumberToday]] forKey:@"postNumberToday"];
+        [new setValue:[entity getLastReplyAuthor] forKey:@"lastReplyAuthor"];
+        [new setValue:[entity getLastReplyTime] forKey:@"lastReplyTime"];
         [managedObjectContext save:&error];
     }
 }
@@ -130,7 +134,11 @@
             BoardEntity *boardEntity = [BoardEntity alloc];
             [boardEntity setBoardName:[result valueForKey:@"boardName"]];
             [boardEntity setBoardId:[result valueForKey:@"boardId"]];
-            //NSLog(@"%@", [result valueForKey:@"topicName"]);
+            [boardEntity setBoardInto:[result valueForKey:@"boardIntro"]];
+            [boardEntity setPostNumberToday:[[result valueForKey:@"postNumberToday"] intValue]];
+            [boardEntity setLastReplyAuthor:[result valueForKey:@"lastReplyAuthor"]];
+            [boardEntity setLastReplyTime:[result valueForKey:@"lastReplyTime"]];
+            //NSLog(@"%@", [result valueForKey:@"lastReplyTime"]);
             [customboard addObject:boardEntity];
         }
     }

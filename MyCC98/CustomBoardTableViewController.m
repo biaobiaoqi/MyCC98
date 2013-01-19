@@ -89,15 +89,51 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%d%d", [indexPath section], [indexPath row]];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [[self.items objectAtIndex:indexPath.row] getBoardName];
+
+    //CONFIGURE CELL
+    
+    CGRect titleFrame = CGRectMake(2, 2, 200, 30);
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
+    titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    titleLabel.text = [[items objectAtIndex:indexPath.row] getBoardName];
+    titleLabel.textColor = [UIColor blueColor];
+    [cell.contentView addSubview:titleLabel];
+    
+    CGRect introFrame = CGRectMake(2, 40, 150, 20);
+    UILabel *introLabel = [[UILabel alloc] initWithFrame:introFrame];
+    introLabel.font = [UIFont systemFontOfSize:15];
+    introLabel.text = [[items objectAtIndex:indexPath.row] getBoardIntro];
+    introLabel.textColor = [UIColor grayColor];
+    [cell.contentView addSubview:introLabel];
+    
+    CGRect postNumberFrame = CGRectMake(220, 8, 92, 20);
+    UILabel *postNumberLabel = [[UILabel alloc] initWithFrame:postNumberFrame];
+    postNumberLabel.font = [UIFont systemFontOfSize:13];
+    postNumberLabel.text = [NSString stringWithFormat:@"今日贴数：%d", [[items objectAtIndex:indexPath.row] getPostNumberToday]];
+    postNumberLabel.textColor = [UIColor grayColor];
+    postNumberLabel.textAlignment = UITextAlignmentRight;
+    [cell.contentView addSubview:postNumberLabel];
+    
+    CGRect lastReplyFrame = CGRectMake(150, 42, 162, 16);
+    UILabel *lastReplyLabel = [[UILabel alloc] initWithFrame:lastReplyFrame];
+    lastReplyLabel.font = [UIFont systemFontOfSize:13];
+    lastReplyLabel.text = [NSString stringWithFormat:@"最后回复：%@", [[items objectAtIndex:indexPath.row] getLastReplyAuthor]];
+    lastReplyLabel.textColor = [UIColor grayColor];
+    lastReplyLabel.textAlignment = UITextAlignmentRight;
+    [cell.contentView addSubview:lastReplyLabel];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
 
 /*
@@ -150,6 +186,7 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    NSLog(@"%d", indexPath.row);
 }
 
 - (IBAction)revealMenu:(id)sender

@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
+#import "CustomBoardNavigationController.h"
 
 @interface MenuViewController : UIViewController <UITableViewDataSource, UITabBarControllerDelegate>
+{
+    UINavigationController *customBoard;
+    UINavigationController *hotTopic;
+}
 
 -(IBAction)logout:(id)sender;
 
 @property (nonatomic, strong) NSArray *menuItems;
+
 
 @end
