@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C3012" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CustomBoard" syncable="YES">
+        <attribute name="boardId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="boardIntro" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="boardMaster" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="boardName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastReplyAuthor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastReplyTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastReplyTopicId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastReplyTopicName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postNumberToday" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="HotTopics" syncable="YES">
         <attribute name="boardId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="boardName" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,5 +24,6 @@
     </entity>
     <elements>
         <element name="HotTopics" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="CustomBoard" positionX="160" positionY="192" width="128" height="180"/>
     </elements>
 </model>

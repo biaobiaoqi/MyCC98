@@ -14,6 +14,9 @@
 -(void)updateHotTopic:(NSMutableArray*)array;
 -(NSMutableArray*)getHotTopic;
 
+-(void)updateCustomBoard:(NSMutableArray*)array;
+-(NSMutableArray*)getCustomBoard;
+
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

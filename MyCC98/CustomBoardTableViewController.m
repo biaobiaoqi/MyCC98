@@ -8,6 +8,7 @@
 
 #import "CustomBoardTableViewController.h"
 #import "CC98API.h"
+#import "CC98Store.h"
 
 @interface CustomBoardTableViewController ()
 
@@ -16,7 +17,7 @@
 @implementation CustomBoardTableViewController
 @synthesize items;
 
-- (void)awakeFromNib
+/*- (void)awakeFromNib
 {
     [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getIndexPath] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -31,7 +32,7 @@
         NSLog(@"%@", error);
     }];
     //self.items = [NSArray arrayWithObjects:@"One", @"Two", @"Three", nil];
-}
+}*/
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -51,6 +52,19 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (_refreshHeaderView == nil) {
+		
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+		view.delegate = self;
+		[self.tableView addSubview:view];
+		_refreshHeaderView = view;
+		
+	}
+	
+	//  update the last update date
+	[_refreshHeaderView refreshLastUpdatedDate];
+    
+    [self reloadTableViewDataSource];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,7 +95,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [self.items objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[self.items objectAtIndex:indexPath.row] getBoardName];
     
     return cell;
 }
@@ -142,5 +156,81 @@
 {
     [self.slidingViewController anchorTopViewTo:ECRight];
 }
+
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource
+{
+	
+	//  should be calling your tableviews data source model to reload
+	//  put here just for demo
+    [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getIndexPath] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSMutableArray *boardlist = [[CC98Parser alloc] parseCustomBoardList:webcontent];
+        [[CC98Store sharedInstance] updateCustomBoard:boardlist];
+        items = [[CC98Store sharedInstance] getCustomBoard];
+        [self doneLoadingTableViewData];
+        //NSLog(@"%@", items);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+    
+	_reloading = YES;
+	
+}
+
+- (void)doneLoadingTableViewData
+{
+	
+	//  model should call this when its done loading
+    [self.tableView reloadData];
+	_reloading = NO;
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+	
+}
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{
+	
+	[self reloadTableViewDataSource];
+	//[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+	
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+	
+	return _reloading; // should return if data source model is reloading
+	
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
+{
+	
+	return [NSDate date]; // should return date data source was last changed
+	
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+	
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+	
+}
+
 
 @end
