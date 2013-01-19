@@ -11,6 +11,8 @@
 
 @interface MenuViewController : UIViewController <UITableViewDataSource, UITabBarControllerDelegate>
 
+-(IBAction)logout:(id)sender;
+
 @property (nonatomic, strong) NSArray *menuItems;
 
 @end
