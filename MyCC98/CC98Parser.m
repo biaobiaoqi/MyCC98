@@ -10,6 +10,8 @@
 #import "BoardEntity.h"
 #import "HotTopicEntity.h"
 #import "CC98Regex.h"
+#import "TopicEntity.h"
+#import "TFHpple.h"
 
 @implementation CC98Parser
 
@@ -163,6 +165,99 @@
     NSRange userAvatarRange = [userAvatarRegex rangeOfFirstMatchInString:html options:0 range:NSMakeRange(0, html.length)];
     NSString *userAvatar = [html substringWithRange:userAvatarRange];
     return userAvatar;
+}
+
+-(NSMutableArray*)parsePostList:(NSString*)html
+{
+    NSMutableArray *postlist = [[NSMutableArray alloc] init];
+    TFHpple *parser = [TFHpple hppleWithHTMLData:[html dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSArray *topicNameArray = [parser searchWithXPathQuery:@"//html/body/form[@action='master_batch.asp']/table/form/tbody/tr[position()>2]/td[position()=2]/a/span"];
+    
+    NSMutableString *webcontent = [NSMutableString stringWithString:html];
+    NSRegularExpression *trim = [[NSRegularExpression alloc]
+                                 initWithPattern:@"[\\r\\n\\t]"
+                                 options:NSRegularExpressionCaseInsensitive
+                                 error:nil];
+    [trim replaceMatchesInString:webcontent options:0 range:NSMakeRange(0, webcontent.length) withTemplate:@""];
+        
+    NSRegularExpression *postListRegex = [[NSRegularExpression alloc]
+                                           initWithPattern:POST_LIST_POST_ENTITY_REGEX
+                                           options:NSRegularExpressionCaseInsensitive
+                                           error:nil];
+    NSArray *postListArray = [postListRegex matchesInString:webcontent options:0 range:NSMakeRange(0, webcontent.length)];
+    //NSLog(@"%@", webcontent);
+    //NSLog(@"%d", postListArray.count);
+    for (int i=0; i<postListArray.count; ++i) {
+        NSTextCheckingResult *postListResult = [postListArray objectAtIndex:i];
+        NSString *topic = [webcontent substringWithRange:postListResult.range];
+        //NSLog(@"%@\n=====================", topic);
+        
+        /*NSRegularExpression *topicNameRegex = [[NSRegularExpression alloc]
+                                               initWithPattern:POST_LIST_POST_NAME_REGEX
+                                               options:NSRegularExpressionCaseInsensitive
+                                               error:nil];
+        NSRange topicNameRange = [topicNameRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *topicName = [topic substringWithRange:topicNameRange];
+        NSLog(@"%@", topicName);*/
+        
+        NSString *topicName = [[[topicNameArray objectAtIndex:i] firstChild] content];
+        
+        NSRegularExpression *topicIdRegex = [[NSRegularExpression alloc]
+                                               initWithPattern:POST_LIST_POST_ID_REGEX
+                                               options:NSRegularExpressionCaseInsensitive
+                                               error:nil];
+        NSRange topicIdRange = [topicIdRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *topicId = [topic substringWithRange:topicIdRange];
+        
+        NSRegularExpression *topicAuthorRegex = [[NSRegularExpression alloc]
+                                             initWithPattern:POST_LIST_POST_AUTHOR_NAME_REGEX
+                                             options:NSRegularExpressionCaseInsensitive
+                                             error:nil];
+        NSRange topicAuthorRange = [topicAuthorRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *topicAuthor = [topic substringWithRange:topicAuthorRange];
+        
+        NSRegularExpression *lastReplyAuthorRegex = [[NSRegularExpression alloc]
+                                                 initWithPattern:POST_LIST_LAST_REPLY_AUTHOR_REGEX
+                                                 options:NSRegularExpressionCaseInsensitive
+                                                 error:nil];
+        NSRange lastReplyAuthorRange = [lastReplyAuthorRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *lastReplyAuthor = [topic substringWithRange:lastReplyAuthorRange];
+        
+        NSRegularExpression *topicPageNumRegex = [[NSRegularExpression alloc]
+                                                     initWithPattern:POST_LIST_POST_PAGE_NUMBER_REGEX
+                                                     options:NSRegularExpressionCaseInsensitive
+                                                     error:nil];
+        NSRange topicPageNumRange = [topicPageNumRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *topicPageNum;
+        if (topicPageNumRange.location == NSNotFound) {
+            topicPageNum = @"1";
+        }
+        else
+        {
+            topicPageNum = [topic substringWithRange:topicPageNumRange];
+        }
+        
+        NSRegularExpression *boardIdRegex = [[NSRegularExpression alloc]
+                                                     initWithPattern:POST_LIST_POST_BOARD_ID_REGEX
+                                                     options:NSRegularExpressionCaseInsensitive
+                                                     error:nil];
+        NSRange boardIdRange = [boardIdRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *boardId = [topic substringWithRange:boardIdRange];
+
+            
+        TopicEntity *entity = [TopicEntity alloc];
+        entity.topicName = topicName;
+        entity.topicId = topicId;
+        entity.topicAuthor = topicAuthor;
+        entity.lastReplyAuthor = lastReplyAuthor;
+        entity.topicPageNum = [topicPageNum intValue];
+        entity.boardId = boardId;
+        NSLog(@"%d %@ %@ %@ %@ %d %@",i, topicName, topicId, topicAuthor, lastReplyAuthor, [topicPageNum intValue], boardId);
+        [postlist addObject:entity];
+    }
+    
+    return postlist;
 }
 
 @end

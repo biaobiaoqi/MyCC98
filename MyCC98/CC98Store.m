@@ -9,6 +9,7 @@
 #import "CC98Store.h"
 #import "HotTopicEntity.h"
 #import "BoardEntity.h"
+#import "TopicEntity.h"
 
 @implementation CC98Store
 @synthesize managedObjectContext;
@@ -145,6 +146,86 @@
     //NSLog(@"%@", hottopic);
     return customboard;
 }
+
+-(void)updateTopicListWithEntity:(NSMutableArray*)array boardId:(NSString*)boardId pageNum:(NSInteger)pageNum
+{
+    //delete all
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Topics" inManagedObjectContext:managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"displayBoardId == %@ && displayPageNum == %d", boardId, pageNum];
+    [request setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *items = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    for (NSManagedObject *managedObject in items) {
+        [managedObjectContext deleteObject:managedObject];
+    }
+    if(![managedObjectContext save:&error])
+    {
+        NSLog(@"%@", error);
+    }
+    
+    //add array
+    NSLog(@"%d", array.count);
+    for (TopicEntity *entity in array) {
+        NSManagedObject *new = [NSEntityDescription insertNewObjectForEntityForName:@"Topics" inManagedObjectContext:managedObjectContext];
+        [new setValue:entity.topicName forKey:@"topicName"];
+        [new setValue:entity.topicId forKey:@"topicId"];
+        [new setValue:entity.boardId forKey:@"boardId"];
+        [new setValue:[NSNumber numberWithInteger:entity.topicPageNum] forKey:@"topicPageNum"];
+        [new setValue:entity.topicAuthor forKey:@"topicAuthor"];
+        [new setValue:entity.lastReplyAuthor forKey:@"lastReplyAuthor"];
+        [new setValue:[NSNumber numberWithInteger:pageNum] forKey:@"displayPageNum"];
+        [new setValue:boardId forKey:@"displayBoardId"];
+        if(![managedObjectContext save:&error])
+        {
+            NSLog(@"%@", error);
+        }
+    }
+}
+
+-(NSMutableArray*)getTopicListWithBoardId:(NSString*)boardId pageNum:(NSInteger)pageNum
+{
+    NSMutableArray *topiclist = [[NSMutableArray alloc] init];
+    
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Topics" inManagedObjectContext:managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    //NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"run" ascending:NO];
+    //NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    //[request setSortDescriptors:sortDescriptors];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"displayBoardId == %@ && displayPageNum == %d", boardId, pageNum];
+    [request setPredicate:predicate];
+    
+    NSError *error;
+    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    NSLog(@"%d", mutableFetchResults.count);
+    if(mutableFetchResults) {
+        for (NSManagedObject *result in mutableFetchResults) {
+            TopicEntity *entity = [TopicEntity alloc];
+            entity.topicName = [result valueForKey:@"topicName"];
+            entity.topicId = [result valueForKey:@"topicId"];
+            entity.boardId = [result valueForKey:@"boardId"];
+            entity.topicAuthor = [result valueForKey:@"topicAuthor"];
+            entity.topicPageNum = [[result valueForKey:@"topicPageNum"] intValue];
+            entity.lastReplyAuthor = [result valueForKey:@"lastReplyAuthor"];
+            //NSLog(@"%@", entity.topicAuthor);
+            [topiclist addObject:entity];
+        }
+    }
+    //NSLog(@"%@", hottopic);
+    return topiclist;
+}
+
+
 
 /*-(void)storeImageFile:(NSData*)data withUrl:(NSString*)url
 {

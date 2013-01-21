@@ -30,4 +30,9 @@
     return [[NSString alloc] initWithString:[NSString stringWithFormat:@"/dispuser.asp?name=%@",[userName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 }
 
+-(NSString*) getBoardPathWithBoardId:(NSString*)boardId pageNum:(NSInteger)pageNum
+{
+    return [[NSString alloc] initWithString:[NSString stringWithFormat:@"/list.asp?boardid=%@&page=%d",boardId, pageNum]];
+}
+
 @end

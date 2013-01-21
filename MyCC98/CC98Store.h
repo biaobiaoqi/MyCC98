@@ -17,6 +17,9 @@
 -(void)updateCustomBoard:(NSMutableArray*)array;
 -(NSMutableArray*)getCustomBoard;
 
+-(void)updateTopicListWithEntity:(NSMutableArray*)array boardId:(NSString*)boardId pageNum:(NSInteger)pageNum;
+-(NSMutableArray*)getTopicListWithBoardId:(NSString*)boardId pageNum:(NSInteger)pageNum;
+
 /*-(void)storeImageFile:(NSData*)data withUrl:(NSString*)url;
 -(NSData*)fetchImageFileWithUrl:(NSString*)url;*/
 

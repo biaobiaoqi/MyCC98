@@ -11,6 +11,7 @@
 #import "CC98Store.h"
 #import "BoardEntity.h"
 #import "PostListTableViewController.h"
+#import "BoardCell.h"
 
 @interface CustomBoardTableViewController ()
 
@@ -69,6 +70,11 @@
     [self reloadTableViewDataSource];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    //[self.navigationController setToolbarHidden:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -91,55 +97,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%d%d", [indexPath section], [indexPath row]];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"BoardCell"];
+    BoardCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[BoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-
-    //CONFIGURE CELL
-    for (UIView *subView in cell.contentView.subviews)
-    {
-        [subView removeFromSuperview];
-    }
-    
-    CGRect titleFrame = CGRectMake(2, 2, 200, 30);
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
-    titleLabel.font = [UIFont boldSystemFontOfSize:20];
-    titleLabel.text = [[items objectAtIndex:indexPath.row] getBoardName];
-    titleLabel.textColor = [UIColor blueColor];
-    [cell.contentView addSubview:titleLabel];
-    
-    CGRect introFrame = CGRectMake(2, 40, 150, 20);
-    UILabel *introLabel = [[UILabel alloc] initWithFrame:introFrame];
-    introLabel.font = [UIFont systemFontOfSize:15];
-    introLabel.text = [[items objectAtIndex:indexPath.row] getBoardIntro];
-    introLabel.textColor = [UIColor grayColor];
-    [cell.contentView addSubview:introLabel];
-    
-    CGRect postNumberFrame = CGRectMake(220, 8, 92, 20);
-    UILabel *postNumberLabel = [[UILabel alloc] initWithFrame:postNumberFrame];
-    postNumberLabel.font = [UIFont systemFontOfSize:13];
-    postNumberLabel.text = [NSString stringWithFormat:@"今日贴数：%d", [[items objectAtIndex:indexPath.row] getPostNumberToday]];
-    postNumberLabel.textColor = [UIColor grayColor];
-    postNumberLabel.textAlignment = UITextAlignmentRight;
-    [cell.contentView addSubview:postNumberLabel];
-    
-    CGRect lastReplyFrame = CGRectMake(150, 42, 162, 16);
-    UILabel *lastReplyLabel = [[UILabel alloc] initWithFrame:lastReplyFrame];
-    lastReplyLabel.font = [UIFont systemFontOfSize:13];
-    lastReplyLabel.text = [NSString stringWithFormat:@"最后回复：%@", [[items objectAtIndex:indexPath.row] getLastReplyAuthor]];
-    lastReplyLabel.textColor = [UIColor grayColor];
-    lastReplyLabel.textAlignment = UITextAlignmentRight;
-    [cell.contentView addSubview:lastReplyLabel];
+    cell.title.text = [[items objectAtIndex:indexPath.row] getBoardName];
+    cell.postNum.text = [NSString stringWithFormat:@"今日贴数：%d", [[items objectAtIndex:indexPath.row] getPostNumberToday]];
+    cell.intro.text = [[items objectAtIndex:indexPath.row] getBoardIntro];
+    cell.lastReply.text = [NSString stringWithFormat:@"最后回复：%@", [[items objectAtIndex:indexPath.row] getLastReplyAuthor]];
     
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60;
 }
 
 /*
@@ -185,14 +154,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-    NSLog(@"%d", indexPath.row);
     
     BoardEntity *entity = [items objectAtIndex:indexPath.row];
     
