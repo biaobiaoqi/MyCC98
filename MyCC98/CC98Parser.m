@@ -173,6 +173,7 @@
     TFHpple *parser = [TFHpple hppleWithHTMLData:[html dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSArray *topicNameArray = [parser searchWithXPathQuery:@"//html/body/form[@action='master_batch.asp']/table/form/tbody/tr[position()>2]/td[position()=2]/a/span"];
+    NSArray *replyNumArray = [parser searchWithXPathQuery:@"//html/body/form[@action='master_batch.asp']/table/form/tbody/tr[position()>2]/td[position()=4]"];
     
     NSMutableString *webcontent = [NSMutableString stringWithString:html];
     NSRegularExpression *trim = [[NSRegularExpression alloc]
@@ -202,6 +203,7 @@
         NSLog(@"%@", topicName);*/
         
         NSString *topicName = [[[topicNameArray objectAtIndex:i] firstChild] content];
+        NSString *replyNum = [[[replyNumArray objectAtIndex:i] firstChild] content];
         
         NSRegularExpression *topicIdRegex = [[NSRegularExpression alloc]
                                                initWithPattern:POST_LIST_POST_ID_REGEX
@@ -253,6 +255,7 @@
         entity.lastReplyAuthor = lastReplyAuthor;
         entity.topicPageNum = [topicPageNum intValue];
         entity.boardId = boardId;
+        entity.replyNum = [replyNum stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSLog(@"%d %@ %@ %@ %@ %d %@",i, topicName, topicId, topicAuthor, lastReplyAuthor, [topicPageNum intValue], boardId);
         [postlist addObject:entity];
     }

@@ -93,6 +93,7 @@
     cell.title.text = entity.topicName;
     cell.author.text = [NSString stringWithFormat:@"作者：%@", entity.topicAuthor];
     cell.lastReply.text = [NSString stringWithFormat:@"最后回复：%@", entity.lastReplyAuthor];
+    cell.numberStat.text = entity.replyNum;
     return cell;
 }
 

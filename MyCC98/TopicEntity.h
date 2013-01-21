@@ -16,7 +16,7 @@
     NSString *topicType;
     NSInteger topicPageNum;
     NSString *topicAuthor;
-    NSInteger replyNum;
+    NSString *replyNum;
     NSDate *lastReplyTime;
     NSString *lastReplyAuthor;
 }
@@ -27,7 +27,7 @@
 @property (nonatomic, strong) NSString *topicType;
 @property (nonatomic) NSInteger topicPageNum;
 @property (nonatomic, strong) NSString *topicAuthor;
-@property (nonatomic) NSInteger replyNum;
+@property (nonatomic, strong) NSString *replyNum;
 @property (nonatomic, strong) NSDate *lastReplyTime;
 @property (nonatomic, strong) NSString *lastReplyAuthor;
 

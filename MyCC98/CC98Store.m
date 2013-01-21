@@ -179,6 +179,7 @@
         [new setValue:[NSNumber numberWithInteger:entity.topicPageNum] forKey:@"topicPageNum"];
         [new setValue:entity.topicAuthor forKey:@"topicAuthor"];
         [new setValue:entity.lastReplyAuthor forKey:@"lastReplyAuthor"];
+        [new setValue:entity.replyNum forKey:@"replyNum"];
         [new setValue:[NSNumber numberWithInteger:pageNum] forKey:@"displayPageNum"];
         [new setValue:boardId forKey:@"displayBoardId"];
         if(![managedObjectContext save:&error])
@@ -217,6 +218,7 @@
             entity.topicAuthor = [result valueForKey:@"topicAuthor"];
             entity.topicPageNum = [[result valueForKey:@"topicPageNum"] intValue];
             entity.lastReplyAuthor = [result valueForKey:@"lastReplyAuthor"];
+            entity.replyNum = [result valueForKey:@"replyNum"];
             //NSLog(@"%@", entity.topicAuthor);
             [topiclist addObject:entity];
         }
