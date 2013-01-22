@@ -23,8 +23,7 @@
 -(void)updateCustomBoard:(NSString*)boardId withTotalPageNum:(NSInteger)pageNum;
 -(NSInteger)getCustomBoardTotalPageNumWithBoardId:(NSString*)boardId;
 
-/*-(void)storeImageFile:(NSData*)data withUrl:(NSString*)url;
--(NSData*)fetchImageFileWithUrl:(NSString*)url;*/
+-(NSMutableArray*)getPostListWithBoardId:(NSString*)boardId topicId:(NSString*)topicId pageNum:(NSInteger)pageNum;
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

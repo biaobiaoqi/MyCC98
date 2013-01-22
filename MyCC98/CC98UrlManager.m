@@ -35,4 +35,9 @@
     return [[NSString alloc] initWithString:[NSString stringWithFormat:@"/list.asp?boardid=%@&page=%d",boardId, pageNum]];
 }
 
+-(NSString*) getTopicPathWithBoardId:(NSString*)boardId topicId:(NSString*)topicId pageNum:(NSInteger)pageNum
+{
+    return [[NSString alloc] initWithString:[NSString stringWithFormat:@"/dispbbs.asp?BoardID=%@&id=%@&star=%d",boardId, topicId, pageNum]];
+}
+
 @end

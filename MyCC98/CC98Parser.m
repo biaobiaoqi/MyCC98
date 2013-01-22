@@ -12,6 +12,7 @@
 #import "CC98Regex.h"
 #import "TopicEntity.h"
 #import "TFHpple.h"
+#import "PostEntity.h"
 
 @implementation CC98Parser
 
@@ -167,7 +168,7 @@
     return userAvatar;
 }
 
--(NSMutableArray*)parsePostList:(NSString*)html
+-(NSMutableArray*)parseTopicList:(NSString*)html
 {
     NSMutableArray *postlist = [[NSMutableArray alloc] init];
     TFHpple *parser = [TFHpple hppleWithHTMLData:[html dataUsingEncoding:NSUTF8StringEncoding]];
@@ -286,6 +287,41 @@
         return 0;
     }
     //NSLog(@"%d=======", topicNameArray.count);
+}
+
+-(NSMutableArray*)parsePostList:(NSData*)html
+{
+    NSMutableArray *postlist = [[NSMutableArray alloc] init];
+    
+    TFHpple *parser = [TFHpple hppleWithHTMLData:html];
+    
+    NSArray *PostContentArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/blockquote/table/tr/td/span"];
+    NSArray *PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/a"];
+    
+    //NSLog(@"===============%d", PostAuthorArray.count);
+    for (int i=0; i<PostContentArray.count; ++i) {
+        TFHppleElement *element = [PostContentArray objectAtIndex:i];
+        //NSLog(@"%@", [element description]);
+        PostEntity *entity = [PostEntity alloc];
+        NSMutableString *content = [[NSMutableString alloc] init];
+        NSArray *child = [element children];
+        for (TFHppleElement *child1 in child) {
+            if ([child1 content] == nil) {
+                [content appendString:@"\n"];
+            }
+            else {
+                [content appendString:[child1 content]];
+            }
+        }
+        //NSLog(@"%@", content);
+        entity.postContent = content;
+        entity.postAuthor = [[[[[PostAuthorArray objectAtIndex:i] firstChild] firstChild] firstChild] content];
+        //NSLog(@"~~~~~~~~~~~~~%@", entity.postAuthor);
+        
+        
+        [postlist addObject:entity];
+    }
+    return postlist;
 }
 
 @end

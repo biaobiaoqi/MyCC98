@@ -1,24 +1,23 @@
 //
-//  TopicListViewController.m
+//  PostListViewController.m
 //  MyCC98
 //
 //  Created by Yan Chen on 1/22/13.
 //  Copyright (c) 2013 Zhejiang University. All rights reserved.
 //
 
-#import "TopicListViewController.h"
+#import "PostListViewController.h"
+#import "PostCell.h"
 #import "CC98API.h"
 #import "CC98Store.h"
-#import "TopicCell.h"
-#import "TopicEntity.h"
-#import "PostListViewController.h"
+#import "PostEntity.h"
 
-@interface TopicListViewController ()
+@interface PostListViewController ()
 
 @end
 
-@implementation TopicListViewController
-@synthesize boardInfo;
+@implementation PostListViewController
+@synthesize topicInfo;
 @synthesize items;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,7 +33,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navigationItem.title = [boardInfo getBoardName];
+    self.navigationItem.title = topicInfo.topicName;
     
     self.prevPage2.action = @selector(prevPageButtonPressed);
     self.nextPage1.action = @selector(nextPageButtonPressed);
@@ -58,14 +57,6 @@
 	//[_refreshHeaderView refreshLastUpdatedDate];
     
     [self loadTableViewDataSource];
-    //currPageNum = 1;
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-    //[self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 -(void)prevPageButtonPressed {
@@ -100,20 +91,33 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"TopicCell";
-    TopicCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"PostCell";
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     if (cell == nil) {
-        cell = [[TopicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[PostCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    TopicEntity *entity = [items objectAtIndex:indexPath.row];
-    cell.title.text = entity.topicName;
-    //[cell.title sizeToFit];
-    cell.author.text = [NSString stringWithFormat:@"作者：%@", entity.topicAuthor];
-    cell.lastReply.text = [NSString stringWithFormat:@"最后回复：%@", entity.lastReplyAuthor];
-    cell.numberStat.text = entity.replyNum;
+    //NSLog(@"%@", [items objectAtIndex:indexPath.row]);
+    PostEntity *entity = [items objectAtIndex:indexPath.row];
+    cell.content.text = entity.postContent;
+    cell.author.text = entity.postAuthor;
+    CGSize maximumLabelSize = CGSizeMake(280, FLT_MAX);
+    
+    CGSize expectedLabelSize = [cell.content.text sizeWithFont:cell.content.font constrainedToSize:maximumLabelSize lineBreakMode:cell.content.lineBreakMode];
+    
+    //adjust the label the the new height.
+    CGRect newFrame = cell.content.frame;
+    newFrame.size.height = expectedLabelSize.height;
+    cell.content.frame = newFrame;
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PostCell *cell = (PostCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    return cell.content.frame.size.height + 40;
 }
 
 
@@ -128,16 +132,6 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-    TopicEntity *entity = [items objectAtIndex:indexPath.row];
-    
-    UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    
-    PostListViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"PostList"];
-    
-    nextViewController.topicInfo = entity;
-    
-    [self.navigationController pushViewController:nextViewController animated:YES];
-    
 }
 
 - (void)loadTableViewDataSource
@@ -150,17 +144,17 @@
         [self.toolbar1 setHidden:YES];
         [self.toolbar2 setHidden:NO];
     }
-    items = [[CC98Store sharedInstance] getTopicListWithBoardId:[boardInfo getBoardId] pageNum:currPageNum];
-    totalPageNum = [[CC98Store sharedInstance] getCustomBoardTotalPageNumWithBoardId:[boardInfo getBoardId]];
-    if (items.count == 0) {
+    //items = [[CC98Store sharedInstance] getPostListWithBoardId:topicInfo.boardId topicId:topicInfo.topicId pageNum:currPageNum];
+    totalPageNum = topicInfo.topicPageNum;
+    //if (items.count == 0) {
         [self reloadTableViewDataSource];
         //NSLog(@"Loading Topic List From Web");
-    }
-    else {
-        [self doneLoadingTableViewData];
+    //}
+    //else {
+    //    [self doneLoadingTableViewData];
         //[self.tableView reloadData];
-        NSLog(@"Loaded Topic List From DB");
-    }
+    //    NSLog(@"Loaded Post List From DB");
+    //}
 }
 
 #pragma mark -
@@ -177,35 +171,21 @@
         [self.toolbar1 setHidden:YES];
         [self.toolbar2 setHidden:NO];
     }
+    
     NSLog(@"Starting GET ===");
-	[[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getBoardPathWithBoardId:[boardInfo getBoardId] pageNum:currPageNum] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+	[[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getTopicPathWithBoardId:topicInfo.boardId topicId:topicInfo.topicId pageNum:currPageNum] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"GET succeed! ===");
-        NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        //NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         //NSLog(@"%@", webcontent);
-        
-        
-        NSMutableArray *postlist = [[CC98Parser alloc] parseTopicList:webcontent];
-        totalPageNum = [[CC98Parser alloc] parsePostListTotalPageNum:responseObject];
-        NSLog(@"PARSE succeed! ===");
-        //NSLog(@"%d", postlist.count);
-        
-        
-        [[CC98Store sharedInstance] updateTopicListWithEntity:postlist boardId:[boardInfo getBoardId] pageNum:currPageNum];
-        items = [[CC98Store sharedInstance] getTopicListWithBoardId:[boardInfo getBoardId] pageNum:currPageNum];
-        NSLog(@"STORE and RETRIEVE succeed! ===");
-        //NSLog(@"%d", items.count);
-        
-        [[CC98Store sharedInstance] updateCustomBoard:[boardInfo getBoardId] withTotalPageNum:totalPageNum];
-        
-        
+        NSMutableArray *array = [[CC98Parser alloc] parsePostList:responseObject];
+        //NSLog(@"%@====", array);
+        items = array;
         [self doneLoadingTableViewData];
         //NSLog(@"%@", items);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
     }];
-    
-	//  should be calling your tableviews data source model to reload
-	//  put here just for demo
+
     
 	_reloading = YES;
 	

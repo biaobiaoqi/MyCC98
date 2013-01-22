@@ -133,41 +133,41 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="M3J-j3-iVF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="77" sectionHeaderHeight="22" sectionFooterHeight="22" id="M3J-j3-iVF">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TopicCell" rowHeight="65" id="B5N-fe-5G4" customClass="TopicCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="65"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TopicCell" rowHeight="77" id="B5N-fe-5G4" customClass="TopicCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" id="i4x-q8-KdD">
-                                                    <rect key="frame" x="3" y="0.0" width="202" height="30"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" id="i4x-q8-KdD">
+                                                    <rect key="frame" x="3" y="0.0" width="241" height="47"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JH9-Oa-NgX">
-                                                    <rect key="frame" x="3" y="35" width="165" height="21"/>
+                                                    <rect key="frame" x="3" y="49" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4kD-pc-e4H">
-                                                    <rect key="frame" x="184" y="4" width="126" height="21"/>
+                                                    <rect key="frame" x="232" y="4" width="78" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lastReply" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tyr-gj-xAn">
-                                                    <rect key="frame" x="162" y="35" width="148" height="21"/>
+                                                    <rect key="frame" x="162" y="49" width="148" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -231,6 +231,97 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P4w-x6-VJZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2026" y="240"/>
+        </scene>
+        <!--Post List View Controller-->
+        <scene sceneID="HaN-ci-mRI">
+            <objects>
+                <viewController storyboardIdentifier="PostList" id="Hlh-tl-gmY" customClass="PostListViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xuv-7x-xmb">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="178" sectionHeaderHeight="22" sectionFooterHeight="22" id="g5C-ER-jSx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="178" id="fxF-GV-8sC" customClass="PostCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="178"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="177"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Br1-K2-BcZ">
+                                                    <rect key="frame" x="20" y="20" width="280" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XzJ-c4-p5t">
+                                                    <rect key="frame" x="20" y="0.0" width="160" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="author" destination="XzJ-c4-p5t" id="UUc-cU-Pxa"/>
+                                            <outlet property="content" destination="Br1-K2-BcZ" id="f8s-uZ-SYZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Hlh-tl-gmY" id="SoO-70-Rnc"/>
+                                    <outlet property="delegate" destination="Hlh-tl-gmY" id="SY2-BB-25D"/>
+                                </connections>
+                            </tableView>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0ge-Sy-vZs">
+                                <rect key="frame" x="0.0" y="504" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="40" systemItem="fixedSpace" id="ySi-eQ-aLx"/>
+                                    <barButtonItem title="上一页" id="1Jz-E9-wdQ"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="Arf-MN-nO6"/>
+                                    <barButtonItem style="plain" id="C43-Pm-2e2"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="XO7-7D-bYe"/>
+                                    <barButtonItem title="下一页" id="uCt-TH-IuG"/>
+                                    <barButtonItem width="40" systemItem="fixedSpace" id="mV6-jI-ik8"/>
+                                </items>
+                            </toolbar>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="BWr-g5-OdB">
+                                <rect key="frame" x="0.0" y="504" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="96" systemItem="fixedSpace" id="vyf-wu-w5O"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ER8-fY-jx8"/>
+                                    <barButtonItem style="plain" id="2RN-lM-e8O"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="2eb-rZ-RQq"/>
+                                    <barButtonItem title="下一页" id="lTc-d2-39C"/>
+                                    <barButtonItem width="40" systemItem="fixedSpace" id="q2j-mQ-fNi"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="nextPage1" destination="lTc-d2-39C" id="3FD-fY-Rut"/>
+                        <outlet property="nextPage2" destination="uCt-TH-IuG" id="qel-Ir-9Sp"/>
+                        <outlet property="pageLabel1" destination="2RN-lM-e8O" id="bfZ-va-H7p"/>
+                        <outlet property="pageLabel2" destination="C43-Pm-2e2" id="ZjI-J4-xzJ"/>
+                        <outlet property="prevPage2" destination="1Jz-E9-wdQ" id="Icc-lz-CzF"/>
+                        <outlet property="tableView" destination="g5C-ER-jSx" id="Xf2-n7-HgO"/>
+                        <outlet property="toolbar1" destination="BWr-g5-OdB" id="ap6-7B-w3N"/>
+                        <outlet property="toolbar2" destination="0ge-Sy-vZs" id="abD-ZX-Lcx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j3W-ni-o89" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2446" y="240"/>
         </scene>
         <!--Custom Board Table View Controller - 个人定制区-->
         <scene sceneID="Kpc-Rl-TeT">
@@ -396,80 +487,6 @@
     <resources>
         <image name="logo.png" width="180" height="60"/>
     </resources>
-    <classes>
-        <class className="BoardCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BoardCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="intro" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lastReply" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="postNum" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="CustomBoardNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomBoardNavigationController.h"/>
-        </class>
-        <class className="CustomBoardTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomBoardTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-            </relationships>
-        </class>
-        <class className="ECSlidingViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
-        </class>
-        <class className="HotTopicNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HotTopicNavigationController.h"/>
-        </class>
-        <class className="HotTopicTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HotTopicTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-            </relationships>
-        </class>
-        <class className="InitialSlidingViewController" superclassName="ECSlidingViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialSlidingViewController.h"/>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="login:"/>
-                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="username" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MenuViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="logout:"/>
-                <relationship kind="outlet" name="avatarImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="menuTable" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="profile" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="TopicCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopicCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="author" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lastReply" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="numberStat" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TopicListViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopicListViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="nextPage1" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="nextPage2" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="pageLabel1" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="pageLabel2" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="prevPage2" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="toolbar1" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="toolbar2" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

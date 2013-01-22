@@ -252,6 +252,10 @@
     if (items.count == 1) {
         NSManagedObject *object = [items objectAtIndex:0];
         [object setValue:[NSNumber numberWithInteger:pageNum] forKey:@"totalPageNum"];
+        if(![managedObjectContext save:&error])
+        {
+            NSLog(@"%@", error);
+        }
     }
 }
 -(NSInteger)getCustomBoardTotalPageNumWithBoardId:(NSString*)boardId
@@ -271,37 +275,13 @@
         return [[object valueForKey:@"totalPageNum"] intValue];
     }
     else {
-        return 0;
+        return 11111;
     }
 }
 
-/*-(void)storeImageFile:(NSData*)data withUrl:(NSString*)url
+-(NSMutableArray*)getPostListWithBoardId:(NSString*)boardId topicId:(NSString*)topicId pageNum:(NSInteger)pageNum
 {
-    NSError *error;
-    NSManagedObject *new = [NSEntityDescription insertNewObjectForEntityForName:@"Images" inManagedObjectContext:managedObjectContext];
-    [new setValue:data forKey:@"image"];
-    [new setValue:url forKey:@"url"];
-    [managedObjectContext save:&error];
+    return nil;
 }
--(NSData*)fetchImageFileWithUrl:(NSString*)url
-{
-    NSEntityDescription *imageEntity = [NSEntityDescription entityForName:@"Images" inManagedObjectContext:self.managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:imageEntity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", url];
-    [fetchRequest setPredicate:predicate];
-    NSError *error;
-    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
-    if (mutableFetchResults) {
-        NSManagedObject *result = [mutableFetchResults objectAtIndex:0];
-        NSData *data = [result valueForKey:@"image"];
-        return data;
-    }
-    else {
-        return nil;
-    }
-}*/
-
-
 
 @end

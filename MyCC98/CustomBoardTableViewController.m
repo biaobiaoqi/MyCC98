@@ -181,7 +181,7 @@
     items = [[CC98Store sharedInstance] getCustomBoard];
     if (items.count == 0) {
         [self reloadTableViewDataSource];
-        NSLog(@"Loading Custom Board List From Web");
+        
     }
     else {
         [self.tableView reloadData];
@@ -197,6 +197,7 @@
 	_reloading = YES;
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
+    NSLog(@"Loading Custom Board List From Web");
     [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getIndexPath] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSMutableArray *boardlist = [[CC98Parser alloc] parseCustomBoardList:webcontent];

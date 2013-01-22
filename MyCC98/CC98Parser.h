@@ -13,7 +13,8 @@
 -(NSMutableArray*)parseCustomBoardList:(NSString*)html;
 -(NSMutableArray*)parseHottopicList:(NSString*)html;
 -(NSString*)parseUserProfile:(NSString*)html;
--(NSMutableArray*)parsePostList:(NSString*)html;
+-(NSMutableArray*)parseTopicList:(NSString*)html;
 -(NSInteger)parsePostListTotalPageNum:(NSData*)html;
+-(NSMutableArray*)parsePostList:(NSData*)html;
 
 @end

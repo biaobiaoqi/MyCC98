@@ -67,6 +67,9 @@
 		BFBB5AF216A99CC300CBF9A1 /* HotTopicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */; };
 		BFBB5AF516A99F6300CBF9A1 /* HotTopicEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */; };
 		BFC0E7A716AE2E63007F2AE4 /* TopicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC0E7A616AE2E63007F2AE4 /* TopicListViewController.m */; };
+		BFC0E7AE16AE8DE7007F2AE4 /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC0E7AD16AE8DE7007F2AE4 /* PostListViewController.m */; };
+		BFC0E7B216AE8FB5007F2AE4 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC0E7B116AE8FB4007F2AE4 /* PostCell.m */; };
+		BFC0E7B516AEC1E1007F2AE4 /* PostEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC0E7B416AEC1E1007F2AE4 /* PostEntity.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -168,6 +171,12 @@
 		BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicEntity.m; sourceTree = "<group>"; };
 		BFC0E7A516AE2E63007F2AE4 /* TopicListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicListViewController.h; sourceTree = "<group>"; };
 		BFC0E7A616AE2E63007F2AE4 /* TopicListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicListViewController.m; sourceTree = "<group>"; };
+		BFC0E7AC16AE8DE7007F2AE4 /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
+		BFC0E7AD16AE8DE7007F2AE4 /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
+		BFC0E7B016AE8FB4007F2AE4 /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
+		BFC0E7B116AE8FB4007F2AE4 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		BFC0E7B316AEC1E0007F2AE4 /* PostEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEntity.h; sourceTree = "<group>"; };
+		BFC0E7B416AEC1E1007F2AE4 /* PostEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostEntity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +228,8 @@
 				BF869A0516AA4E0A00BA5307 /* CC98Store.m */,
 				BF9971E116AD4F510040A9C1 /* TopicEntity.h */,
 				BF9971E216AD4F510040A9C1 /* TopicEntity.m */,
+				BFC0E7B316AEC1E0007F2AE4 /* PostEntity.h */,
+				BFC0E7B416AEC1E1007F2AE4 /* PostEntity.m */,
 			);
 			name = CC98LIB;
 			sourceTree = "<group>";
@@ -257,6 +268,10 @@
 				BF9971DE16AD39E00040A9C1 /* TopicCell.m */,
 				BFC0E7A516AE2E63007F2AE4 /* TopicListViewController.h */,
 				BFC0E7A616AE2E63007F2AE4 /* TopicListViewController.m */,
+				BFC0E7AC16AE8DE7007F2AE4 /* PostListViewController.h */,
+				BFC0E7AD16AE8DE7007F2AE4 /* PostListViewController.m */,
+				BFC0E7B016AE8FB4007F2AE4 /* PostCell.h */,
+				BFC0E7B116AE8FB4007F2AE4 /* PostCell.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -543,6 +558,9 @@
 				BF427AB316AD7FA500085ABB /* TFHppleElement.m in Sources */,
 				BF427AB416AD7FA500085ABB /* XPathQuery.m in Sources */,
 				BFC0E7A716AE2E63007F2AE4 /* TopicListViewController.m in Sources */,
+				BFC0E7AE16AE8DE7007F2AE4 /* PostListViewController.m in Sources */,
+				BFC0E7B216AE8FB5007F2AE4 /* PostCell.m in Sources */,
+				BFC0E7B516AEC1E1007F2AE4 /* PostEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

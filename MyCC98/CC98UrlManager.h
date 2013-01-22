@@ -15,5 +15,6 @@
 -(NSString*) getHotTopicPath;
 -(NSString*) getUserProfilePath:(NSString*)userName;
 -(NSString*) getBoardPathWithBoardId:(NSString*)boardId pageNum:(NSInteger)pageNum;
+-(NSString*) getTopicPathWithBoardId:(NSString*)boardId topicId:(NSString*)topicId pageNum:(NSInteger)pageNum;
 
 @end
