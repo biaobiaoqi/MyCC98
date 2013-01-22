@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *items;
 
 - (IBAction)revealMenu:(id)sender;
+- (void)loadTableViewDataSource;
 - (void)reloadTableViewDataSource;
 - (void)doneLoadingTableViewData;
 

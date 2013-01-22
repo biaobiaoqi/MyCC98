@@ -149,7 +149,8 @@
 
 -(void)updateTopicListWithEntity:(NSMutableArray*)array boardId:(NSString*)boardId pageNum:(NSInteger)pageNum
 {
-    //delete all
+    //if the page is empty in db, just insert instead of delete before insert
+    //if the page is not empty, delete all topics in this board and then insert
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"Topics" inManagedObjectContext:managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -160,17 +161,26 @@
     
     NSError *error;
     NSArray *items = [managedObjectContext executeFetchRequest:request error:&error];
+    //NSLog(@"%d", items.count);
+    if (items.count != 0) {
+        NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"displayBoardId == %@", boardId];
+        [request setPredicate:predicate1];
+        
+        //NSError *error;
+        NSArray *items1 = [managedObjectContext executeFetchRequest:request error:&error];
+        
+        for (NSManagedObject *managedObject in items1) {
+            [managedObjectContext deleteObject:managedObject];
+        }
+        if(![managedObjectContext save:&error])
+        {
+            NSLog(@"%@", error);
+        }
+    }
     
-    for (NSManagedObject *managedObject in items) {
-        [managedObjectContext deleteObject:managedObject];
-    }
-    if(![managedObjectContext save:&error])
-    {
-        NSLog(@"%@", error);
-    }
     
     //add array
-    NSLog(@"%d", array.count);
+    //NSLog(@"%d", array.count);
     for (TopicEntity *entity in array) {
         NSManagedObject *new = [NSEntityDescription insertNewObjectForEntityForName:@"Topics" inManagedObjectContext:managedObjectContext];
         [new setValue:entity.topicName forKey:@"topicName"];
@@ -208,7 +218,7 @@
     
     NSError *error;
     NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    NSLog(@"%d", mutableFetchResults.count);
+    //NSLog(@"%d", mutableFetchResults.count);
     if(mutableFetchResults) {
         for (NSManagedObject *result in mutableFetchResults) {
             TopicEntity *entity = [TopicEntity alloc];
@@ -227,7 +237,43 @@
     return topiclist;
 }
 
-
+-(void)updateCustomBoard:(NSString*)boardId withTotalPageNum:(NSInteger)pageNum
+{
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"CustomBoard" inManagedObjectContext:managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"boardId == %@", boardId];
+    [request setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *items = [managedObjectContext executeFetchRequest:request error:&error];
+    if (items.count == 1) {
+        NSManagedObject *object = [items objectAtIndex:0];
+        [object setValue:[NSNumber numberWithInteger:pageNum] forKey:@"totalPageNum"];
+    }
+}
+-(NSInteger)getCustomBoardTotalPageNumWithBoardId:(NSString*)boardId
+{
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"CustomBoard" inManagedObjectContext:managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"boardId == %@", boardId];
+    [request setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *items = [managedObjectContext executeFetchRequest:request error:&error];
+    if (items.count == 1) {
+        NSManagedObject *object = [items objectAtIndex:0];
+        return [[object valueForKey:@"totalPageNum"] intValue];
+    }
+    else {
+        return 0;
+    }
+}
 
 /*-(void)storeImageFile:(NSData*)data withUrl:(NSString*)url
 {

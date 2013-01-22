@@ -278,7 +278,7 @@
                                              error:nil];
         NSRange lastPageRange = [lastPageRegex rangeOfFirstMatchInString:lastPageLink options:0 range:NSMakeRange(0, lastPageLink.length)];
         NSString *lastPage = [lastPageLink substringWithRange:lastPageRange];
-        NSLog(@"%@========", lastPage);
+        //NSLog(@"%@========", lastPage);
         return [lastPage intValue];
     }
     else

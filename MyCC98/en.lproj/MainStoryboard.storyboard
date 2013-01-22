@@ -189,28 +189,29 @@
                                     <outlet property="delegate" destination="xQ3-Ym-9vE" id="rkO-5M-D2i"/>
                                 </connections>
                             </tableView>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="KiY-YX-Q27">
+                                <rect key="frame" x="0.0" y="504" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="96" systemItem="fixedSpace" id="i7x-sp-7ls"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="EqV-5c-PEf"/>
+                                    <barButtonItem style="plain" id="2eN-Kb-SPM"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="hSR-aP-mvK"/>
+                                    <barButtonItem title="下一页" id="JJI-OY-MgI"/>
+                                    <barButtonItem width="40" systemItem="fixedSpace" id="Llm-Ym-2hu"/>
+                                </items>
+                            </toolbar>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="YgR-f7-N2q">
                                 <rect key="frame" x="0.0" y="504" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem width="30" systemItem="fixedSpace" id="GTa-r3-zbe"/>
+                                    <barButtonItem width="40" systemItem="fixedSpace" id="GTa-r3-zbe"/>
                                     <barButtonItem title="上一页" id="WOD-03-SQA"/>
                                     <barButtonItem systemItem="flexibleSpace" id="p6D-bA-nJk"/>
                                     <barButtonItem style="plain" id="pd8-Ou-gOw"/>
                                     <barButtonItem systemItem="flexibleSpace" id="BMc-mc-McU"/>
                                     <barButtonItem title="下一页" id="U8s-S6-W1d"/>
-                                    <barButtonItem width="31" systemItem="fixedSpace" id="6E9-1a-kw4"/>
-                                </items>
-                            </toolbar>
-                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="KiY-YX-Q27">
-                                <rect key="frame" x="0.0" y="504" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem width="133" systemItem="fixedSpace" id="i7x-sp-7ls"/>
-                                    <barButtonItem style="plain" id="2eN-Kb-SPM"/>
-                                    <barButtonItem systemItem="flexibleSpace" id="hSR-aP-mvK"/>
-                                    <barButtonItem title="下一页" id="JJI-OY-MgI"/>
-                                    <barButtonItem width="29" systemItem="fixedSpace" id="Llm-Ym-2hu"/>
+                                    <barButtonItem width="40" systemItem="fixedSpace" id="6E9-1a-kw4"/>
                                 </items>
                             </toolbar>
                         </subviews>

@@ -65,9 +65,10 @@
 	}
 	
 	//  update the last update date
-	[_refreshHeaderView refreshLastUpdatedDate];
+	//[_refreshHeaderView refreshLastUpdatedDate];
     
-    [self reloadTableViewDataSource];
+    //[self reloadTableViewDataSource];
+    [self loadTableViewDataSource];
     //[self.navigationController setDelegate:self];
 }
 
@@ -173,12 +174,26 @@
     [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
+- (void)loadTableViewDataSource
+{
+    //NSLog(@"");
+    items = [[CC98Store sharedInstance] getCustomBoard];
+    if (items.count == 0) {
+        [self reloadTableViewDataSource];
+        NSLog(@"Loading Custom Board List From Web");
+    }
+    else {
+        [self.tableView reloadData];
+        NSLog(@"Loaded Custom Board List From DB");
+    }
+}
+
 #pragma mark -
 #pragma mark Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource
 {
-	
+	_reloading = YES;
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
     [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getIndexPath] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -191,9 +206,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
     }];
-    
-	_reloading = YES;
-	
 }
 
 - (void)doneLoadingTableViewData

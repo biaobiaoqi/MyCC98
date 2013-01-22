@@ -165,7 +165,9 @@
 	
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
+    
     [[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getHotTopicPath] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSMutableArray *boardlist = [[CC98Parser alloc] parseHottopicList:webcontent];
         [[CC98Store sharedInstance] updateHotTopic:boardlist];

@@ -20,6 +20,9 @@
 -(void)updateTopicListWithEntity:(NSMutableArray*)array boardId:(NSString*)boardId pageNum:(NSInteger)pageNum;
 -(NSMutableArray*)getTopicListWithBoardId:(NSString*)boardId pageNum:(NSInteger)pageNum;
 
+-(void)updateCustomBoard:(NSString*)boardId withTotalPageNum:(NSInteger)pageNum;
+-(NSInteger)getCustomBoardTotalPageNumWithBoardId:(NSString*)boardId;
+
 /*-(void)storeImageFile:(NSData*)data withUrl:(NSString*)url;
 -(NSData*)fetchImageFileWithUrl:(NSString*)url;*/
 

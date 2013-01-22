@@ -54,21 +54,21 @@
 	}
 	
 	//  update the last update date
-	[_refreshHeaderView refreshLastUpdatedDate];
+	//[_refreshHeaderView refreshLastUpdatedDate];
     
-    [self reloadTableViewDataSource];
+    [self loadTableViewDataSource];
     //currPageNum = 1;
     
 }
 
 -(void)prevPageButtonPressed {
     currPageNum--;
-    [self reloadTableViewDataSource];
+    [self loadTableViewDataSource];
 }
 
 -(void)nextPageButtonPressed {
     currPageNum++;
-    [self reloadTableViewDataSource];
+    [self loadTableViewDataSource];
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,6 +122,29 @@
      */
 }
 
+- (void)loadTableViewDataSource
+{
+    if (currPageNum == 1) {
+        [self.toolbar1 setHidden:NO];
+        [self.toolbar2 setHidden:YES];
+    }
+    else {
+        [self.toolbar1 setHidden:YES];
+        [self.toolbar2 setHidden:NO];
+    }
+    items = [[CC98Store sharedInstance] getTopicListWithBoardId:[boardInfo getBoardId] pageNum:currPageNum];
+    totalPageNum = [[CC98Store sharedInstance] getCustomBoardTotalPageNumWithBoardId:[boardInfo getBoardId]];
+    if (items.count == 0) {
+        [self reloadTableViewDataSource];
+        NSLog(@"Loading Topic List From Web");
+    }
+    else {
+        [self doneLoadingTableViewData];
+        //[self.tableView reloadData];
+        NSLog(@"Loaded Topic List From DB");
+    }
+}
+
 #pragma mark -
 #pragma mark Data Source Loading / Reloading Methods
 
@@ -135,16 +158,27 @@
         [self.toolbar1 setHidden:YES];
         [self.toolbar2 setHidden:NO];
     }
-    
+    //NSLog(@"Starting GET ===");
 	[[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getBoardPathWithBoardId:[boardInfo getBoardId] pageNum:currPageNum] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSLog(@"GET succeed! ===");
         NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         //NSLog(@"%@", webcontent);
+        
+        
         NSMutableArray *postlist = [[CC98Parser alloc] parsePostList:webcontent];
         totalPageNum = [[CC98Parser alloc] parsePostListTotalPageNum:responseObject];
+        //NSLog(@"PARSE succeed! ===");
         //NSLog(@"%d", postlist.count);
+        
+        
         [[CC98Store sharedInstance] updateTopicListWithEntity:postlist boardId:[boardInfo getBoardId] pageNum:currPageNum];
         items = [[CC98Store sharedInstance] getTopicListWithBoardId:[boardInfo getBoardId] pageNum:currPageNum];
+        //NSLog(@"STORE and RETRIEVE succeed! ===");
         //NSLog(@"%d", items.count);
+        
+        [[CC98Store sharedInstance] updateCustomBoard:[boardInfo getBoardId] withTotalPageNum:totalPageNum];
+        
+        
         [self doneLoadingTableViewData];
         //NSLog(@"%@", items);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

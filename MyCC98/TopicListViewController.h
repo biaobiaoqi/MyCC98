@@ -30,6 +30,7 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar1;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar2;
 
+- (void)loadTableViewDataSource;
 - (void)reloadTableViewDataSource;
 - (void)doneLoadingTableViewData;
 
