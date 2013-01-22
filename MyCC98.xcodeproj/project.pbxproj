@@ -44,7 +44,6 @@
 		BF8699F616AA3B3300BA5307 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BF8699ED16AA3B3300BA5307 /* whiteArrow.png */; };
 		BF8699F716AA3B3300BA5307 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF8699EE16AA3B3300BA5307 /* whiteArrow@2x.png */; };
 		BF869A0616AA4E0A00BA5307 /* CC98Store.m in Sources */ = {isa = PBXBuildFile; fileRef = BF869A0516AA4E0A00BA5307 /* CC98Store.m */; };
-		BF869A2516AACE7D00BA5307 /* PostListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF869A2416AACE7D00BA5307 /* PostListTableViewController.m */; };
 		BF97057116A917AD00FECBFD /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BF97057016A917AD00FECBFD /* logo.png */; };
 		BF97057816A9233900FECBFD /* CC98Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = BF97057716A9233900FECBFD /* CC98Parser.m */; };
 		BF97057B16A9238C00FECBFD /* CC98UrlManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF97057A16A9238C00FECBFD /* CC98UrlManager.m */; };
@@ -67,6 +66,7 @@
 		BFBB5AEE16A99C7900CBF9A1 /* HotTopicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AED16A99C7900CBF9A1 /* HotTopicNavigationController.m */; };
 		BFBB5AF216A99CC300CBF9A1 /* HotTopicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */; };
 		BFBB5AF516A99F6300CBF9A1 /* HotTopicEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */; };
+		BFC0E7A716AE2E63007F2AE4 /* TopicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC0E7A616AE2E63007F2AE4 /* TopicListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,8 +125,6 @@
 		BF8699EE16AA3B3300BA5307 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		BF869A0416AA4E0A00BA5307 /* CC98Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC98Store.h; sourceTree = "<group>"; };
 		BF869A0516AA4E0A00BA5307 /* CC98Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC98Store.m; sourceTree = "<group>"; };
-		BF869A2316AACE7D00BA5307 /* PostListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListTableViewController.h; sourceTree = "<group>"; };
-		BF869A2416AACE7D00BA5307 /* PostListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListTableViewController.m; sourceTree = "<group>"; };
 		BF97057016A917AD00FECBFD /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		BF97057616A9233900FECBFD /* CC98Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC98Parser.h; sourceTree = "<group>"; };
 		BF97057716A9233900FECBFD /* CC98Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC98Parser.m; sourceTree = "<group>"; };
@@ -168,6 +166,8 @@
 		BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicTableViewController.m; sourceTree = "<group>"; };
 		BFBB5AF316A99F6200CBF9A1 /* HotTopicEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicEntity.h; sourceTree = "<group>"; };
 		BFBB5AF416A99F6200CBF9A1 /* HotTopicEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicEntity.m; sourceTree = "<group>"; };
+		BFC0E7A516AE2E63007F2AE4 /* TopicListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicListViewController.h; sourceTree = "<group>"; };
+		BFC0E7A616AE2E63007F2AE4 /* TopicListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,12 +251,12 @@
 				BFBB5AED16A99C7900CBF9A1 /* HotTopicNavigationController.m */,
 				BFBB5AF016A99CC200CBF9A1 /* HotTopicTableViewController.h */,
 				BFBB5AF116A99CC300CBF9A1 /* HotTopicTableViewController.m */,
-				BF869A2316AACE7D00BA5307 /* PostListTableViewController.h */,
-				BF869A2416AACE7D00BA5307 /* PostListTableViewController.m */,
 				BF9971D516AD237E0040A9C1 /* BoardCell.h */,
 				BF9971D616AD237E0040A9C1 /* BoardCell.m */,
 				BF9971DD16AD39E00040A9C1 /* TopicCell.h */,
 				BF9971DE16AD39E00040A9C1 /* TopicCell.m */,
+				BFC0E7A516AE2E63007F2AE4 /* TopicListViewController.h */,
+				BFC0E7A616AE2E63007F2AE4 /* TopicListViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -536,13 +536,13 @@
 				BFBB5AF516A99F6300CBF9A1 /* HotTopicEntity.m in Sources */,
 				BF8699EF16AA3B3300BA5307 /* EGORefreshTableHeaderView.m in Sources */,
 				BF869A0616AA4E0A00BA5307 /* CC98Store.m in Sources */,
-				BF869A2516AACE7D00BA5307 /* PostListTableViewController.m in Sources */,
 				BF9971D716AD237E0040A9C1 /* BoardCell.m in Sources */,
 				BF9971DF16AD39E00040A9C1 /* TopicCell.m in Sources */,
 				BF9971E316AD4F510040A9C1 /* TopicEntity.m in Sources */,
 				BF427AB216AD7FA500085ABB /* TFHpple.m in Sources */,
 				BF427AB316AD7FA500085ABB /* TFHppleElement.m in Sources */,
 				BF427AB416AD7FA500085ABB /* XPathQuery.m in Sources */,
+				BFC0E7A716AE2E63007F2AE4 /* TopicListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

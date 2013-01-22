@@ -10,7 +10,7 @@
 #import "CC98API.h"
 #import "CC98Store.h"
 #import "BoardEntity.h"
-#import "PostListTableViewController.h"
+#import "TopicListViewController.h"
 #import "BoardCell.h"
 
 @interface CustomBoardTableViewController ()
@@ -68,11 +68,12 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
     
     [self reloadTableViewDataSource];
+    //[self.navigationController setDelegate:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //[self.navigationController setToolbarHidden:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -159,7 +160,7 @@
     
     UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     
-    PostListTableViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"PostList"];
+    TopicListViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"TopicList"];
     
     nextViewController.boardInfo = entity;
     

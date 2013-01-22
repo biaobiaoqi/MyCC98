@@ -1,28 +1,28 @@
 //
-//  PostListTableViewController.m
+//  TopicListViewController.m
 //  MyCC98
 //
-//  Created by Yan Chen on 1/19/13.
+//  Created by Yan Chen on 1/22/13.
 //  Copyright (c) 2013 Zhejiang University. All rights reserved.
 //
 
-#import "PostListTableViewController.h"
+#import "TopicListViewController.h"
 #import "CC98API.h"
 #import "CC98Store.h"
 #import "TopicCell.h"
 #import "TopicEntity.h"
 
-@interface PostListTableViewController ()
+@interface TopicListViewController ()
 
 @end
 
-@implementation PostListTableViewController
+@implementation TopicListViewController
 @synthesize boardInfo;
 @synthesize items;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -32,13 +32,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	// Do any additional setup after loading the view.
     self.navigationItem.title = [boardInfo getBoardName];
+    
+    self.prevPage2.action = @selector(prevPageButtonPressed);
+    self.nextPage1.action = @selector(nextPageButtonPressed);
+    self.nextPage2.action = @selector(nextPageButtonPressed);
+    
+    if (currPageNum == 0) {
+        currPageNum = 1;
+    }
+    
     
     if (_refreshHeaderView == nil) {
 		
@@ -53,11 +57,18 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
     
     [self reloadTableViewDataSource];
+    //currPageNum = 1;
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    //[self.navigationController setToolbarHidden:NO animated:NO];
+-(void)prevPageButtonPressed {
+    currPageNum--;
+    [self reloadTableViewDataSource];
+}
+
+-(void)nextPageButtonPressed {
+    currPageNum++;
+    [self reloadTableViewDataSource];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,44 +108,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -149,26 +122,35 @@
      */
 }
 
-
 #pragma mark -
 #pragma mark Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource
 {
-	[[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getBoardPathWithBoardId:[boardInfo getBoardId] pageNum:1] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    if (currPageNum == 1) {
+        [self.toolbar1 setHidden:NO];
+        [self.toolbar2 setHidden:YES];
+    }
+    else {
+        [self.toolbar1 setHidden:YES];
+        [self.toolbar2 setHidden:NO];
+    }
+    
+	[[CC98API sharedInstance] getPath:[[CC98UrlManager alloc] getBoardPathWithBoardId:[boardInfo getBoardId] pageNum:currPageNum] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *webcontent = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         //NSLog(@"%@", webcontent);
         NSMutableArray *postlist = [[CC98Parser alloc] parsePostList:webcontent];
-        NSLog(@"%d", postlist.count);
-        [[CC98Store sharedInstance] updateTopicListWithEntity:postlist boardId:[boardInfo getBoardId] pageNum:1];
-        items = [[CC98Store sharedInstance] getTopicListWithBoardId:[boardInfo getBoardId] pageNum:1];
+        totalPageNum = [[CC98Parser alloc] parsePostListTotalPageNum:responseObject];
+        //NSLog(@"%d", postlist.count);
+        [[CC98Store sharedInstance] updateTopicListWithEntity:postlist boardId:[boardInfo getBoardId] pageNum:currPageNum];
+        items = [[CC98Store sharedInstance] getTopicListWithBoardId:[boardInfo getBoardId] pageNum:currPageNum];
         //NSLog(@"%d", items.count);
         [self doneLoadingTableViewData];
         //NSLog(@"%@", items);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
     }];
-
+    
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
     
@@ -181,6 +163,9 @@
 	
 	//  model should call this when its done loading
     [self.tableView reloadData];
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+    self.pageLabel1.title = [NSString stringWithFormat:@"%d/%d", currPageNum, totalPageNum];
+    self.pageLabel2.title = [NSString stringWithFormat:@"%d/%d", currPageNum, totalPageNum];
 	_reloading = NO;
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 	
@@ -227,5 +212,6 @@
 	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 	
 }
+
 
 @end

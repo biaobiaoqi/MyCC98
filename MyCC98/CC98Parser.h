@@ -14,5 +14,6 @@
 -(NSMutableArray*)parseHottopicList:(NSString*)html;
 -(NSString*)parseUserProfile:(NSString*)html;
 -(NSMutableArray*)parsePostList:(NSString*)html;
+-(NSInteger)parsePostListTotalPageNum:(NSData*)html;
 
 @end

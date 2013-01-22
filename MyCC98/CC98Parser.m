@@ -256,11 +256,36 @@
         entity.topicPageNum = [topicPageNum intValue];
         entity.boardId = boardId;
         entity.replyNum = [replyNum stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        NSLog(@"%d %@ %@ %@ %@ %d %@",i, topicName, topicId, topicAuthor, lastReplyAuthor, [topicPageNum intValue], boardId);
+        //NSLog(@"%d %@ %@ %@ %@ %d %@",i, topicName, topicId, topicAuthor, lastReplyAuthor, [topicPageNum intValue], boardId);
         [postlist addObject:entity];
     }
     
     return postlist;
+}
+
+-(NSInteger)parsePostListTotalPageNum:(NSData*)html
+{
+    TFHpple *parser = [TFHpple hppleWithHTMLData:html];
+    
+    NSArray *topicNameArray = [parser searchWithXPathQuery:@"//html/body/form[position()=2]/table/tr/td[position()=2]/div/a[@title='尾页']"];
+    if (topicNameArray.count == 1) {
+        TFHppleElement *element = [topicNameArray objectAtIndex:0];
+        NSString *lastPageLink = [[element attributes] objectForKey:@"href"];
+        //NSLog(@"%@", lastPageLink);
+        NSRegularExpression *lastPageRegex = [[NSRegularExpression alloc]
+                                             initWithPattern:@"(?<=page=)\\d+(?=&action)"
+                                             options:NSRegularExpressionCaseInsensitive
+                                             error:nil];
+        NSRange lastPageRange = [lastPageRegex rangeOfFirstMatchInString:lastPageLink options:0 range:NSMakeRange(0, lastPageLink.length)];
+        NSString *lastPage = [lastPageLink substringWithRange:lastPageRange];
+        NSLog(@"%@========", lastPage);
+        return [lastPage intValue];
+    }
+    else
+    {
+        return 0;
+    }
+    //NSLog(@"%d=======", topicNameArray.count);
 }
 
 @end
