@@ -1,7 +1,2 @@
 platform :ios, '5.1'
 pod 'OHAttributedLabel'
-pod 'MBProgressHUD'
-pod 'ECSlidingViewController'
-pod 'hpple'
-pod 'SVPullToRefresh'
-pod 'AFNetworking'
