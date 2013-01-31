@@ -247,6 +247,7 @@
 				BFD660B016BA8AA300665FBA /* Frameworks */,
 				BFD660B116BA8AA300665FBA /* Resources */,
 				A258C780ED1948C7B558B185 /* Copy Pods Resources */,
+				BFD6616916BA8DFA00665FBA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -312,6 +313,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		BFD6616916BA8DFA00665FBA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -423,6 +437,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 053B12F86D5E4C3BB41BCBAB /* Pods.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyCC98/MyCC98-Prefix.pch";
 				INFOPLIST_FILE = "MyCC98/MyCC98-Info.plist";
@@ -436,6 +451,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 053B12F86D5E4C3BB41BCBAB /* Pods.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyCC98/MyCC98-Prefix.pch";
 				INFOPLIST_FILE = "MyCC98/MyCC98-Info.plist";
