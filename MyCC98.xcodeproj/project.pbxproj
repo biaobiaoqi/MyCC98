@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		091B795FF6AC434B8F55B013 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A83630CDB9164F04BE6DEC6E /* libPods.a */; };
 		BF2FE11B16B3A39700AB739B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FE11A16B3A39700AB739B /* UIKit.framework */; };
 		BF2FE11D16B3A39700AB739B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FE11C16B3A39700AB739B /* Foundation.framework */; };
 		BF2FE11F16B3A39700AB739B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FE11E16B3A39700AB739B /* CoreGraphics.framework */; };
@@ -44,7 +45,6 @@
 		BF2FE1B616B3AF4B00AB739B /* BoardListNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2FE1B516B3AF4B00AB739B /* BoardListNavigationController.m */; };
 		BF2FE1B916B3AF6800AB739B /* BoardListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2FE1B816B3AF6800AB739B /* BoardListTableViewController.m */; };
 		BF2FE1BC16B3AF9200AB739B /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2FE1BB16B3AF9200AB739B /* MenuViewController.m */; };
-		BF49617516B8AA750021F9A7 /* libOHAttributedLabel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF49617416B8AA750021F9A7 /* libOHAttributedLabel.a */; };
 		BF49617916B8AB0C0021F9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF49617716B8AAFA0021F9A7 /* CoreText.framework */; };
 		BF6A9E5416B4DD2B00D93648 /* SettingsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6A9E5316B4DD2B00D93648 /* SettingsNavigationController.m */; };
 		BF6A9E5716B4DD4700D93648 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6A9E5616B4DD4700D93648 /* SettingsTableViewController.m */; };
@@ -67,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A83630CDB9164F04BE6DEC6E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B357530A70E34BDABA51CC5E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		BF2FE11616B3A39700AB739B /* MyCC98.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCC98.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF2FE11A16B3A39700AB739B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BF2FE11C16B3A39700AB739B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -130,7 +132,6 @@
 		BF2FE1B816B3AF6800AB739B /* BoardListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardListTableViewController.m; sourceTree = "<group>"; };
 		BF2FE1BA16B3AF9200AB739B /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		BF2FE1BB16B3AF9200AB739B /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		BF49617416B8AA750021F9A7 /* libOHAttributedLabel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOHAttributedLabel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF49617716B8AAFA0021F9A7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		BF6A9E5216B4DD2B00D93648 /* SettingsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsNavigationController.h; sourceTree = "<group>"; };
 		BF6A9E5316B4DD2B00D93648 /* SettingsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNavigationController.m; sourceTree = "<group>"; };
@@ -176,7 +177,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF49617916B8AB0C0021F9A7 /* CoreText.framework in Frameworks */,
-				BF49617516B8AA750021F9A7 /* libOHAttributedLabel.a in Frameworks */,
 				BF2FE1A016B3A82500AB739B /* MobileCoreServices.framework in Frameworks */,
 				BF2FE19E16B3A81D00AB739B /* Security.framework in Frameworks */,
 				BF2FE19C16B3A81800AB739B /* libxml2.dylib in Frameworks */,
@@ -186,6 +186,7 @@
 				BF2FE11D16B3A39700AB739B /* Foundation.framework in Frameworks */,
 				BF2FE11F16B3A39700AB739B /* CoreGraphics.framework in Frameworks */,
 				BF2FE12116B3A39700AB739B /* CoreData.framework in Frameworks */,
+				091B795FF6AC434B8F55B013 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,11 +196,11 @@
 		BF2FE10B16B3A39700AB739B = {
 			isa = PBXGroup;
 			children = (
-				BF49617416B8AA750021F9A7 /* libOHAttributedLabel.a */,
 				BF2FE19B16B3A81800AB739B /* libxml2.dylib */,
 				BF2FE12216B3A39700AB739B /* MyCC98 */,
 				BF2FE11916B3A39700AB739B /* Frameworks */,
 				BF2FE11716B3A39700AB739B /* Products */,
+				B357530A70E34BDABA51CC5E /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -223,6 +224,7 @@
 				BF2FE11C16B3A39700AB739B /* Foundation.framework */,
 				BF2FE11E16B3A39700AB739B /* CoreGraphics.framework */,
 				BF2FE12016B3A39700AB739B /* CoreData.framework */,
+				A83630CDB9164F04BE6DEC6E /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -419,6 +421,7 @@
 				BF2FE11316B3A39700AB739B /* Frameworks */,
 				BF2FE11416B3A39700AB739B /* Resources */,
 				BF6A9E7016B4F8E700D93648 /* ShellScript */,
+				F434B023C30944A388FC5880 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -483,6 +486,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+		F434B023C30944A388FC5880 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -609,6 +626,7 @@
 		};
 		BF2FE14316B3A39700AB739B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B357530A70E34BDABA51CC5E /* Pods.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -616,11 +634,8 @@
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "MyCC98/MyCC98-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/MyCC98-gzodvondjsfdrydkjhdrcpcpjhlq/Build/Products/Debug-iphoneos\"",
-				);
-				OTHER_LDFLAGS = "-ObjC";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -628,6 +643,7 @@
 		};
 		BF2FE14416B3A39700AB739B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B357530A70E34BDABA51CC5E /* Pods.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -635,11 +651,8 @@
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "MyCC98/MyCC98-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/MyCC98-gzodvondjsfdrydkjhdrcpcpjhlq/Build/Products/Debug-iphoneos\"",
-				);
-				OTHER_LDFLAGS = "-ObjC";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
