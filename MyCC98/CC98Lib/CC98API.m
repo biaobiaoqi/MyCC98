@@ -100,7 +100,7 @@
 
 - (NSURL*)urlFromString:(NSString*)string
 {
-    if (key == @"") {
+    if ([key isEqual: @""]) {
         return [NSURL URLWithString:string];
     } else {
         string = [string stringByReplacingOccurrencesOfString:@"http:\\/\\/|https:\\/\\/" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [string length])];

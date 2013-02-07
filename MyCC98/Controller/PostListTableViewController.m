@@ -52,10 +52,10 @@
     [self.tableView addPullToRefreshWithActionHandler:^{
         weakSelf.currPageNum = 1;
         
-        [[CC98API sharedInstance] getPostListWithTopicId:topicInfo.topicId boardId:topicInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicInfo.topicId boardId:weakSelf.topicInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
             weakSelf.currPageNum++;
             weakSelf.items = [[CC98Parser sharedInstance] parsePostList:responseObject];
-            [[CC98Store sharedInstance] updatePostListWithEntity:weakSelf.items topicId:topicInfo.topicId pageNum:weakSelf.currPageNum];
+            [[CC98Store sharedInstance] updatePostListWithEntity:weakSelf.items topicId:weakSelf.topicInfo.topicId pageNum:weakSelf.currPageNum];
             [weakSelf.tableView reloadData];
             [weakSelf.tableView.pullToRefreshView stopAnimating];
             //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
@@ -73,15 +73,15 @@
         }
         //NSLog(@"inf scr pagenum: %d", weakSelf.currPageNum);
         
-        [[CC98API sharedInstance] getPostListWithTopicId:topicInfo.topicId boardId:topicInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicInfo.topicId boardId:weakSelf.topicInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
             weakSelf.currPageNum++;
             //NSLog(@"%d", weakSelf.currPageNum);
             NSMutableArray *array = [[CC98Parser sharedInstance] parsePostList:responseObject];
-            [[CC98Store sharedInstance] updatePostListWithEntity:array topicId:topicInfo.topicId pageNum:weakSelf.currPageNum];
+            [[CC98Store sharedInstance] updatePostListWithEntity:array topicId:weakSelf.topicInfo.topicId pageNum:weakSelf.currPageNum];
             //NSLog(@"%d", array.count);
             NSMutableArray *insertion = [[NSMutableArray alloc] init];
             for (int i=0; i<array.count; ++i) {
-                [insertion addObject:[NSIndexPath indexPathForRow:i+items.count inSection:0]];
+                [insertion addObject:[NSIndexPath indexPathForRow:i+weakSelf.items.count inSection:0]];
             }
             [weakSelf.items addObjectsFromArray:array];
             [weakSelf.tableView beginUpdates];

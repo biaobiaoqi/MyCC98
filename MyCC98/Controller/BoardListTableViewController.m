@@ -60,7 +60,7 @@
     
     // setup pull to refresh
     [self.tableView addPullToRefreshWithActionHandler:^{
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakSelf.navigationController.view animated:YES];
         //hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"Loading";
         [[CC98API sharedInstance] getBoardStatWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
