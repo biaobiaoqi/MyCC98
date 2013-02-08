@@ -57,7 +57,8 @@
     else
     {
         self.baseURL = [NSURL URLWithString:RVPNURL];
-        cpath = [rvpnkey stringByAppendingString:@"/web/1/http/2/www.cc98.org"];
+        //cpath = [rvpnkey stringByAppendingString:@"/web/1/http/2/www.cc98.org"];
+        cpath = @"/web/1/http/2/www.cc98.org";
         key = [NSString stringWithString:rvpnkey];
         [NSMutableURLRequest setAllowsAnyHTTPSCertificate:YES forHost:@"rvpn.zju.edu.cn"];
         [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:@"rvpn.zju.edu.cn"];
@@ -96,6 +97,13 @@
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     [self getPath:[NSString stringWithFormat:@"%@%@", cpath, [[CC98UrlManager sharedInstance] getTopicPathWithBoardId:boardId topicId:topicId pageNum:pageNum]] parameters:nil success:success failure:failure];
+}
+
+- (void)getRVPNWithKey:(NSString*)rvpnkey
+               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"/%@%@%@",rvpnkey, cpath, [[CC98UrlManager sharedInstance] getIndexPath]] parameters:nil success:success failure:failure];
 }
 
 - (NSURL*)urlFromString:(NSString*)string

@@ -28,9 +28,6 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="X1j-Zo-7Z7">
                                 <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="496" type="user" id="Atq-qC-vBe"/>
-                                </constraints>
                                 <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MenuItemCell" id="md2-DF-g7n">
@@ -50,7 +47,7 @@
                             </tableView>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fdr-PQ-dj7">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="264" id="G8k-Nc-DW4"/>
+                                    <constraint firstAttribute="width" constant="264" type="user" id="G8k-Nc-DW4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -66,20 +63,22 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAa-Lu-lL5">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" type="user" id="SL4-TT-iKM"/>
-                                    <constraint firstAttribute="width" constant="45" id="gVS-pE-DEO"/>
+                                    <constraint firstAttribute="width" constant="45" type="user" id="gVS-pE-DEO"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Fdr-PQ-dj7" firstAttribute="bottom" secondItem="LAa-Lu-lL5" secondAttribute="bottom" type="default" id="6Ra-1U-fHG"/>
-                            <constraint firstItem="Fdr-PQ-dj7" firstAttribute="trailing" secondItem="rtZ-Ia-yHW" secondAttribute="trailing" type="default" id="9Oe-VW-m4W"/>
-                            <constraint firstItem="X1j-Zo-7Z7" firstAttribute="top" secondItem="LAa-Lu-lL5" secondAttribute="bottom" constant="4" type="user" id="9gH-IF-ch2"/>
+                            <constraint firstItem="Fdr-PQ-dj7" firstAttribute="leading" secondItem="LAa-Lu-lL5" secondAttribute="trailing" constant="8" type="user" id="92t-jM-GhT"/>
+                            <constraint firstItem="LAa-Lu-lL5" firstAttribute="top" secondItem="rtZ-Ia-yHW" secondAttribute="top" constant="3" type="user" id="Cyd-kK-SWf"/>
+                            <constraint firstItem="X1j-Zo-7Z7" firstAttribute="top" secondItem="rtZ-Ia-yHW" secondAttribute="top" constant="52" type="user" id="E1j-n0-Ztu"/>
                             <constraint firstItem="LAa-Lu-lL5" firstAttribute="top" secondItem="Fdr-PQ-dj7" secondAttribute="top" type="default" id="L31-kD-vOR"/>
-                            <constraint firstItem="Fdr-PQ-dj7" firstAttribute="leading" secondItem="LAa-Lu-lL5" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Mxv-zA-gad"/>
-                            <constraint firstItem="X1j-Zo-7Z7" firstAttribute="bottom" secondItem="rtZ-Ia-yHW" secondAttribute="bottom" type="user" id="Wq6-1C-m5Z"/>
+                            <constraint firstItem="X1j-Zo-7Z7" firstAttribute="top" secondItem="LAa-Lu-lL5" secondAttribute="bottom" constant="4" type="user" id="LNy-va-BaX"/>
+                            <constraint firstItem="Fdr-PQ-dj7" firstAttribute="trailing" secondItem="rtZ-Ia-yHW" secondAttribute="trailing" type="default" id="NB3-qb-fv8"/>
+                            <constraint firstItem="Fdr-PQ-dj7" firstAttribute="leading" secondItem="LAa-Lu-lL5" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="UXQ-Hc-Atj"/>
                             <constraint firstItem="X1j-Zo-7Z7" firstAttribute="trailing" secondItem="rtZ-Ia-yHW" secondAttribute="trailing" type="default" id="bDF-l8-4GY"/>
-                            <constraint firstItem="LAa-Lu-lL5" firstAttribute="top" secondItem="rtZ-Ia-yHW" secondAttribute="top" constant="3" type="user" id="pCD-FO-W6c"/>
+                            <constraint firstItem="X1j-Zo-7Z7" firstAttribute="bottom" secondItem="rtZ-Ia-yHW" secondAttribute="bottom" type="user" id="lD0-js-A58"/>
                             <constraint firstItem="X1j-Zo-7Z7" firstAttribute="leading" secondItem="rtZ-Ia-yHW" secondAttribute="leading" type="default" id="wgR-qO-HSS"/>
                         </constraints>
                     </view>
@@ -421,9 +420,9 @@
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qly-BI-0V6">
-                                            <rect key="frame" x="280" y="11" width="10" height="21"/>
+                                            <rect key="frame" x="281" y="13" width="9" height="19"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>

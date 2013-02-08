@@ -30,5 +30,8 @@
         pageNum:(NSInteger)pageNum
         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)getRVPNWithKey:(NSString*)rvpnkey
+                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (NSURL*)urlFromString:(NSString*)string;
 @end

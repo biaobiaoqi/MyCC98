@@ -9,6 +9,7 @@
 #import "SettingsTableViewController.h"
 #import "RVPNSwitchCell.h"
 #import "CC98API.h"
+#import "MBProgressHUD.h"
 
 @interface SettingsTableViewController ()
 
@@ -126,6 +127,17 @@
         } else {
             rvpnCode = textField.text;
             [[CC98API sharedInstance] setRVPN:YES key:rvpnCode];
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            hud.labelText = @"Checking RVPN";
+            [[CC98API sharedInstance] getRVPNWithKey:rvpnCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+                //NSLog(@"RVPN success");
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+                isRVPN = NO;
+                [[CC98API sharedInstance] setRVPN:NO key:nil];
+                //NSLog(@"RVPN failure");
+            }];
             [self.tableView reloadData];
         }
     }
