@@ -75,6 +75,7 @@
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quotex\\]" withString:@"<br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quote\\]" withString:@"<br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(<b>以下是引用)(.*?)(：</b>)([\\s\\S]*?)\\[/quote\\]" withString:@"$1$2$3$4<br><b>$2引用结束</b><br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quote\\]" withString:@"<br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[upload=jpg\\](.+?)\\[/upload\\]" withString:@"<img src=\"$1\" />" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[size=.*?\\])|(\\[/size\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[font=.*?\\])|(\\[/font\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
@@ -102,7 +103,7 @@
         if (topicIdRange.location == NSNotFound) {
             OHAttributedLabel* htmlLabel = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(0, cellHeight, 320, 1000)];
             htmlLabel.attributedText = [OHASBasicHTMLParser attributedStringByProcessingMarkupInString:string];
-            htmlLabel.automaticallyAddLinksForType = NSTextCheckingTypeLink;
+            htmlLabel.automaticallyAddLinksForType = nil;
             [htmlLabel sizeToFit];
             [self.contentView addSubview:htmlLabel];
             
