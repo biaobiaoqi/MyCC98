@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CCTopicEntity.h"
 
-@interface PostListTableViewController : UITableViewController <UIWebViewDelegate>
+@interface PostListTableViewController : UITableViewController <UIWebViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) CCTopicEntity *topicInfo;
 @property (nonatomic, strong) NSMutableArray *items;

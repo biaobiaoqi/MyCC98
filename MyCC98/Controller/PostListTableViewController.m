@@ -7,6 +7,7 @@
 //
 
 #import "PostListTableViewController.h"
+#import "NewPostViewController.h"
 #import "PostCell.h"
 #import "SVPullToRefresh.h"
 #import "CC98Store.h"
@@ -103,6 +104,10 @@
     }];
     
     self.tableView.showsInfiniteScrolling = NO;
+    
+    if (items.count == 0) {
+        [self.tableView triggerPullToRefresh];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -185,12 +190,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    UIActionSheet *actionsheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复", @"引用", nil];
+    actionsheet.tag = indexPath.row;
+    [actionsheet showInView:self.view];
+    
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //NSLog(@"%d", buttonIndex);
+    UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    NewPostViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"NewPost"];
+    switch (buttonIndex) {
+        case 0:
+        {
+            [self presentViewController:nextViewController animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            CCPostEntity *entity = [items objectAtIndex:actionSheet.tag];
+            nextViewController.preContent = [NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在*****[/i]的发言：[/b]\n%@\n[/quotex]\n", entity.postAuthor, entity.postContent];
+            [self presentViewController:nextViewController animated:YES completion:nil];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

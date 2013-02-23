@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF27D69116D8E108003FED3D /* NewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF27D69016D8E108003FED3D /* NewPostViewController.m */; };
 		BF3BD73F16BA931E00114346 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF3BD73D16BA931E00114346 /* MainStoryboard.storyboard */; };
 		BF3BD79816BA932900114346 /* CC98API.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD74316BA932900114346 /* CC98API.m */; };
 		BF3BD79916BA932900114346 /* CC98Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD74516BA932900114346 /* CC98Parser.m */; };
@@ -44,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF27D68F16D8E108003FED3D /* NewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostViewController.h; sourceTree = "<group>"; };
+		BF27D69016D8E108003FED3D /* NewPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPostViewController.m; sourceTree = "<group>"; };
 		BF3BD73E16BA931E00114346 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		BF3BD74216BA932900114346 /* CC98API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC98API.h; sourceTree = "<group>"; };
 		BF3BD74316BA932900114346 /* CC98API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC98API.m; sourceTree = "<group>"; };
@@ -174,6 +177,8 @@
 				BF3BD76A16BA932900114346 /* TopicCell.m */,
 				BF3BD76B16BA932900114346 /* TopicListTableViewController.h */,
 				BF3BD76C16BA932900114346 /* TopicListTableViewController.m */,
+				BF27D68F16D8E108003FED3D /* NewPostViewController.h */,
+				BF27D69016D8E108003FED3D /* NewPostViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				BF3BD7AA16BA932900114346 /* SettingsTableViewController.m in Sources */,
 				BF3BD7AB16BA932900114346 /* TopicCell.m in Sources */,
 				BF3BD7AC16BA932900114346 /* TopicListTableViewController.m in Sources */,
+				BF27D69116D8E108003FED3D /* NewPostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

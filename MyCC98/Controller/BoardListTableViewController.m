@@ -95,7 +95,6 @@
         }];
     }];
     
-    
     /*if (allBoards.count == 0) {
         [self.tableView triggerPullToRefresh];
     }*/

@@ -103,7 +103,10 @@
             //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
         }];
     }];
-    weakSelf.tableView.showsInfiniteScrolling = NO;
+    self.tableView.showsInfiniteScrolling = NO;
+    if (items.count == 0) {
+        [self.tableView triggerPullToRefresh];
+    }
 }
 
 - (void)didReceiveMemoryWarning
