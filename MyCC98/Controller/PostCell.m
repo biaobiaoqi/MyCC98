@@ -47,6 +47,22 @@
     [author sizeToFit];
     [self.contentView addSubview:author];
     cellHeight += author.frame.size.height;
+    /*
+    + (UIColor *)blackColor;      // 0.0 white
+    + (UIColor *)darkGrayColor;   // 0.333 white
+    + (UIColor *)lightGrayColor;  // 0.667 white
+    + (UIColor *)whiteColor;      // 1.0 white
+    + (UIColor *)grayColor;       // 0.5 white
+    + (UIColor *)redColor;        // 1.0, 0.0, 0.0 RGB
+    + (UIColor *)greenColor;      // 0.0, 1.0, 0.0 RGB
+    + (UIColor *)blueColor;       // 0.0, 0.0, 1.0 RGB
+    + (UIColor *)cyanColor;       // 0.0, 1.0, 1.0 RGB
+    + (UIColor *)yellowColor;     // 1.0, 1.0, 0.0 RGB
+    + (UIColor *)magentaColor;    // 1.0, 0.0, 1.0 RGB
+    + (UIColor *)orangeColor;     // 1.0, 0.5, 0.0 RGB
+    + (UIColor *)purpleColor;     // 0.5, 0.0, 0.5 RGB
+    + (UIColor *)brownColor;      // 0.6, 0.4, 0.2 RGB
+    + (UIColor *)clearColor;      // 0.0 white, 0.0 alpha*/
     
     NSString *ubb = entity.postContent;
     //NSLog(@"BEFORE: ==== %@", ubb);
@@ -54,16 +70,21 @@
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[b\\](.+?)\\[/b\\]" withString:@"<b>$1</b>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[i\\](.+?)\\[/i\\]" withString:@"<i>$1</i>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[u\\](.+?)\\[/u\\]" withString:@"<u>$1</u>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quotex\\](.+?)\\[/quotex\\]" withString:@"<br>======引用开始======<br>$1<br>======引用结束======<br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quotex\\]" withString:@"<br><font color=\"blue\">_______________________________________________</font><br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quotex\\]" withString:@"<br><font color=\"blue\">_______________________________________________</font><br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quote\\]" withString:@"<br><font color=\"blue\">_______________________________________________</font><br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quote\\]" withString:@"<br><font color=\"blue\">_______________________________________________</font><br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[upload=jpg\\](.+?)\\[/upload\\]" withString:@"<img src=\"$1\" />" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[size=.*?\\])|(\\[/size\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[font=.*?\\])|(\\[/font\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=\\w{1,8}?\\]\\[/color\\]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.*?)\\](.*?)\\[/color\\]" withString:@"<font color=\"$1\">$2</font>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.+?)\\](.+?)\\[/color\\]" withString:@"<span style='color:$1;'>$2</span>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=transparent\\](.*?)\\[/color\\]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(black|darkGray|lightGray|white|gray|red|green|blue|cyan|yellow|magenta|orange|purple|brown|clear)\\](.*?)\\[/color\\]" withString:@"<font color=\"$1\">$2</font>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.*?)\\](.*?)\\[/color\\]" withString:@"<font color=\"yellow\">$2</font>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.*?)\\](.*?)\\[/color\\]" withString:@"$2" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     
-    //NSLog(@"AFTER: ==== %@", ubb);
+    NSLog(@"AFTER: ==== %@", ubb);
 
     ubb = [ubb stringByReplacingOccurrencesOfString:@"^(<img.*?/>)(?!$)" withString:@"$1\r" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(?<!^)(<img.*?/>)$" withString:@"\r$1" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
