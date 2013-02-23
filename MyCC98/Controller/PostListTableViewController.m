@@ -22,6 +22,7 @@
 @synthesize topicInfo;
 @synthesize items;
 @synthesize currPageNum;
+@synthesize totalPageNum;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -46,6 +47,8 @@
     items = [[CC98Store sharedInstance] getPostListWithTopicId:topicInfo.topicId];
     currPageNum = [[CC98Store sharedInstance] getPostListMaxPageNumWithTopicId:topicInfo.topicId] + 1;
     
+    self.tableView.showsInfiniteScrolling = NO;
+    
     __weak PostListTableViewController *weakSelf = self;
     
     // setup pull to refresh
@@ -53,11 +56,13 @@
         weakSelf.currPageNum = 1;
         
         [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicInfo.topicId boardId:weakSelf.topicInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            weakSelf.currPageNum++;
+            
             weakSelf.items = [[CC98Parser sharedInstance] parsePostList:responseObject];
+            
             [[CC98Store sharedInstance] updatePostListWithEntity:weakSelf.items topicId:weakSelf.topicInfo.topicId pageNum:weakSelf.currPageNum];
             [weakSelf.tableView reloadData];
             [weakSelf.tableView.pullToRefreshView stopAnimating];
+            weakSelf.currPageNum++;
             //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //NSLog(@"%@", error);

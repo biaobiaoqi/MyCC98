@@ -125,7 +125,7 @@
 
 -(NSMutableArray*)parseTopicList:(NSData*)htmlData
 {
-    NSLog(@"I'm here!");
+    //NSLog(@"I'm here!");
     NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
     NSMutableArray *topiclist = [[NSMutableArray alloc] init];
     TFHpple *parser = [TFHpple hppleWithHTMLData:htmlData];
@@ -146,7 +146,7 @@
                                           error:nil];
     NSArray *postListArray = [postListRegex matchesInString:webcontent options:0 range:NSMakeRange(0, webcontent.length)];
     //NSLog(@"%@", webcontent);
-    NSLog(@"======%d", postListArray.count);
+    //NSLog(@"======%d", postListArray.count);
     for (int i=0; i<postListArray.count; ++i) {
         NSTextCheckingResult *postListResult = [postListArray objectAtIndex:i];
         NSString *topic = [webcontent substringWithRange:postListResult.range];
@@ -219,6 +219,40 @@
     
     return topiclist;
 }
+
+-(NSInteger)parseTotalPageNumInTopicList:(NSData*)htmlData
+{
+    //NSLog(@"I'm here!");
+    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    
+    NSRegularExpression *pageNumOutRegex = [[NSRegularExpression alloc]
+                                            initWithPattern:@"页次：<b>\\d+</b>/<b>\\d+</b>页"
+                                            options:NSRegularExpressionCaseInsensitive
+                                            error:nil];
+    NSArray *pageNumOutArray = [pageNumOutRegex matchesInString:html options:0 range:NSMakeRange(0, html.length)];
+    if (pageNumOutArray.count == 0) {
+        NSLog(@"搜索到0处pageNumOut");
+        return 0;
+    }
+    NSTextCheckingResult *pageNumOutResult = [pageNumOutArray objectAtIndex:0];
+    NSString *pageNumOut = [html substringWithRange:pageNumOutResult.range];
+    //NSLog(@"%@", pageNumOut);
+    
+    NSRegularExpression *pageNumRegex = [[NSRegularExpression alloc]
+                                            initWithPattern:@"(?<=<b>)\\d+?(?=</b>页)"
+                                            options:NSRegularExpressionCaseInsensitive
+                                            error:nil];
+    NSArray *pageNumArray = [pageNumRegex matchesInString:pageNumOut options:0 range:NSMakeRange(0, pageNumOut.length)];
+    if (pageNumArray.count == 0) {
+        NSLog(@"搜索到0处pageNum");
+        return 0;
+    }
+    NSTextCheckingResult *pageNumResult = [pageNumArray objectAtIndex:0];
+    NSString *pageNum = [pageNumOut substringWithRange:pageNumResult.range];
+    //NSLog(@"%@", pageNum);
+    return [pageNum intValue];
+}
+
 
 -(NSMutableArray*)parsePostList:(NSData*)htmlData
 {

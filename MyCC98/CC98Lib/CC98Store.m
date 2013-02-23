@@ -138,7 +138,9 @@
 -(void)updateTopicListWithEntity:(NSMutableArray*)array boardId:(NSString*)boardId pageNum:(NSInteger)pageNum
 {
     NSError *error;
+    //NSLog(@"pageNum: %d", pageNum);
     if (pageNum == 1) {
+        //NSLog(@"deleting!");
         NSEntityDescription* entity = [NSEntityDescription entityForName:@"Topics" inManagedObjectContext:managedObjectContext];
         
         NSFetchRequest *request = [[NSFetchRequest alloc] init];

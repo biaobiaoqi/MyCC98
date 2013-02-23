@@ -24,6 +24,7 @@
 @synthesize boardInfo;
 @synthesize items;
 @synthesize currPageNum;
+@synthesize totalPageNum;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -46,39 +47,42 @@
     self.navigationItem.title = boardInfo.boardName;
     
     items = [[CC98Store sharedInstance] getTopicListWithBoardId:boardInfo.boardId];
-    currPageNum = [[CC98Store sharedInstance] getTopicListMaxPageNumWithBoardId:boardInfo.boardId] + 1;
+    //currPageNum = [[CC98Store sharedInstance] getTopicListMaxPageNumWithBoardId:boardInfo.boardId] + 1;
+    
+    
     //NSLog(@"%d", currPageNum);
     __weak TopicListTableViewController *weakSelf = self;
     
     // setup pull to refresh
     [self.tableView addPullToRefreshWithActionHandler:^{
         weakSelf.currPageNum = 1;
-        //MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        //hud.labelText = @"Loading";
-        //NSLog(@"pull to ref");
+        
         [[CC98API sharedInstance] getTopicListWithBoardId:weakSelf.boardInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            weakSelf.currPageNum++;
             weakSelf.items = [[CC98Parser sharedInstance] parseTopicList:responseObject];
+            weakSelf.totalPageNum = [[CC98Parser sharedInstance] parseTotalPageNumInTopicList:responseObject];
+            if (weakSelf.totalPageNum == 1) {
+                weakSelf.tableView.showsInfiniteScrolling = NO;
+            } else {
+                weakSelf.tableView.showsInfiniteScrolling = YES;
+            }
+            //NSLog(@"%d", weakSelf.totalPageNum);
             [[CC98Store sharedInstance] updateTopicListWithEntity:weakSelf.items boardId:weakSelf.boardInfo.boardId pageNum:weakSelf.currPageNum];
             [weakSelf.tableView reloadData];
             [weakSelf.tableView.pullToRefreshView stopAnimating];
-            //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
+            weakSelf.currPageNum++;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //NSLog(@"%@", error);
             [weakSelf.tableView.pullToRefreshView stopAnimating];
-            //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
         }];
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-        if (weakSelf.items.count == 0) {
-            [weakSelf.tableView.infiniteScrollingView stopAnimating];
-            return;
-        }
-        //NSLog(@"inf scr pagenum: %d", weakSelf.currPageNum);
         
         [[CC98API sharedInstance] getTopicListWithBoardId:weakSelf.boardInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
             weakSelf.currPageNum++;
+            if (weakSelf.currPageNum > weakSelf.totalPageNum) {
+                weakSelf.tableView.showsInfiniteScrolling = NO;
+            }
             //NSLog(@"%d", weakSelf.currPageNum);
             NSMutableArray *array = [[CC98Parser sharedInstance] parseTopicList:responseObject];
             [[CC98Store sharedInstance] updateTopicListWithEntity:array boardId:weakSelf.boardInfo.boardId pageNum:weakSelf.currPageNum];
@@ -99,6 +103,7 @@
             //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
         }];
     }];
+    weakSelf.tableView.showsInfiniteScrolling = NO;
 }
 
 - (void)didReceiveMemoryWarning

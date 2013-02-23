@@ -15,6 +15,7 @@
 -(NSMutableArray*)parseAllBoardList:(NSData*)html;
 -(NSMutableArray*)parsePersonalBoardList:(NSData*)htmlData;
 -(NSMutableArray*)parseTopicList:(NSData*)htmlData;
+-(NSInteger)parseTotalPageNumInTopicList:(NSData*)htmlData;
 -(NSMutableArray*)parsePostList:(NSData*)htmlData;
 
 

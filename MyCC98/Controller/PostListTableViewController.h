@@ -14,5 +14,6 @@
 @property (nonatomic, strong) CCTopicEntity *topicInfo;
 @property (nonatomic, strong) NSMutableArray *items;
 @property (nonatomic) NSInteger currPageNum;
+@property (nonatomic) NSInteger totalPageNum;
 
 @end

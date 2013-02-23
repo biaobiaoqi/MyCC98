@@ -14,6 +14,7 @@
 @property (nonatomic, strong) CCBoardEntity *boardInfo;
 @property (nonatomic, strong) NSMutableArray *items;
 @property (nonatomic) NSInteger currPageNum;
+@property (nonatomic) NSInteger totalPageNum;
 
 
 @end
