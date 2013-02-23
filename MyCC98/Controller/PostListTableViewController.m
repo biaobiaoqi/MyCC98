@@ -45,9 +45,7 @@
     self.navigationItem.title = topicInfo.topicName;
     
     items = [[CC98Store sharedInstance] getPostListWithTopicId:topicInfo.topicId];
-    currPageNum = [[CC98Store sharedInstance] getPostListMaxPageNumWithTopicId:topicInfo.topicId] + 1;
-    
-    self.tableView.showsInfiniteScrolling = NO;
+    //currPageNum = [[CC98Store sharedInstance] getPostListMaxPageNumWithTopicId:topicInfo.topicId] + 1;
     
     __weak PostListTableViewController *weakSelf = self;
     
@@ -58,7 +56,13 @@
         [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicInfo.topicId boardId:weakSelf.topicInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             weakSelf.items = [[CC98Parser sharedInstance] parsePostList:responseObject];
-            
+            weakSelf.totalPageNum = [[CC98Parser sharedInstance] parseTotalPageNumInPostList:responseObject];
+            //NSLog(@"%d", weakSelf.totalPageNum);
+            if (weakSelf.totalPageNum == 1) {
+                weakSelf.tableView.showsInfiniteScrolling = NO;
+            } else {
+                weakSelf.tableView.showsInfiniteScrolling = YES;
+            }
             [[CC98Store sharedInstance] updatePostListWithEntity:weakSelf.items topicId:weakSelf.topicInfo.topicId pageNum:weakSelf.currPageNum];
             [weakSelf.tableView reloadData];
             [weakSelf.tableView.pullToRefreshView stopAnimating];
@@ -72,14 +76,11 @@
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-        if (weakSelf.items.count == 0) {
-            [weakSelf.tableView.infiniteScrollingView stopAnimating];
-            return;
-        }
-        //NSLog(@"inf scr pagenum: %d", weakSelf.currPageNum);
-        
         [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicInfo.topicId boardId:weakSelf.topicInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
             weakSelf.currPageNum++;
+            if (weakSelf.currPageNum > weakSelf.totalPageNum) {
+                weakSelf.tableView.showsInfiniteScrolling = NO;
+            }
             //NSLog(@"%d", weakSelf.currPageNum);
             NSMutableArray *array = [[CC98Parser sharedInstance] parsePostList:responseObject];
             [[CC98Store sharedInstance] updatePostListWithEntity:array topicId:weakSelf.topicInfo.topicId pageNum:weakSelf.currPageNum];
@@ -100,6 +101,8 @@
             //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
         }];
     }];
+    
+    self.tableView.showsInfiniteScrolling = NO;
 }
 
 - (void)didReceiveMemoryWarning

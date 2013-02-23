@@ -289,4 +289,36 @@
     return postlist;
 }
 
+-(NSInteger)parseTotalPageNumInPostList:(NSData*)htmlData
+{
+    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    //NSLog(@"%@", html);
+    NSRegularExpression *pageNumOutRegex = [[NSRegularExpression alloc]
+                                            initWithPattern:@"<table cellpadding=0 cellspacing=3 border=0 width=97% align=center><tr><td valign=middle nowrap>[\\s\\S]*?</table>"
+                                            options:NSRegularExpressionCaseInsensitive
+                                            error:nil];
+    NSArray *pageNumOutArray = [pageNumOutRegex matchesInString:html options:0 range:NSMakeRange(0, html.length)];
+    if (pageNumOutArray.count == 0) {
+        NSLog(@"搜索到0处pageNumOut");
+        return 0;
+    }
+    NSTextCheckingResult *pageNumOutResult = [pageNumOutArray objectAtIndex:0];
+    NSString *pageNumOut = [html substringWithRange:pageNumOutResult.range];
+    //NSLog(@"%@", pageNumOut);
+    
+    NSRegularExpression *pageNumRegex = [[NSRegularExpression alloc]
+                                         initWithPattern:@"(?<=\\[)\\d+?(?=\\])"
+                                         options:NSRegularExpressionCaseInsensitive
+                                         error:nil];
+    NSArray *pageNumArray = [pageNumRegex matchesInString:pageNumOut options:0 range:NSMakeRange(0, pageNumOut.length)];
+    if (pageNumArray.count == 0) {
+        NSLog(@"搜索到0处pageNum");
+        return 0;
+    }
+    NSTextCheckingResult *pageNumResult = [pageNumArray objectAtIndex:pageNumArray.count-1];
+    NSString *pageNum = [pageNumOut substringWithRange:pageNumResult.range];
+    //NSLog(@"%@", pageNum);
+    return [pageNum intValue];
+}
+
 @end

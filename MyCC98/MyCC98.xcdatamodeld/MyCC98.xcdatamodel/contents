@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C3012" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C3012" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Boards" syncable="YES">
         <attribute name="boardId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="boardName" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,7 +25,7 @@
     </entity>
     <elements>
         <element name="Boards" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Topics" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Posts" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Topics" positionX="160" positionY="192" width="128" height="165"/>
     </elements>
 </model>

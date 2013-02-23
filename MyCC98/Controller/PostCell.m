@@ -49,7 +49,7 @@
     cellHeight += author.frame.size.height;
     
     NSString *ubb = entity.postContent;
-    NSLog(@"BEFORE: ==== %@", ubb);
+    //NSLog(@"BEFORE: ==== %@", ubb);
     ubb = [ubb stringByReplacingOccurrencesOfString:@"[\n\r\t]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[b\\](.+?)\\[/b\\]" withString:@"<b>$1</b>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[i\\](.+?)\\[/i\\]" withString:@"<i>$1</i>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
@@ -63,7 +63,7 @@
     //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.+?)\\](.+?)\\[/color\\]" withString:@"<span style='color:$1;'>$2</span>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     
-    NSLog(@"AFTER: ==== %@", ubb);
+    //NSLog(@"AFTER: ==== %@", ubb);
 
     ubb = [ubb stringByReplacingOccurrencesOfString:@"^(<img.*?/>)(?!$)" withString:@"$1\r" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(?<!^)(<img.*?/>)$" withString:@"\r$1" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
@@ -95,7 +95,7 @@
             //NSLog(@"%@", url);
             UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, cellHeight, 200, 120)];
             NSURL *imageurl = [[CC98API sharedInstance] urlFromString:url];
-            NSLog(@"%@", imageurl);
+            //NSLog(@"%@", imageurl);
             [image setImageWithURL:imageurl];
             image.contentMode = UIViewContentModeScaleAspectFill;
             image.clipsToBounds = YES;
