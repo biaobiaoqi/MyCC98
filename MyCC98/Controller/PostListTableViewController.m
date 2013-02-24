@@ -204,13 +204,16 @@
     switch (buttonIndex) {
         case 0:
         {
-            [self presentViewController:nextViewController animated:YES completion:nil];
+            //[self presentViewController:nextViewController animated:YES completion:nil];
         }
             break;
         case 1:
         {
-            CCPostEntity *entity = [items objectAtIndex:actionSheet.tag];
-            nextViewController.preContent = [NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在*****[/i]的发言：[/b]\n%@\n[/quotex]\n", entity.postAuthor, entity.postContent];
+            CCPostEntity *postEntity = [items objectAtIndex:actionSheet.tag];
+            CCTopicEntity *topicEntity = topicInfo;
+            nextViewController.postEntity = postEntity;
+            nextViewController.topicEntity = topicEntity;
+            //nextViewController.preContent = [NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在*****[/i]的发言：[/b]\n%@\n[/quotex]\n", entity.postAuthor, entity.postContent];
             [self presentViewController:nextViewController animated:YES completion:nil];
         }
             break;

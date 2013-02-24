@@ -60,4 +60,9 @@
     return @"/boardstat.asp";
 }
 
+-(NSString*) getReplyPostPathWithBoardId:(NSString*)boardId bm:(NSString*)bm
+{
+    return [[NSString alloc] initWithString:[NSString stringWithFormat:@"/SaveReAnnounce.asp?method=Topic&boardID=%@&bm=%@",boardId, bm]];
+}
+
 @end

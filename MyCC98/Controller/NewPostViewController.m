@@ -8,6 +8,7 @@
 
 #import "NewPostViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CC98API.h"
 
 @interface NewPostViewController ()
 
@@ -15,6 +16,8 @@
 
 @implementation NewPostViewController
 @synthesize textview;
+@synthesize postEntity;
+@synthesize topicEntity;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,8 +40,10 @@
     toolbar.items = [NSArray arrayWithObject:barButton];
     
     self.textview.inputAccessoryView = toolbar;
-    
-    [self.textview setText:self.preContent];
+    if (self.postEntity != nil) {
+        [self.textview setText:[NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在*****[/i]的发言：[/b]\n%@\n[/quotex]\n", self.postEntity.postAuthor, self.postEntity.postContent]];
+        NSLog(@"postId: %@", self.postEntity.postId);
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,7 +55,36 @@
 - (IBAction)submitButtonClicked:(id)sender
 {
     NSLog(@"%@", [self.textview text]);
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *pw16 = [[NSUserDefaults standardUserDefaults] objectForKey:@"pw16"];
+    NSLog(@"username: %@", uid);
+    NSLog(@"passwd: %@", pw16);
+    NSDictionary* postData;
+    postData = [NSDictionary dictionaryWithObjectsAndKeys:
+                 @"", @"upfilerename",
+                 postEntity.replyId, @"followup",
+                 topicEntity.topicId, @"rootID",
+                 @"1", @"star",
+                 @"bbs1", @"TotalUseTable",
+                 uid, @"username",
+                 pw16, @"passwd",
+                 postEntity.replyId, @"ReplyId",
+                 @"", @"subject",
+                 @"face7.gif", @"Expression",
+                 [self.textview text], @"Content",
+                 @"yes", @"signflag",
+                 nil];
+    
+    [[CC98API sharedInstance] replyPostWithBoardId:topicEntity.boardId replyId:postEntity.replyId topicId:topicEntity.topicId bm:[NSString stringWithFormat:@"%d", postEntity.bm] data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success");
+        NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"html: %@", html);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
 }
 
 - (IBAction)cancelButtonClicked:(id)sender

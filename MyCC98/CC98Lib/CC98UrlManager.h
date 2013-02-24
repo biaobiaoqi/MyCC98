@@ -19,5 +19,6 @@
 -(NSString*) getBoardPathWithBoardId:(NSString*)boardId pageNum:(NSInteger)pageNum;
 -(NSString*) getTopicPathWithBoardId:(NSString*)boardId topicId:(NSString*)topicId pageNum:(NSInteger)pageNum;
 -(NSString*) getBoardStatPath;
+-(NSString*) getReplyPostPathWithBoardId:(NSString*)boardId bm:(NSString*)bm;
 
 @end

@@ -14,5 +14,7 @@
 @property (nonatomic, strong) NSString *postTitle;
 @property (nonatomic, strong) NSString *postAuthor;
 @property (nonatomic, strong) NSString *postContent;
+@property (nonatomic, strong) NSString *replyId;
+@property (nonatomic) NSInteger bm;
 
 @end

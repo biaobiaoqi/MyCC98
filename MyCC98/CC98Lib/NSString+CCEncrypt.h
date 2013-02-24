@@ -11,5 +11,6 @@
 @interface NSString (CCEncrypt)
 
 - (NSString*) md5;
+- (NSString*) md5_16;
 
 @end

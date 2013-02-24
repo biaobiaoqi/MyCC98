@@ -48,6 +48,8 @@
     NSString* uid = [username text];
     NSString* pw = [password text];
     NSString* pw32 = [pw md5];
+    NSString* pw16 = [pw md5_16];
+    //NSLog(@"pw16: %@", pw16);
     NSDictionary* loginData;
     loginData = [NSDictionary dictionaryWithObjectsAndKeys:
                  @"i", @"a",
@@ -77,6 +79,7 @@
             NSLog(@"Login Success");
             [[NSUserDefaults standardUserDefaults] setObject:[loginData objectForKey:@"u"] forKey:@"username"];
             [[NSUserDefaults standardUserDefaults] setObject:[loginData objectForKey:@"p"] forKey:@"pw32"];
+            [[NSUserDefaults standardUserDefaults] setObject:pw16 forKey:@"pw16"];
             //[self performSegueWithIdentifier:@"login" sender:self];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self dismissViewControllerAnimated:YES completion:nil];

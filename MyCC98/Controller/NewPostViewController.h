@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCPostEntity.h"
+#import "CCTopicEntity.h"
 
 @interface NewPostViewController : UIViewController
 
-@property (nonatomic, strong) NSString *preContent;
+@property (nonatomic, strong) CCPostEntity *postEntity;
+@property (nonatomic, strong) CCTopicEntity *topicEntity;
 @property (nonatomic, retain) IBOutlet UITextView *textview;
 
 - (IBAction)submitButtonClicked:(id)sender;

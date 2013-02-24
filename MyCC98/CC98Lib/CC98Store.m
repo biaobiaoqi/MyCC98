@@ -312,6 +312,8 @@
             postEntity.postTitle = [result valueForKey:@"postTitle"];
             postEntity.postContent = [result valueForKey:@"postContent"];
             postEntity.postAuthor = [result valueForKey:@"postAuthor"];
+            postEntity.bm = [[result valueForKey:@"bm"] intValue];
+            postEntity.replyId = [result valueForKey:@"replyId"];
             [postlist addObject:postEntity];
         }
     }

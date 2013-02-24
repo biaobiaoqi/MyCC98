@@ -6,11 +6,13 @@
         <attribute name="isPersonal" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <entity name="Posts" syncable="YES">
+        <attribute name="bm" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="pageNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="postAuthor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postContent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="replyId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="topicId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Topics" syncable="YES">
@@ -25,7 +27,7 @@
     </entity>
     <elements>
         <element name="Boards" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Posts" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Posts" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Topics" positionX="160" positionY="192" width="128" height="165"/>
     </elements>
 </model>

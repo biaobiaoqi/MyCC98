@@ -34,4 +34,8 @@
                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (NSURL*)urlFromString:(NSString*)string;
+- (void)replyPostWithBoardId:(NSString*)boardId replyId:(NSString*)replyId topicId:(NSString*)topicId
+        bm:(NSString*)bm data:(NSDictionary*)postData
+        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

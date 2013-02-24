@@ -262,6 +262,7 @@
     
     NSArray *PostContentArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/blockquote/table/tr/td/span"];
     NSArray *PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/a"];
+    NSArray *PostBmArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/table/tr[position()=1]/td[position()=1]/a[position()=5]"];
     
     //NSLog(@"===============%d", PostAuthorArray.count);
     for (int i=0; i<PostContentArray.count; ++i) {
@@ -281,8 +282,35 @@
         //NSLog(@"%@", content);
         entity.postContent = content;
         entity.postAuthor = [[[[[PostAuthorArray objectAtIndex:i] firstChild] firstChild] firstChild] content];
-        //NSLog(@"~~~~~~~~~~~~~%@", entity.postAuthor);
         
+        NSString *referer = [[PostBmArray objectAtIndex:i]  objectForKey:@"href"];
+        NSRegularExpression *bmRegex = [[NSRegularExpression alloc]
+                                                initWithPattern:@"(?<=bm=)\\d+"
+                                                options:NSRegularExpressionCaseInsensitive
+                                                error:nil];
+        NSArray *bmArray = [bmRegex matchesInString:referer options:0 range:NSMakeRange(0, referer.length)];
+        if (bmArray.count == 0) {
+            NSLog(@"搜索到0处bm");
+            return 0;
+        }
+        NSTextCheckingResult *bmResult = [bmArray objectAtIndex:0];
+        NSString *bm = [referer substringWithRange:bmResult.range];
+        //NSLog(@"bm:%@", bm);
+        entity.bm = [bm intValue];
+        
+        NSRegularExpression *replyIdRegex = [[NSRegularExpression alloc]
+                                        initWithPattern:@"(?<=replyID=)\\d+"
+                                        options:NSRegularExpressionCaseInsensitive
+                                        error:nil];
+        NSArray *replyIdArray = [replyIdRegex matchesInString:referer options:0 range:NSMakeRange(0, referer.length)];
+        if (replyIdArray.count == 0) {
+            NSLog(@"搜索到0处replyId");
+            return 0;
+        }
+        NSTextCheckingResult *replyIdResult = [replyIdArray objectAtIndex:0];
+        NSString *replyId = [referer substringWithRange:replyIdResult.range];
+        //NSLog(@"replyId:%@", replyId);
+        entity.replyId = replyId;
         
         [postlist addObject:entity];
     }
