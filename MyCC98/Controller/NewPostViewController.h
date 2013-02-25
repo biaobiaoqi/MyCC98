@@ -10,7 +10,7 @@
 #import "CCPostEntity.h"
 #import "CCTopicEntity.h"
 
-@interface NewPostViewController : UIViewController
+@interface NewPostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) CCPostEntity *postEntity;
 //@property (nonatomic, strong) CCTopicEntity *topicEntity;
@@ -22,6 +22,7 @@
 
 - (IBAction)submitButtonClicked:(id)sender;
 - (IBAction)cancelButtonClicked:(id)sender;
+- (IBAction)uploadButtonClicked:(id)sender;
 
 - (void)keyboardWasShown:(NSNotification*)notification;
 - (void)keyboardWillBeHidden:(NSNotification*)notification;

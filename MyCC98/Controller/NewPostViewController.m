@@ -10,6 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CC98API.h"
 #import "NSDate+CCDateUtil.h"
+#import "UIImage+CCImageScale.h"
+#import "AFNetworking.h"
+#import "MBProgressHUD.h"
 
 @interface NewPostViewController ()
 
@@ -123,6 +126,75 @@
 - (IBAction)cancelButtonClicked:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)uploadButtonClicked:(id)sender
+{
+    UIActionSheet *actionsheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选取", nil];
+    [actionsheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //NSLog(@"%d", buttonIndex);
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            } else {
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    NSData *imageToUpload = UIImageJPEGRepresentation([UIImage imageWithImage:image scaledToMaxWidth:400 maxHeight:400], 90);
+    NSMutableURLRequest *request = [[CC98API sharedInstance] multipartFormRequestWithMethod:@"POST" path:[NSString stringWithFormat:@"/saveannouce_upfile.asp?boardid=%@", boardId] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFormData:[@"upload" dataUsingEncoding:NSUTF8StringEncoding] name:@"act"];
+        [formData appendPartWithFormData:[@"C:\\fakepath\\zju1.jpg" dataUsingEncoding:NSUTF8StringEncoding] name:@"fname"];
+        [formData appendPartWithFileData:imageToUpload name:@"file1" fileName:@"zju1.jpg" mimeType:@"image/jpeg"];
+        [formData appendPartWithFormData:[@"ä¸Šä¼ " dataUsingEncoding:NSUTF8StringEncoding] name:@"Submit"];
+    }];
+    [request setValue:[NSString stringWithFormat:@"http://www.cc98.org/saveannounce_upload.asp?boardid=%@", boardId] forHTTPHeaderField:@"Referer"];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"正在上传...";
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        
+        NSRegularExpression *imageUrlRegex = [[NSRegularExpression alloc]
+                                               initWithPattern:@"(?<=\\[upload=jpg,1\\]).*?(?=\\[/upload\\])"
+                                               options:NSRegularExpressionCaseInsensitive
+                                               error:nil];
+        NSRange imageUrlRange = [imageUrlRegex rangeOfFirstMatchInString:html options:0 range:NSMakeRange(0, html.length)];
+        NSString *imageUrl = [html substringWithRange:imageUrlRange];
+        //NSLog(@"response: [%@]",imageUrl);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        textview.text = [NSString stringWithFormat:@"%@[upload=jpg]%@[/upload]\n", textview.text, imageUrl];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error: %@", error);
+    }];
+    
+    [operation start];
 }
 
 - (void)keyboardWasShown:(NSNotification*)notification {
