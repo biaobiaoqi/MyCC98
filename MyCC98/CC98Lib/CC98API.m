@@ -127,4 +127,15 @@
     [self enqueueHTTPRequestOperation:operation];
 }
 
+- (void)replyTopicWithBoardId:(NSString*)boardId topicId:(NSString*)topicId
+                         data:(NSDictionary*)postData
+                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"/SaveReAnnounce.asp?method=Topic&boardID=%@&bm=", boardId] parameters:postData];
+    [request setValue:[NSString stringWithFormat:@"http://www.cc98.org/reannounce.asp?BoardID=%@&id=%@&star=1", boardId, topicId] forHTTPHeaderField:@"Referer"];
+	AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [self enqueueHTTPRequestOperation:operation];
+}
+
 @end

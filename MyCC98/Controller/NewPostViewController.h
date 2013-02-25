@@ -15,6 +15,7 @@
 @property (nonatomic, strong) CCPostEntity *postEntity;
 @property (nonatomic, strong) CCTopicEntity *topicEntity;
 @property (nonatomic, retain) IBOutlet UITextView *textview;
+@property (nonatomic) NSInteger postMode;
 
 - (IBAction)submitButtonClicked:(id)sender;
 - (IBAction)cancelButtonClicked:(id)sender;

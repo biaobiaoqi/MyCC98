@@ -38,4 +38,8 @@
         bm:(NSString*)bm data:(NSDictionary*)postData
         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)replyTopicWithBoardId:(NSString*)boardId topicId:(NSString*)topicId
+                        data:(NSDictionary*)postData
+                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

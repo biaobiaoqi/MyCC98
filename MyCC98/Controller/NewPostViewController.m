@@ -18,6 +18,7 @@
 @synthesize textview;
 @synthesize postEntity;
 @synthesize topicEntity;
+@synthesize postMode;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,7 +41,7 @@
     toolbar.items = [NSArray arrayWithObject:barButton];
     
     self.textview.inputAccessoryView = toolbar;
-    if (self.postEntity != nil) {
+    if (postMode == 1) {
         [self.textview setText:[NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在*****[/i]的发言：[/b]\n%@\n[/quotex]\n", self.postEntity.postAuthor, self.postEntity.postContent]];
         NSLog(@"postId: %@", self.postEntity.postId);
     }
@@ -74,16 +75,28 @@
                  [self.textview text], @"Content",
                  @"yes", @"signflag",
                  nil];
+    if (postMode == 0) {
+        [[CC98API sharedInstance] replyTopicWithBoardId:topicEntity.boardId topicId:topicEntity.topicId data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //NSLog(@"success");
+            //NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            //NSLog(@"html: %@", html);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@", error);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+    } else if (postMode == 1) {
+        [[CC98API sharedInstance] replyPostWithBoardId:topicEntity.boardId replyId:postEntity.replyId topicId:topicEntity.topicId bm:[NSString stringWithFormat:@"%d", postEntity.bm] data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //NSLog(@"success");
+            //NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            //NSLog(@"html: %@", html);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@", error);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+    }
     
-    [[CC98API sharedInstance] replyPostWithBoardId:topicEntity.boardId replyId:postEntity.replyId topicId:topicEntity.topicId bm:[NSString stringWithFormat:@"%d", postEntity.bm] data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"success");
-        NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"html: %@", html);
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
     
 }
 
