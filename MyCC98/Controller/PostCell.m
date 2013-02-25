@@ -40,13 +40,30 @@
         [subview removeFromSuperview];
     }
     
-    UILabel *author = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHeight, 320, 100)];
+    UILabel *author = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHeight, 160, 18)];
     author.text = [NSString stringWithFormat:@"作者：%@", entity.postAuthor];
     author.font = [UIFont boldSystemFontOfSize:14];
     author.textColor = [UIColor blueColor];
     [author sizeToFit];
     [self.contentView addSubview:author];
-    cellHeight += author.frame.size.height;
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+    [formatter setAMSymbol:@"AM"];
+    [formatter setPMSymbol:@"PM"];
+    [formatter setDateFormat:@"M/d/yyyy h:mm:ss aaa"];
+    NSString *postTimeString = [formatter stringFromDate:entity.postTime];
+    UILabel *time = [[UILabel alloc] initWithFrame:CGRectMake(160, cellHeight+2, 150, 14)];
+    time.text = postTimeString;
+    time.font = [UIFont boldSystemFontOfSize:12];
+    time.textColor = [UIColor blueColor];
+    time.textAlignment = NSTextAlignmentRight;
+    [self.contentView addSubview:time];
+    
+    cellHeight += 20;
+    
+    //NSLog(@"post time: !!!%@", entity.postTime);
     /*
     + (UIColor *)blackColor;      // 0.0 white
     + (UIColor *)darkGrayColor;   // 0.333 white
@@ -66,7 +83,7 @@
     
     NSString *ubb = entity.postContent;
     //NSLog(@"BEFORE: ==== %@", ubb);
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"[\n\r\t]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"[\r\t]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[b\\](.+?)\\[/b\\]" withString:@"<b>$1</b>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[i\\](.+?)\\[/i\\]" withString:@"<i>$1</i>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[u\\](.+?)\\[/u\\]" withString:@"<u>$1</u>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
@@ -84,7 +101,7 @@
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(black|darkGray|lightGray|white|gray|red|green|blue|cyan|yellow|magenta|orange|purple|brown|clear)\\](.*?)\\[/color\\]" withString:@"<font color=\"$1\">$2</font>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.*?)\\](.*?)\\[/color\\]" withString:@"<font color=\"purple\">$2</font>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.*?)\\](.*?)\\[/color\\]" withString:@"$2" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    //ubb = [ubb stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     
     //NSLog(@"AFTER: ==== %@", ubb);
     

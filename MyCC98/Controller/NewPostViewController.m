@@ -42,8 +42,14 @@
     
     self.textview.inputAccessoryView = toolbar;
     if (postMode == 1) {
-        [self.textview setText:[NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在*****[/i]的发言：[/b]\n%@\n[/quotex]\n", self.postEntity.postAuthor, self.postEntity.postContent]];
-        NSLog(@"postId: %@", self.postEntity.postId);
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+        [formatter setAMSymbol:@"AM"];
+        [formatter setPMSymbol:@"PM"];
+        [formatter setDateFormat:@"M/d/yyyy h:mm:ss aaa"];
+        NSString *postTimeString = [formatter stringFromDate:postEntity.postTime];
+        [self.textview setText:[NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在%@[/i]的发言：[/b]\n%@\n[/quotex]\n", self.postEntity.postAuthor,postTimeString, self.postEntity.postContent]];
+        //NSLog(@"postId: %@", self.postEntity.postId);
     }
 }
 
@@ -78,8 +84,8 @@
     if (postMode == 0) {
         [[CC98API sharedInstance] replyTopicWithBoardId:topicEntity.boardId topicId:topicEntity.topicId data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //NSLog(@"success");
-            //NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            //NSLog(@"html: %@", html);
+            NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"html: %@", html);
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@", error);
@@ -88,8 +94,8 @@
     } else if (postMode == 1) {
         [[CC98API sharedInstance] replyPostWithBoardId:topicEntity.boardId replyId:postEntity.replyId topicId:topicEntity.topicId bm:[NSString stringWithFormat:@"%d", postEntity.bm] data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //NSLog(@"success");
-            //NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            //NSLog(@"html: %@", html);
+            NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"html: %@", html);
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@", error);

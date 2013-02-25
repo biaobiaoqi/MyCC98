@@ -263,7 +263,7 @@
     NSArray *PostContentArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/blockquote/table/tr/td/span"];
     NSArray *PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/a"];
     NSArray *PostBmArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/table/tr[position()=1]/td[position()=1]/a[position()=5]"];
-    
+    NSArray *PostTimeArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=2]/td[position()=1]/text()[position()=2]"];
     //NSLog(@"===============%d", PostAuthorArray.count);
     for (int i=0; i<PostContentArray.count; ++i) {
         TFHppleElement *element = [PostContentArray objectAtIndex:i];
@@ -281,7 +281,22 @@
         }
         //NSLog(@"%@", content);
         entity.postContent = content;
+        
+        //pre proccess "<br>" flags
+        entity.postContent = [entity.postContent stringByReplacingOccurrencesOfString:@"\n" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [entity.postContent length])];
+        entity.postContent = [entity.postContent stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [entity.postContent length])];
+        
         entity.postAuthor = [[[[[PostAuthorArray objectAtIndex:i] firstChild] firstChild] firstChild] content];
+        
+        NSString *postTimeString = [[PostTimeArray objectAtIndex:i] content];
+        postTimeString = [postTimeString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        //NSLog(@"post time: %@", postTimeString);
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+        [formatter setAMSymbol:@"AM"];
+        [formatter setPMSymbol:@"PM"];
+        [formatter setDateFormat:@"M/d/yyyy h:mm:ss aaa"];
+        NSDate *postTime = [formatter dateFromString:postTimeString];
         
         NSString *referer = [[PostBmArray objectAtIndex:i]  objectForKey:@"href"];
         NSRegularExpression *bmRegex = [[NSRegularExpression alloc]
@@ -311,6 +326,7 @@
         NSString *replyId = [referer substringWithRange:replyIdResult.range];
         //NSLog(@"replyId:%@", replyId);
         entity.replyId = replyId;
+        entity.postTime = postTime;
         
         [postlist addObject:entity];
     }

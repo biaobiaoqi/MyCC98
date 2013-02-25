@@ -11,6 +11,7 @@
         <attribute name="postAuthor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postContent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="postTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="replyId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="topicId" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,7 +28,7 @@
     </entity>
     <elements>
         <element name="Boards" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Posts" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="Posts" positionX="160" positionY="192" width="128" height="180"/>
         <element name="Topics" positionX="160" positionY="192" width="128" height="165"/>
     </elements>
 </model>

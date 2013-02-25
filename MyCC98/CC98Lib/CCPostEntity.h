@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSString *postContent;
 @property (nonatomic, strong) NSString *replyId;
 @property (nonatomic) NSInteger bm;
+@property (nonatomic, strong) NSDate *postTime;
 
 @end

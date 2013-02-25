@@ -281,6 +281,8 @@
         [new setValue:entity.postAuthor forKey:@"postAuthor"];
         [new setValue:topicId forKey:@"topicId"];
         [new setValue:[NSNumber numberWithInteger:pageNum] forKey:@"pageNum"];
+        [new setValue:entity.postTime forKey:@"postTime"];
+        
         [managedObjectContext save:&error];
     }
 }
@@ -314,6 +316,7 @@
             postEntity.postAuthor = [result valueForKey:@"postAuthor"];
             postEntity.bm = [[result valueForKey:@"bm"] intValue];
             postEntity.replyId = [result valueForKey:@"replyId"];
+            postEntity.postTime = [result valueForKey:@"postTime"];
             [postlist addObject:postEntity];
         }
     }
