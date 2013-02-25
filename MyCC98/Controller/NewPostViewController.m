@@ -92,7 +92,7 @@
                  postEntity.replyId, @"ReplyId",
                  [self.titleField text], @"subject",
                  @"face7.gif", @"Expression",
-                 [NSString stringWithFormat:@"%@\n[right][color=gray]From [url=dispbbs.asp?boardID=100&ID=4104016]MyCC98[/url] via iPhone[/color][/right]", [self.textview text]], @"Content",
+                 [NSString stringWithFormat:@"%@\n[right][color=gray]From [url=dispbbs.asp?boardID=598&ID=4111850&page=1]MyCC98[/url] via iPhone[/color][/right]", [self.textview text]], @"Content",
                  @"yes", @"signflag",
                  nil];
     if (postMode == 0) {
