@@ -191,6 +191,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         textview.text = [NSString stringWithFormat:@"%@[upload=jpg]%@[/upload]\n", textview.text, imageUrl];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"error: %@", error);
     }];
     

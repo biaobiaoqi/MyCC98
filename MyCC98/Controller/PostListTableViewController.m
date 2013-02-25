@@ -227,7 +227,8 @@
             CCPostEntity *postEntity = [items objectAtIndex:actionSheet.tag];
             //CCTopicEntity *topicEntity = topicInfo;
             nextViewController.postEntity = postEntity;
-            //nextViewController.topicEntity = topicEntity;
+            nextViewController.boardId = boardId;
+            nextViewController.topicId = topicId;
             nextViewController.postMode = 1;
             //nextViewController.preContent = [NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在*****[/i]的发言：[/b]\n%@\n[/quotex]\n", entity.postAuthor, entity.postContent];
             [self presentViewController:nextViewController animated:YES completion:nil];
