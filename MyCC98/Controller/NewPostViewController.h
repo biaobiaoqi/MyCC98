@@ -20,4 +20,7 @@
 - (IBAction)submitButtonClicked:(id)sender;
 - (IBAction)cancelButtonClicked:(id)sender;
 
+- (void)keyboardWasShown:(NSNotification*)notification;
+- (void)keyboardWillBeHidden:(NSNotification*)notification;
+
 @end

@@ -36,6 +36,7 @@
 	// Do any additional setup after loading the view.
     [[self.textview layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.textview layer] setBorderWidth:1];
+    //self.textview.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 80);
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self.textview action:@selector(resignFirstResponder)];
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
@@ -50,6 +51,13 @@
         [self.textview setText:[NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在%@[/i]的发言：[/b]\n%@\n[/quotex]\n", self.postEntity.postAuthor,postTimeString, self.postEntity.postContent]];
         //NSLog(@"postId: %@", self.postEntity.postId);
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,6 +116,16 @@
 - (IBAction)cancelButtonClicked:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)notification {
+    NSDictionary* info = [notification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    self.textview.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - keyboardSize.height);
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)notification {
+    self.textview.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 80);
 }
 
 @end
