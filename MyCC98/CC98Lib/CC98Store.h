@@ -26,6 +26,8 @@
 -(NSMutableArray*)getPostListWithTopicId:(NSString*)topicId;
 -(NSInteger)getPostListMaxPageNumWithTopicId:(NSString*)topicId;
 
+-(void)updateHotTopic:(NSMutableArray*)array;
+-(NSMutableArray*)getHotTopic;
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

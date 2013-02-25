@@ -22,7 +22,10 @@
 @end
 
 @implementation PostListTableViewController
-@synthesize topicInfo;
+//@synthesize topicInfo;
+@synthesize topicId;
+@synthesize boardId;
+@synthesize topicName;
 @synthesize items;
 @synthesize currPageNum;
 @synthesize totalPageNum;
@@ -45,9 +48,9 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.navigationItem.title = topicInfo.topicName;
+    self.navigationItem.title = topicName;
     
-    items = [[CC98Store sharedInstance] getPostListWithTopicId:topicInfo.topicId];
+    items = [[CC98Store sharedInstance] getPostListWithTopicId:topicId];
     //currPageNum = [[CC98Store sharedInstance] getPostListMaxPageNumWithTopicId:topicInfo.topicId] + 1;
     
     __weak PostListTableViewController *weakSelf = self;
@@ -56,7 +59,7 @@
     [self.tableView addPullToRefreshWithActionHandler:^{
         weakSelf.currPageNum = 1;
         
-        [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicInfo.topicId boardId:weakSelf.topicInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicId boardId:weakSelf.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             weakSelf.items = [[CC98Parser sharedInstance] parsePostList:responseObject];
             weakSelf.totalPageNum = [[CC98Parser sharedInstance] parseTotalPageNumInPostList:responseObject];
@@ -66,7 +69,7 @@
             } else {
                 weakSelf.tableView.showsInfiniteScrolling = YES;
             }
-            [[CC98Store sharedInstance] updatePostListWithEntity:weakSelf.items topicId:weakSelf.topicInfo.topicId pageNum:weakSelf.currPageNum];
+            [[CC98Store sharedInstance] updatePostListWithEntity:weakSelf.items topicId:weakSelf.topicId pageNum:weakSelf.currPageNum];
             [weakSelf.tableView reloadData];
             [weakSelf.tableView.pullToRefreshView stopAnimating];
             weakSelf.currPageNum++;
@@ -79,14 +82,14 @@
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicInfo.topicId boardId:weakSelf.topicInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicId boardId:weakSelf.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
             weakSelf.currPageNum++;
             if (weakSelf.currPageNum > weakSelf.totalPageNum) {
                 weakSelf.tableView.showsInfiniteScrolling = NO;
             }
             //NSLog(@"%d", weakSelf.currPageNum);
             NSMutableArray *array = [[CC98Parser sharedInstance] parsePostList:responseObject];
-            [[CC98Store sharedInstance] updatePostListWithEntity:array topicId:weakSelf.topicInfo.topicId pageNum:weakSelf.currPageNum];
+            [[CC98Store sharedInstance] updatePostListWithEntity:array topicId:weakSelf.topicId pageNum:weakSelf.currPageNum];
             //NSLog(@"%d", array.count);
             NSMutableArray *insertion = [[NSMutableArray alloc] init];
             for (int i=0; i<array.count; ++i) {
@@ -207,9 +210,11 @@
             UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
             NewPostViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"NewPost"];
             CCPostEntity *postEntity = [items objectAtIndex:0];
-            CCTopicEntity *topicEntity = topicInfo;
+            //CCTopicEntity *topicEntity = topicInfo;
             nextViewController.postEntity = postEntity;
-            nextViewController.topicEntity = topicEntity;
+            nextViewController.boardId = boardId;
+            nextViewController.topicId = topicId;
+            //nextViewController.topicEntity = topicEntity;
             nextViewController.postMode = 0;
             //nextViewController.preContent = [NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在*****[/i]的发言：[/b]\n%@\n[/quotex]\n", entity.postAuthor, entity.postContent];
             [self presentViewController:nextViewController animated:YES completion:nil];
@@ -220,9 +225,9 @@
             UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
             NewPostViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"NewPost"];
             CCPostEntity *postEntity = [items objectAtIndex:actionSheet.tag];
-            CCTopicEntity *topicEntity = topicInfo;
+            //CCTopicEntity *topicEntity = topicInfo;
             nextViewController.postEntity = postEntity;
-            nextViewController.topicEntity = topicEntity;
+            //nextViewController.topicEntity = topicEntity;
             nextViewController.postMode = 1;
             //nextViewController.preContent = [NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在*****[/i]的发言：[/b]\n%@\n[/quotex]\n", entity.postAuthor, entity.postContent];
             [self presentViewController:nextViewController animated:YES completion:nil];
@@ -234,7 +239,7 @@
             WebViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"WebView"];
             //[nextViewController.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
             //[self presentViewController:nextViewController animated:YES completion:nil];
-            nextViewController.url = [[CC98API sharedInstance] urlFromBoardId:topicInfo.boardId topicId:topicInfo.topicId pageNum:@""];
+            nextViewController.url = [[CC98API sharedInstance] urlFromBoardId:boardId topicId:topicId pageNum:@""];
             [self.navigationController pushViewController:nextViewController animated:YES];
         }
         default:

@@ -11,6 +11,7 @@
 #import "CCBoardEntity.h"
 #import "CCTopicEntity.h"
 #import "CCPostEntity.h"
+#import "CCHotTopicEntity.h"
 #import "NSString+CCStringUtil.h"
 
 #define P_BOARD_OUTER_WRAAPER_REGEX @"var customboards_disp = new Array[\\s\\S]*var customboards_order=customboards\\.split"
@@ -30,6 +31,14 @@
 #define POST_LIST_POST_ENTITY_REGEX @"(?<=<tr style=\"vertical-align: middle;\">).*?(?=;</script>)"
 
 #define USER_PROFILE_AVATAR_REGEX @"(?<=&nbsp;\\<img src=).*?(?= )"
+
+#define HOT_TOPIC_WRAPPER @"&nbsp;<a href=\".*?(</td></tr><TR><TD align=middle|</td></tr><!--data)"
+#define HOT_TOPIC_NAME_REGEX @"(?<=\\<font color=#000066>).*?(?=\\</font>)"
+#define HOT_TOPIC_ID_REGEX @"(?<=&id=).*?(?=\" )"
+#define HOT_TOPIC_BOARD_ID_REGEX @"(?<=boardid=)\\d{0,5}?(?=&id=)"
+#define HOT_TOPIC_BOARD_NAME_WITH_AUTHOR_REGEX @"(?<=target=\"_blank\">).{0,30}?(?=</a></td><td height=20)"
+#define HOT_TOPIC_POST_TIME_REGEX @"(?<=\">).{5,18}?(?=</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)"
+#define HOT_TOPIC_CLICK_REGEX @"(?<=align=middle class=tablebody\\d>).*?(?=</td>)"
 
 @implementation CC98Parser
 
@@ -373,6 +382,57 @@
     NSRange userAvatarRange = [userAvatarRegex rangeOfFirstMatchInString:html options:0 range:NSMakeRange(0, html.length)];
     NSString *userAvatar = [html substringWithRange:userAvatarRange];
     return userAvatar;
+}
+
+-(NSMutableArray*)parseHottopicList:(NSData*)htmlData
+{
+    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    NSMutableArray *hottopiclist = [[NSMutableArray alloc] init];
+    
+    NSRegularExpression *topicListRegex = [[NSRegularExpression alloc]
+                                           initWithPattern:HOT_TOPIC_WRAPPER
+                                           options:NSRegularExpressionCaseInsensitive
+                                           error:nil];
+    NSArray *topicListArray = [topicListRegex matchesInString:html options:0 range:NSMakeRange(0, html.length)];
+    for (NSTextCheckingResult *topicListResult in topicListArray) {
+        NSString *topic = [html substringWithRange:topicListResult.range];
+        //NSLog(@"%@", topic);
+        
+        NSRegularExpression *topicNameRegex = [[NSRegularExpression alloc]
+                                               initWithPattern:HOT_TOPIC_NAME_REGEX
+                                               options:NSRegularExpressionCaseInsensitive
+                                               error:nil];
+        NSRange topicNameRange = [topicNameRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *topicName = [topic substringWithRange:topicNameRange];
+        //NSLog(@"%@", topicName);
+        
+        NSRegularExpression *topicIdRegex = [[NSRegularExpression alloc]
+                                             initWithPattern:HOT_TOPIC_ID_REGEX
+                                             options:NSRegularExpressionCaseInsensitive
+                                             error:nil];
+        NSRange topicIdRange = [topicIdRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *topicId = [topic substringWithRange:topicIdRange];
+        //NSLog(@"%@", topicId);
+        
+        NSRegularExpression *boardIdRegex = [[NSRegularExpression alloc]
+                                             initWithPattern:HOT_TOPIC_BOARD_ID_REGEX
+                                             options:NSRegularExpressionCaseInsensitive
+                                             error:nil];
+        NSRange boardIdRange = [boardIdRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+        NSString *boardId = [topic substringWithRange:boardIdRange];
+        
+        
+        CCHotTopicEntity *entity = [CCHotTopicEntity alloc];
+        entity.topicName = topicName;
+        entity.topicId = topicId;
+        entity.boardId = boardId;
+        
+        [hottopiclist addObject:entity];
+    }
+    //NSLog(@"%@", topicList);
+    
+    
+    return hottopiclist;
 }
 
 @end

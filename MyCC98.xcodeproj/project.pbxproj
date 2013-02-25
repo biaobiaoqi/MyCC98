@@ -30,6 +30,11 @@
 		BF3BD7AA16BA932900114346 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD76816BA932900114346 /* SettingsTableViewController.m */; };
 		BF3BD7AB16BA932900114346 /* TopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD76A16BA932900114346 /* TopicCell.m */; };
 		BF3BD7AC16BA932900114346 /* TopicListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD76C16BA932900114346 /* TopicListTableViewController.m */; };
+		BF79B53116DB66E300B25996 /* HotTopicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF79B53016DB66E300B25996 /* HotTopicNavigationController.m */; };
+		BF79B53416DB66FC00B25996 /* HotTopicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF79B53316DB66FC00B25996 /* HotTopicTableViewController.m */; };
+		BF79B53716DB68B100B25996 /* CCHotTopicEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BF79B53616DB68B100B25996 /* CCHotTopicEntity.m */; };
+		BF79B53A16DB6D3A00B25996 /* HotTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF79B53916DB6D3A00B25996 /* HotTopicCell.m */; };
+		BF79B53D16DB77D500B25996 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF79B53C16DB77D400B25996 /* AboutViewController.m */; };
 		BFD661A616BA928B00665FBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD661A516BA928B00665FBA /* UIKit.framework */; };
 		BFD661A816BA928B00665FBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD661A716BA928B00665FBA /* Foundation.framework */; };
 		BFD661AA16BA928B00665FBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD661A916BA928B00665FBA /* CoreGraphics.framework */; };
@@ -94,6 +99,16 @@
 		BF3BD76A16BA932900114346 /* TopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicCell.m; sourceTree = "<group>"; };
 		BF3BD76B16BA932900114346 /* TopicListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicListTableViewController.h; sourceTree = "<group>"; };
 		BF3BD76C16BA932900114346 /* TopicListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicListTableViewController.m; sourceTree = "<group>"; };
+		BF79B52F16DB66E300B25996 /* HotTopicNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicNavigationController.h; sourceTree = "<group>"; };
+		BF79B53016DB66E300B25996 /* HotTopicNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicNavigationController.m; sourceTree = "<group>"; };
+		BF79B53216DB66FC00B25996 /* HotTopicTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicTableViewController.h; sourceTree = "<group>"; };
+		BF79B53316DB66FC00B25996 /* HotTopicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicTableViewController.m; sourceTree = "<group>"; };
+		BF79B53516DB68B100B25996 /* CCHotTopicEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHotTopicEntity.h; sourceTree = "<group>"; };
+		BF79B53616DB68B100B25996 /* CCHotTopicEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHotTopicEntity.m; sourceTree = "<group>"; };
+		BF79B53816DB6D3900B25996 /* HotTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicCell.h; sourceTree = "<group>"; };
+		BF79B53916DB6D3A00B25996 /* HotTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicCell.m; sourceTree = "<group>"; };
+		BF79B53B16DB77D300B25996 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		BF79B53C16DB77D400B25996 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		BFD661A116BA928B00665FBA /* MyCC98.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCC98.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD661A516BA928B00665FBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BFD661A716BA928B00665FBA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -156,6 +171,8 @@
 				BF3BD75116BA932900114346 /* NSString+CCStringUtil.m */,
 				BFEE1D3B16DB31C4006B24DA /* NSDate+CCDateUtil.h */,
 				BFEE1D3C16DB31C4006B24DA /* NSDate+CCDateUtil.m */,
+				BF79B53516DB68B100B25996 /* CCHotTopicEntity.h */,
+				BF79B53616DB68B100B25996 /* CCHotTopicEntity.m */,
 			);
 			path = CC98Lib;
 			sourceTree = "<group>";
@@ -193,6 +210,14 @@
 				BF27D69016D8E108003FED3D /* NewPostViewController.m */,
 				BFEE1D3E16DB4486006B24DA /* WebViewController.h */,
 				BFEE1D3F16DB4486006B24DA /* WebViewController.m */,
+				BF79B52F16DB66E300B25996 /* HotTopicNavigationController.h */,
+				BF79B53016DB66E300B25996 /* HotTopicNavigationController.m */,
+				BF79B53216DB66FC00B25996 /* HotTopicTableViewController.h */,
+				BF79B53316DB66FC00B25996 /* HotTopicTableViewController.m */,
+				BF79B53816DB6D3900B25996 /* HotTopicCell.h */,
+				BF79B53916DB6D3A00B25996 /* HotTopicCell.m */,
+				BF79B53B16DB77D300B25996 /* AboutViewController.h */,
+				BF79B53C16DB77D400B25996 /* AboutViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -384,6 +409,11 @@
 				BF27D69116D8E108003FED3D /* NewPostViewController.m in Sources */,
 				BFEE1D3D16DB31C4006B24DA /* NSDate+CCDateUtil.m in Sources */,
 				BFEE1D4016DB4486006B24DA /* WebViewController.m in Sources */,
+				BF79B53116DB66E300B25996 /* HotTopicNavigationController.m in Sources */,
+				BF79B53416DB66FC00B25996 /* HotTopicTableViewController.m in Sources */,
+				BF79B53716DB68B100B25996 /* CCHotTopicEntity.m in Sources */,
+				BF79B53A16DB6D3A00B25996 /* HotTopicCell.m in Sources */,
+				BF79B53D16DB77D500B25996 /* AboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

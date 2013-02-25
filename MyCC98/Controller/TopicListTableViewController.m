@@ -198,7 +198,9 @@
     
     PostListTableViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"PostList"];
     
-    nextViewController.topicInfo = entity;
+    nextViewController.topicId = entity.topicId;
+    nextViewController.boardId = entity.boardId;
+    nextViewController.topicName = entity.topicName;
     
     [self.navigationController pushViewController:nextViewController animated:YES];
 }

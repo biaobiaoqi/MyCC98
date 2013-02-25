@@ -5,6 +5,17 @@
         <attribute name="boardName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isPersonal" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
+    <entity name="HotTopics" syncable="YES">
+        <attribute name="boardId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="boardName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clickNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="focusNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="postAuthor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="replyNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="topicId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="topicName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Posts" syncable="YES">
         <attribute name="bm" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="pageNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -30,5 +41,6 @@
         <element name="Boards" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Posts" positionX="160" positionY="192" width="128" height="180"/>
         <element name="Topics" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="HotTopics" positionX="160" positionY="192" width="128" height="180"/>
     </elements>
 </model>

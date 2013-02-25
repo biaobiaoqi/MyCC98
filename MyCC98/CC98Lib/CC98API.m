@@ -154,4 +154,10 @@
     [self enqueueHTTPRequestOperation:operation];
 }
 
+- (void)getHotTopicListWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [[CC98API sharedInstance] getPath:[[CC98UrlManager sharedInstance] getHotTopicPath] parameters:nil success:success failure:failure];
+}
+
 @end

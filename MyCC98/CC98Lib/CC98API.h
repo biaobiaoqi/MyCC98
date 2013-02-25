@@ -46,4 +46,6 @@
 - (void)getAvatarUrlWithUserName:(NSString*)username
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)getHotTopicListWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

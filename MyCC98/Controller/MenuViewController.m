@@ -117,7 +117,19 @@
                     }];
                 }
                     break;
-                    
+                case 1:
+                {
+                    if (hottopic == nil) {
+                        hottopic = [self.storyboard instantiateViewControllerWithIdentifier:@"HotTopic"];
+                    }
+                    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+                        CGRect frame = self.slidingViewController.topViewController.view.frame;
+                        self.slidingViewController.topViewController = hottopic;
+                        self.slidingViewController.topViewController.view.frame = frame;
+                        [self.slidingViewController resetTopView];
+                    }];
+                }
+                    break;
                 default:
                     break;
             }
@@ -139,7 +151,19 @@
                     }];
                 }
                     break;
-                    
+                case 1:
+                {
+                    if (about == nil) {
+                        about = [self.storyboard instantiateViewControllerWithIdentifier:@"About"];
+                    }
+                    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+                        CGRect frame = self.slidingViewController.topViewController.view.frame;
+                        self.slidingViewController.topViewController = about;
+                        self.slidingViewController.topViewController.view.frame = frame;
+                        [self.slidingViewController resetTopView];
+                    }];
+                }
+                    break;
                 default:
                     break;
             }

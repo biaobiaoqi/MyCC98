@@ -13,7 +13,9 @@
 @interface NewPostViewController : UIViewController
 
 @property (nonatomic, strong) CCPostEntity *postEntity;
-@property (nonatomic, strong) CCTopicEntity *topicEntity;
+//@property (nonatomic, strong) CCTopicEntity *topicEntity;
+@property (nonatomic, strong) NSString *topicId;
+@property (nonatomic, strong) NSString *boardId;
 @property (nonatomic, retain) IBOutlet UITextView *textview;
 @property (nonatomic, retain) IBOutlet UITextField *titleField;
 @property (nonatomic) NSInteger postMode;

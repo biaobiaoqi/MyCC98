@@ -19,7 +19,9 @@
 @synthesize textview;
 @synthesize titleField;
 @synthesize postEntity;
-@synthesize topicEntity;
+//@synthesize topicEntity;
+@synthesize topicId;
+@synthesize boardId;
 @synthesize postMode;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -82,7 +84,7 @@
     postData = [NSDictionary dictionaryWithObjectsAndKeys:
                  @"", @"upfilerename",
                  postEntity.replyId, @"followup",
-                 topicEntity.topicId, @"rootID",
+                 topicId, @"rootID",
                  @"1", @"star",
                  @"bbs1", @"TotalUseTable",
                  uid, @"username",
@@ -94,7 +96,7 @@
                  @"yes", @"signflag",
                  nil];
     if (postMode == 0) {
-        [[CC98API sharedInstance] replyTopicWithBoardId:topicEntity.boardId topicId:topicEntity.topicId data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[CC98API sharedInstance] replyTopicWithBoardId:boardId topicId:topicId data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //NSLog(@"success");
             NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSLog(@"html: %@", html);
@@ -104,7 +106,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }];
     } else if (postMode == 1) {
-        [[CC98API sharedInstance] replyPostWithBoardId:topicEntity.boardId replyId:postEntity.replyId topicId:topicEntity.topicId bm:[NSString stringWithFormat:@"%d", postEntity.bm] data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[CC98API sharedInstance] replyPostWithBoardId:boardId replyId:postEntity.replyId topicId:topicId bm:[NSString stringWithFormat:@"%d", postEntity.bm] data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //NSLog(@"success");
             NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSLog(@"html: %@", html);

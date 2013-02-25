@@ -12,6 +12,8 @@
 {
     UINavigationController *boardList;
     UINavigationController *settings;
+    UINavigationController *hottopic;
+    UIViewController *about;
     IBOutlet UIImageView *avatarImage;
     IBOutlet UITableView *menuTable;
     IBOutlet UIButton *profile;
