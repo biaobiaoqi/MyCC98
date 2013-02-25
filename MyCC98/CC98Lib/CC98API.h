@@ -34,6 +34,7 @@
                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (NSURL*)urlFromString:(NSString*)string;
+- (NSURL*)urlFromBoardId:(NSString*)boardId topicId:(NSString*)topicId pageNum:(NSString*)pageNum;
 - (void)replyPostWithBoardId:(NSString*)boardId replyId:(NSString*)replyId topicId:(NSString*)topicId
         bm:(NSString*)bm data:(NSDictionary*)postData
         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
@@ -42,4 +43,7 @@
                         data:(NSDictionary*)postData
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)getAvatarUrlWithUserName:(NSString*)username
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

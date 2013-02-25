@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "NSString+CCStringUtil.h"
 #import "CC98API.h"
+#import "CC98Parser.h"
 #import "MBProgressHUD.h"
 
 @interface LoginViewController ()
@@ -81,8 +82,18 @@
             [[NSUserDefaults standardUserDefaults] setObject:[loginData objectForKey:@"p"] forKey:@"pw32"];
             [[NSUserDefaults standardUserDefaults] setObject:pw16 forKey:@"pw16"];
             //[self performSegueWithIdentifier:@"login" sender:self];
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [[CC98API sharedInstance] getAvatarUrlWithUserName:uid success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSString *avatarurl = [[CC98Parser sharedInstance] parseUserAvatarUrl:responseObject];
+                [[NSUserDefaults standardUserDefaults] setObject:avatarurl forKey:@"avatarurl"];
+                //NSLog(@"user avatar %@", avatarurl);
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"error: %@", error);
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);

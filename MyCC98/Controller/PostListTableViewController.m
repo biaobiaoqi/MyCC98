@@ -8,12 +8,14 @@
 
 #import "PostListTableViewController.h"
 #import "NewPostViewController.h"
+#import "WebViewController.h"
 #import "PostCell.h"
 #import "SVPullToRefresh.h"
 #import "CC98Store.h"
 #import "CCPostEntity.h"
 #import "CC98API.h"
 #import "CC98Parser.h"
+#import "CC98UrlManager.h"
 
 @interface PostListTableViewController ()
 
@@ -190,7 +192,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    UIActionSheet *actionsheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复", @"引用", nil];
+    UIActionSheet *actionsheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复", @"引用", @"查看网页", nil];
     actionsheet.tag = indexPath.row;
     [actionsheet showInView:self.view];
     
@@ -199,11 +201,11 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     //NSLog(@"%d", buttonIndex);
-    UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    NewPostViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"NewPost"];
     switch (buttonIndex) {
         case 0:
         {
+            UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+            NewPostViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"NewPost"];
             CCPostEntity *postEntity = [items objectAtIndex:0];
             CCTopicEntity *topicEntity = topicInfo;
             nextViewController.postEntity = postEntity;
@@ -215,6 +217,8 @@
             break;
         case 1:
         {
+            UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+            NewPostViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"NewPost"];
             CCPostEntity *postEntity = [items objectAtIndex:actionSheet.tag];
             CCTopicEntity *topicEntity = topicInfo;
             nextViewController.postEntity = postEntity;
@@ -224,6 +228,15 @@
             [self presentViewController:nextViewController animated:YES completion:nil];
         }
             break;
+        case 2:
+        {
+            UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+            WebViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"WebView"];
+            //[nextViewController.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
+            //[self presentViewController:nextViewController animated:YES completion:nil];
+            nextViewController.url = [[CC98API sharedInstance] urlFromBoardId:topicInfo.boardId topicId:topicInfo.topicId pageNum:@""];
+            [self.navigationController pushViewController:nextViewController animated:YES];
+        }
         default:
             break;
     }

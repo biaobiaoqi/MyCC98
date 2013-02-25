@@ -29,6 +29,8 @@
 #define POST_LIST_LAST_REPLY_AUTHOR_REGEX @"(?<=usr\":\").*?(?=\")"
 #define POST_LIST_POST_ENTITY_REGEX @"(?<=<tr style=\"vertical-align: middle;\">).*?(?=;</script>)"
 
+#define USER_PROFILE_AVATAR_REGEX @"(?<=&nbsp;\\<img src=).*?(?= )"
+
 @implementation CC98Parser
 
 #pragma mark - Singleton methods
@@ -359,6 +361,18 @@
     NSString *pageNum = [pageNumOut substringWithRange:pageNumResult.range];
     //NSLog(@"%@", pageNum);
     return [pageNum intValue];
+}
+
+-(NSString*)parseUserAvatarUrl:(NSData*)htmlData
+{
+    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    NSRegularExpression *userAvatarRegex = [[NSRegularExpression alloc]
+                                            initWithPattern:USER_PROFILE_AVATAR_REGEX
+                                            options:NSRegularExpressionCaseInsensitive
+                                            error:nil];
+    NSRange userAvatarRange = [userAvatarRegex rangeOfFirstMatchInString:html options:0 range:NSMakeRange(0, html.length)];
+    NSString *userAvatar = [html substringWithRange:userAvatarRange];
+    return userAvatar;
 }
 
 @end

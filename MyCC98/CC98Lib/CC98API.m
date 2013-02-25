@@ -72,6 +72,13 @@
     [self postPath:[NSString stringWithFormat:@"%@%@", cpath,[[CC98UrlManager sharedInstance] getLoginPath]] parameters:loginData success:success failure:failure];
 }
 
+- (void)getAvatarUrlWithUserName:(NSString*)username
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [self getPath:[[CC98UrlManager sharedInstance] getUserProfilePath:username] parameters:nil success:success failure:failure];
+}
+
 - (void)getBoardStatWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -113,6 +120,15 @@
     } else {
         string = [string stringByReplacingOccurrencesOfString:@"http:\\/\\/|https:\\/\\/" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [string length])];
         return [NSURL URLWithString:[NSString stringWithFormat:@"https://rvpn.zju.edu.cn/%@/web/1/http/2/%@", key, string]];
+    }
+}
+
+- (NSURL*)urlFromBoardId:(NSString*)boardId topicId:(NSString*)topicId pageNum:(NSString*)pageNum
+{
+    if ([key isEqual: @""]) {
+        return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.cc98.org/dispbbs.asp?boardID=%@&ID=%@&page=%@", boardId, topicId, pageNum]];
+    } else {
+        return [NSURL URLWithString:[NSString stringWithFormat:@"https://rvpn.zju.edu.cn/%@/web/1/http/2/www.cc98.org/dispbbs.asp?boardID=%@&ID=%@&page=%@", key, boardId, topicId, pageNum]];
     }
 }
 

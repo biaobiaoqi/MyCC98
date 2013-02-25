@@ -8,6 +8,7 @@
 
 #import "MenuViewController.h"
 #import "ECSlidingViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface MenuViewController ()
 
@@ -52,6 +53,8 @@
         [profile setTitle:@"登陆" forState:UIControlStateNormal];
     } else {
         [profile setTitle:un forState:UIControlStateNormal];
+        NSString *avatarurl = [[NSUserDefaults standardUserDefaults] objectForKey:@"avatarurl"];
+        [avatarImage setImageWithURL:[NSURL URLWithString:avatarurl]];
     }
     
     //profile.titleLabel.textColor = [UIColor whiteColor];

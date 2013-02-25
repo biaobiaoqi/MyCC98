@@ -18,6 +18,6 @@
 -(NSInteger)parseTotalPageNumInTopicList:(NSData*)htmlData;
 -(NSMutableArray*)parsePostList:(NSData*)htmlData;
 -(NSInteger)parseTotalPageNumInPostList:(NSData*)htmlData;
-
+-(NSString*)parseUserAvatarUrl:(NSData*)htmlData;
 
 @end

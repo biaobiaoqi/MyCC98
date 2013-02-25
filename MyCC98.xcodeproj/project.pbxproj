@@ -44,6 +44,7 @@
 		BFEE1D3816DB0FF3006B24DA /* logo_s.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEE1D3616DB0FF3006B24DA /* logo_s.png */; };
 		BFEE1D3916DB0FF3006B24DA /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEE1D3716DB0FF3006B24DA /* logo.png */; };
 		BFEE1D3D16DB31C4006B24DA /* NSDate+CCDateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEE1D3C16DB31C4006B24DA /* NSDate+CCDateUtil.m */; };
+		BFEE1D4016DB4486006B24DA /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEE1D3F16DB4486006B24DA /* WebViewController.m */; };
 		ED21354DA1F04E8E92D7DA5E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F19169EBE67140B2BAF987C4 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,8 @@
 		BFEE1D3716DB0FF3006B24DA /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		BFEE1D3B16DB31C4006B24DA /* NSDate+CCDateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CCDateUtil.h"; sourceTree = "<group>"; };
 		BFEE1D3C16DB31C4006B24DA /* NSDate+CCDateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CCDateUtil.m"; sourceTree = "<group>"; };
+		BFEE1D3E16DB4486006B24DA /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		BFEE1D3F16DB4486006B24DA /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		F19169EBE67140B2BAF987C4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1D03B8D11E244E69308C7D4 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -170,10 +173,6 @@
 				BF3BD75A16BA932900114346 /* LoginViewController.m */,
 				BF3BD75B16BA932900114346 /* MenuViewController.h */,
 				BF3BD75C16BA932900114346 /* MenuViewController.m */,
-				BF3BD75D16BA932900114346 /* PostCell.h */,
-				BF3BD75E16BA932900114346 /* PostCell.m */,
-				BF3BD75F16BA932900114346 /* PostListTableViewController.h */,
-				BF3BD76016BA932900114346 /* PostListTableViewController.m */,
 				BF3BD76116BA932900114346 /* ProfileViewController.h */,
 				BF3BD76216BA932900114346 /* ProfileViewController.m */,
 				BF3BD76316BA932900114346 /* RVPNSwitchCell.h */,
@@ -186,8 +185,14 @@
 				BF3BD76A16BA932900114346 /* TopicCell.m */,
 				BF3BD76B16BA932900114346 /* TopicListTableViewController.h */,
 				BF3BD76C16BA932900114346 /* TopicListTableViewController.m */,
+				BF3BD75D16BA932900114346 /* PostCell.h */,
+				BF3BD75E16BA932900114346 /* PostCell.m */,
+				BF3BD75F16BA932900114346 /* PostListTableViewController.h */,
+				BF3BD76016BA932900114346 /* PostListTableViewController.m */,
 				BF27D68F16D8E108003FED3D /* NewPostViewController.h */,
 				BF27D69016D8E108003FED3D /* NewPostViewController.m */,
+				BFEE1D3E16DB4486006B24DA /* WebViewController.h */,
+				BFEE1D3F16DB4486006B24DA /* WebViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 				BF3BD7AC16BA932900114346 /* TopicListTableViewController.m in Sources */,
 				BF27D69116D8E108003FED3D /* NewPostViewController.m in Sources */,
 				BFEE1D3D16DB31C4006B24DA /* NSDate+CCDateUtil.m in Sources */,
+				BFEE1D4016DB4486006B24DA /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
