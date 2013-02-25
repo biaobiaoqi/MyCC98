@@ -15,6 +15,7 @@
 @property (nonatomic, strong) CCPostEntity *postEntity;
 @property (nonatomic, strong) CCTopicEntity *topicEntity;
 @property (nonatomic, retain) IBOutlet UITextView *textview;
+@property (nonatomic, retain) IBOutlet UITextField *titleField;
 @property (nonatomic) NSInteger postMode;
 
 - (IBAction)submitButtonClicked:(id)sender;
@@ -22,5 +23,6 @@
 
 - (void)keyboardWasShown:(NSNotification*)notification;
 - (void)keyboardWillBeHidden:(NSNotification*)notification;
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;
 
 @end

@@ -445,22 +445,38 @@
                                     <action selector="cancelButtonClicked:" destination="mNv-9J-tIF" eventType="touchUpInside" id="T8m-S9-Hkj"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iDb-eb-1w5">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" type="user" id="Owy-1c-4ka"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mNv-9J-tIF" id="9aR-Ja-HsJ"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3ZF-uI-7r6" firstAttribute="leading" secondItem="hHS-l8-ZHr" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="1Mr-tj-dcb"/>
                             <constraint firstItem="i3E-Vj-Dqk" firstAttribute="leading" secondItem="hHS-l8-ZHr" secondAttribute="leading" type="default" id="3Ke-nr-Fe7"/>
-                            <constraint firstAttribute="bottom" secondItem="i3E-Vj-Dqk" secondAttribute="bottom" constant="80" type="user" id="6Rb-oB-Nhz"/>
+                            <constraint firstItem="iDb-eb-1w5" firstAttribute="trailing" secondItem="hHS-l8-ZHr" secondAttribute="trailing" type="default" id="CPp-65-DFO"/>
                             <constraint firstItem="i3E-Vj-Dqk" firstAttribute="trailing" secondItem="hHS-l8-ZHr" secondAttribute="trailing" type="default" id="FEm-gT-P6H"/>
                             <constraint firstAttribute="bottom" secondItem="vy4-MZ-mGd" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="FnU-8M-g0l"/>
-                            <constraint firstItem="i3E-Vj-Dqk" firstAttribute="top" secondItem="hHS-l8-ZHr" secondAttribute="top" type="user" id="Jrp-kk-g4V"/>
                             <constraint firstItem="vy4-MZ-mGd" firstAttribute="top" secondItem="3ZF-uI-7r6" secondAttribute="top" type="default" id="Ndg-Pu-vNy"/>
+                            <constraint firstItem="i3E-Vj-Dqk" firstAttribute="top" secondItem="iDb-eb-1w5" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Osu-HM-7qh"/>
+                            <constraint firstItem="iDb-eb-1w5" firstAttribute="top" secondItem="hHS-l8-ZHr" secondAttribute="top" type="user" id="Pr9-ad-qnt"/>
                             <constraint firstAttribute="trailing" secondItem="vy4-MZ-mGd" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="aEz-uk-Jut"/>
+                            <constraint firstItem="vy4-MZ-mGd" firstAttribute="baseline" secondItem="3ZF-uI-7r6" secondAttribute="baseline" type="user" id="eHD-uH-Yzs"/>
+                            <constraint firstItem="i3E-Vj-Dqk" firstAttribute="top" secondItem="hHS-l8-ZHr" secondAttribute="top" constant="53" type="user" id="hzi-ZH-lHU"/>
+                            <constraint firstAttribute="bottom" secondItem="i3E-Vj-Dqk" secondAttribute="bottom" constant="80" type="user" id="iyP-Gy-erJ"/>
+                            <constraint firstItem="iDb-eb-1w5" firstAttribute="leading" secondItem="hHS-l8-ZHr" secondAttribute="leading" type="default" id="kdj-rd-e08"/>
                             <constraint firstAttribute="bottom" secondItem="3ZF-uI-7r6" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="mGk-12-Dw5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="textview" destination="i3E-Vj-Dqk" id="lAj-mf-oAh"/>
+                        <outlet property="titleField" destination="iDb-eb-1w5" id="Djc-Gx-iGJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXD-Ku-dge" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -609,6 +625,7 @@
                 <relationship kind="action" name="cancelButtonClicked:"/>
                 <relationship kind="action" name="submitButtonClicked:"/>
                 <relationship kind="outlet" name="textview" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="titleField" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="PostCell" superclassName="UITableViewCell">

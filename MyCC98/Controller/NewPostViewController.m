@@ -17,6 +17,7 @@
 
 @implementation NewPostViewController
 @synthesize textview;
+@synthesize titleField;
 @synthesize postEntity;
 @synthesize topicEntity;
 @synthesize postMode;
@@ -34,8 +35,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [[self.textview layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[self.textview layer] setBorderColor:[[UIColor blackColor] CGColor]];
     [[self.textview layer] setBorderWidth:1];
+    //titleField.frame = CGRectMake(0, 0, 320, 100);
     //self.textview.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 80);
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self.textview action:@selector(resignFirstResponder)];
@@ -46,6 +48,8 @@
     [toolbar setItems:[NSArray arrayWithObjects:flexSpace,barButton,Nil] animated:NO];
     
     self.textview.inputAccessoryView = toolbar;
+    //self.titleField.inputAccessoryView = toolbar;
+    
     if (postMode == 1) {
         NSString *postTimeString = [postEntity.postTime convertToString];
         [self.textview setText:[NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在%@[/i]的发言：[/b]\n%@\n[/quotex]\n", self.postEntity.postAuthor,postTimeString, self.postEntity.postContent]];
@@ -73,6 +77,7 @@
     NSString *pw16 = [[NSUserDefaults standardUserDefaults] objectForKey:@"pw16"];
     NSLog(@"username: %@", uid);
     NSLog(@"passwd: %@", pw16);
+    NSLog(@"title: %@", [self.titleField text]);
     NSDictionary* postData;
     postData = [NSDictionary dictionaryWithObjectsAndKeys:
                  @"", @"upfilerename",
@@ -83,9 +88,9 @@
                  uid, @"username",
                  pw16, @"passwd",
                  postEntity.replyId, @"ReplyId",
-                 @"", @"subject",
+                 [self.titleField text], @"subject",
                  @"face7.gif", @"Expression",
-                 [self.textview text], @"Content",
+                 [NSString stringWithFormat:@"%@\n[right][color=gray]From [url=dispbbs.asp?boardID=100&ID=4104016]MyCC98[/url] via iPhone[/color][/right]", [self.textview text]], @"Content",
                  @"yes", @"signflag",
                  nil];
     if (postMode == 0) {
@@ -121,11 +126,16 @@
 - (void)keyboardWasShown:(NSNotification*)notification {
     NSDictionary* info = [notification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    self.textview.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - keyboardSize.height);
+    self.textview.frame = CGRectMake(0, 53, self.view.frame.size.width, self.view.frame.size.height - keyboardSize.height - 53);
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)notification {
-    self.textview.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 80);
+    self.textview.frame = CGRectMake(0, 53, self.view.frame.size.width, self.view.frame.size.height - 80 - 53);
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
 }
 
 @end

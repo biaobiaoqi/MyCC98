@@ -282,6 +282,8 @@
         [new setValue:topicId forKey:@"topicId"];
         [new setValue:[NSNumber numberWithInteger:pageNum] forKey:@"pageNum"];
         [new setValue:entity.postTime forKey:@"postTime"];
+        [new setValue:[NSNumber numberWithInteger:entity.bm] forKey:@"bm"];
+        [new setValue:entity.replyId forKey:@"replyId"];
         
         [managedObjectContext save:&error];
     }
