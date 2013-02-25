@@ -11,6 +11,7 @@
 #import "CCBoardEntity.h"
 #import "CCTopicEntity.h"
 #import "CCPostEntity.h"
+#import "NSString+CCStringUtil.h"
 
 #define P_BOARD_OUTER_WRAAPER_REGEX @"var customboards_disp = new Array[\\s\\S]*var customboards_order=customboards\\.split"
 #define P_BOARD_SINGLE_BOARD_WRAPPER_REGEX @"</a>-->[\\s\\S]*?(?=</td></tr></table></TD>)"
@@ -291,12 +292,7 @@
         NSString *postTimeString = [[PostTimeArray objectAtIndex:i] content];
         postTimeString = [postTimeString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //NSLog(@"post time: %@", postTimeString);
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
-        [formatter setAMSymbol:@"AM"];
-        [formatter setPMSymbol:@"PM"];
-        [formatter setDateFormat:@"M/d/yyyy h:mm:ss aaa"];
-        NSDate *postTime = [formatter dateFromString:postTimeString];
+        NSDate *postTime = [postTimeString convertToDate];
         
         NSString *referer = [[PostBmArray objectAtIndex:i]  objectForKey:@"href"];
         NSRegularExpression *bmRegex = [[NSRegularExpression alloc]

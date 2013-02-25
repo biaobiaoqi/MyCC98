@@ -12,6 +12,7 @@
 #import <OHAttributedLabel/NSAttributedString+Attributes.h>
 #import <OHAttributedLabel/OHASBasicHTMLParser.h>
 #import "CC98API.h"
+#import "NSDate+CCDateUtil.h"
 
 @implementation PostCell
 @synthesize cellHeight;
@@ -48,12 +49,7 @@
     [self.contentView addSubview:author];
     
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
-    [formatter setAMSymbol:@"AM"];
-    [formatter setPMSymbol:@"PM"];
-    [formatter setDateFormat:@"M/d/yyyy h:mm:ss aaa"];
-    NSString *postTimeString = [formatter stringFromDate:entity.postTime];
+    NSString *postTimeString = [entity.postTime convertToString];
     UILabel *time = [[UILabel alloc] initWithFrame:CGRectMake(160, cellHeight+2, 150, 14)];
     time.text = postTimeString;
     time.font = [UIFont boldSystemFontOfSize:12];
@@ -88,11 +84,11 @@
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[i\\](.+?)\\[/i\\]" withString:@"<i>$1</i>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[u\\](.+?)\\[/u\\]" withString:@"<u>$1</u>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quotex\\]" withString:@"<br><font color=\"blue\">_______________________________________________</font><br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quotex\\]" withString:@"<br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quotex\\]" withString:@"<br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quote\\]" withString:@"<br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quotex\\]" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quotex\\]" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quote\\]" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(<b>以下是引用)(.*?)(：</b>)([\\s\\S]*?)\\[/quote\\]" withString:@"$1$2$3$4<br><b>$2引用结束</b><br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quote\\]" withString:@"<br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quote\\]" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[upload=jpg\\](.+?)\\[/upload\\]" withString:@"<img src=\"$1\" />" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[size=.*?\\])|(\\[/size\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[font=.*?\\])|(\\[/font\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];

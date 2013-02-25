@@ -16,7 +16,7 @@
 		BF3BD79C16BA932900114346 /* CCBoardEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD74B16BA932900114346 /* CCBoardEntity.m */; };
 		BF3BD79D16BA932900114346 /* CCPostEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD74D16BA932900114346 /* CCPostEntity.m */; };
 		BF3BD79E16BA932900114346 /* CCTopicEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD74F16BA932900114346 /* CCTopicEntity.m */; };
-		BF3BD79F16BA932900114346 /* NSString+CCEncrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD75116BA932900114346 /* NSString+CCEncrypt.m */; };
+		BF3BD79F16BA932900114346 /* NSString+CCStringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD75116BA932900114346 /* NSString+CCStringUtil.m */; };
 		BF3BD7A016BA932900114346 /* BoardListNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD75416BA932900114346 /* BoardListNavigationController.m */; };
 		BF3BD7A116BA932900114346 /* BoardListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD75616BA932900114346 /* BoardListTableViewController.m */; };
 		BF3BD7A216BA932900114346 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD75816BA932900114346 /* InitialSlidingViewController.m */; };
@@ -43,6 +43,7 @@
 		BFD661C116BA928B00665FBA /* MyCC98.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFD661BF16BA928B00665FBA /* MyCC98.xcdatamodeld */; };
 		BFEE1D3816DB0FF3006B24DA /* logo_s.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEE1D3616DB0FF3006B24DA /* logo_s.png */; };
 		BFEE1D3916DB0FF3006B24DA /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEE1D3716DB0FF3006B24DA /* logo.png */; };
+		BFEE1D3D16DB31C4006B24DA /* NSDate+CCDateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEE1D3C16DB31C4006B24DA /* NSDate+CCDateUtil.m */; };
 		ED21354DA1F04E8E92D7DA5E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F19169EBE67140B2BAF987C4 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -64,8 +65,8 @@
 		BF3BD74D16BA932900114346 /* CCPostEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCPostEntity.m; sourceTree = "<group>"; };
 		BF3BD74E16BA932900114346 /* CCTopicEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTopicEntity.h; sourceTree = "<group>"; };
 		BF3BD74F16BA932900114346 /* CCTopicEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTopicEntity.m; sourceTree = "<group>"; };
-		BF3BD75016BA932900114346 /* NSString+CCEncrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CCEncrypt.h"; sourceTree = "<group>"; };
-		BF3BD75116BA932900114346 /* NSString+CCEncrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CCEncrypt.m"; sourceTree = "<group>"; };
+		BF3BD75016BA932900114346 /* NSString+CCStringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CCStringUtil.h"; sourceTree = "<group>"; };
+		BF3BD75116BA932900114346 /* NSString+CCStringUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CCStringUtil.m"; sourceTree = "<group>"; };
 		BF3BD75316BA932900114346 /* BoardListNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardListNavigationController.h; sourceTree = "<group>"; };
 		BF3BD75416BA932900114346 /* BoardListNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardListNavigationController.m; sourceTree = "<group>"; };
 		BF3BD75516BA932900114346 /* BoardListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardListTableViewController.h; sourceTree = "<group>"; };
@@ -109,6 +110,8 @@
 		BFD661C016BA928B00665FBA /* MyCC98.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyCC98.xcdatamodel; sourceTree = "<group>"; };
 		BFEE1D3616DB0FF3006B24DA /* logo_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_s.png; sourceTree = "<group>"; };
 		BFEE1D3716DB0FF3006B24DA /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		BFEE1D3B16DB31C4006B24DA /* NSDate+CCDateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CCDateUtil.h"; sourceTree = "<group>"; };
+		BFEE1D3C16DB31C4006B24DA /* NSDate+CCDateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CCDateUtil.m"; sourceTree = "<group>"; };
 		F19169EBE67140B2BAF987C4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1D03B8D11E244E69308C7D4 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -146,8 +149,10 @@
 				BF3BD74D16BA932900114346 /* CCPostEntity.m */,
 				BF3BD74E16BA932900114346 /* CCTopicEntity.h */,
 				BF3BD74F16BA932900114346 /* CCTopicEntity.m */,
-				BF3BD75016BA932900114346 /* NSString+CCEncrypt.h */,
-				BF3BD75116BA932900114346 /* NSString+CCEncrypt.m */,
+				BF3BD75016BA932900114346 /* NSString+CCStringUtil.h */,
+				BF3BD75116BA932900114346 /* NSString+CCStringUtil.m */,
+				BFEE1D3B16DB31C4006B24DA /* NSDate+CCDateUtil.h */,
+				BFEE1D3C16DB31C4006B24DA /* NSDate+CCDateUtil.m */,
 			);
 			path = CC98Lib;
 			sourceTree = "<group>";
@@ -357,7 +362,7 @@
 				BF3BD79C16BA932900114346 /* CCBoardEntity.m in Sources */,
 				BF3BD79D16BA932900114346 /* CCPostEntity.m in Sources */,
 				BF3BD79E16BA932900114346 /* CCTopicEntity.m in Sources */,
-				BF3BD79F16BA932900114346 /* NSString+CCEncrypt.m in Sources */,
+				BF3BD79F16BA932900114346 /* NSString+CCStringUtil.m in Sources */,
 				BF3BD7A016BA932900114346 /* BoardListNavigationController.m in Sources */,
 				BF3BD7A116BA932900114346 /* BoardListTableViewController.m in Sources */,
 				BF3BD7A216BA932900114346 /* InitialSlidingViewController.m in Sources */,
@@ -372,6 +377,7 @@
 				BF3BD7AB16BA932900114346 /* TopicCell.m in Sources */,
 				BF3BD7AC16BA932900114346 /* TopicListTableViewController.m in Sources */,
 				BF27D69116D8E108003FED3D /* NewPostViewController.m in Sources */,
+				BFEE1D3D16DB31C4006B24DA /* NSDate+CCDateUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

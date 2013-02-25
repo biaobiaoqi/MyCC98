@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (CCEncrypt)
+@interface NSString (CCStringUtil)
 
-- (NSString*) md5;
+- (NSString*) md5_32;
 - (NSString*) md5_16;
-
+- (NSDate*) convertToDate;
 @end

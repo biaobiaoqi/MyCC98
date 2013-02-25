@@ -9,6 +9,7 @@
 #import "NewPostViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CC98API.h"
+#import "NSDate+CCDateUtil.h"
 
 @interface NewPostViewController ()
 
@@ -42,12 +43,7 @@
     
     self.textview.inputAccessoryView = toolbar;
     if (postMode == 1) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
-        [formatter setAMSymbol:@"AM"];
-        [formatter setPMSymbol:@"PM"];
-        [formatter setDateFormat:@"M/d/yyyy h:mm:ss aaa"];
-        NSString *postTimeString = [formatter stringFromDate:postEntity.postTime];
+        NSString *postTimeString = [postEntity.postTime convertToString];
         [self.textview setText:[NSString stringWithFormat:@"[quotex][b]以下是引用[i]%@在%@[/i]的发言：[/b]\n%@\n[/quotex]\n", self.postEntity.postAuthor,postTimeString, self.postEntity.postContent]];
         //NSLog(@"postId: %@", self.postEntity.postId);
     }

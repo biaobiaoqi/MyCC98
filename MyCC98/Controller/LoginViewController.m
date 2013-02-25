@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "NSString+CCEncrypt.h"
+#import "NSString+CCStringUtil.h"
 #import "CC98API.h"
 #import "MBProgressHUD.h"
 
@@ -47,7 +47,7 @@
 {
     NSString* uid = [username text];
     NSString* pw = [password text];
-    NSString* pw32 = [pw md5];
+    NSString* pw32 = [pw md5_32];
     NSString* pw16 = [pw md5_16];
     //NSLog(@"pw16: %@", pw16);
     NSDictionary* loginData;
