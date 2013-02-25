@@ -37,9 +37,12 @@
     [[self.textview layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.textview layer] setBorderWidth:1];
     
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"隐藏键盘" style:UIBarButtonItemStylePlain target:self.textview action:@selector(resignFirstResponder)];
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 32)];
-    toolbar.items = [NSArray arrayWithObject:barButton];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self.textview action:@selector(resignFirstResponder)];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    toolbar.barStyle = UIBarStyleDefault;
+    UIBarButtonItem* flexSpace = [[UIBarButtonItem alloc]
+                                  initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [toolbar setItems:[NSArray arrayWithObjects:flexSpace,barButton,Nil] animated:NO];
     
     self.textview.inputAccessoryView = toolbar;
     if (postMode == 1) {
