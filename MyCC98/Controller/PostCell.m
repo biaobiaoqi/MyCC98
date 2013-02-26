@@ -80,28 +80,35 @@
     NSString *ubb = entity.postContent;
     //NSLog(@"BEFORE: ==== %@", ubb);
     ubb = [ubb stringByReplacingOccurrencesOfString:@"[\r\t]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[b\\](.+?)\\[/b\\]" withString:@"<b>$1</b>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[i\\](.+?)\\[/i\\]" withString:@"<i>$1</i>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[u\\](.+?)\\[/u\\]" withString:@"<u>$1</u>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[b\\]([\\s\\S]+?)\\[/b\\]" withString:@"<b>$1</b>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[i\\]([\\s\\S]+?)\\[/i\\]" withString:@"<i>$1</i>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[u\\]([\\s\\S]+?)\\[/u\\]" withString:@"<u>$1</u>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quotex\\]" withString:@"<br><font color=\"blue\">_______________________________________________</font><br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quotex\\]" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quotex\\]" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[quote\\]" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"(<b>以下是引用)(.*?)(：</b>)([\\s\\S]*?)\\[/quote\\]" withString:@"$1$2$3$4<br><b>$2引用结束</b><br>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"(<b>以下是引用)(.*?)(：</b>)([\\s\\S]*?)\\[/quote\\]" withString:@"$1$2$3$4\n<b>$2引用结束</b>\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"(<b>以下是引用)(.*?)(：</b>)([\\s\\S]*?)\\[/quotex\\]" withString:@"$1$2$3$4\n<b>$2引用结束</b>\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quotex\\]" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[/quote\\]" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[upload=jpg\\](.+?)\\[/upload\\]" withString:@"<img src=\"$1\" />" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[upload=(jpg|png|gif|jpg,1|png,1|gif,1)\\](.+?)\\[/upload\\]" withString:@"<img src=\"$2\" />" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[size=.*?\\])|(\\[/size\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[font=.*?\\])|(\\[/font\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[url=.*?\\])|(\\[/url\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    
+    
     ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=\\w{1,8}?\\]\\[/color\\]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=transparent\\](.*?)\\[/color\\]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(black|darkGray|lightGray|white|gray|red|green|blue|cyan|yellow|magenta|orange|purple|brown|clear)\\](.*?)\\[/color\\]" withString:@"<font color=\"$1\">$2</font>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.*?)\\](.*?)\\[/color\\]" withString:@"<font color=\"purple\">$2</font>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=transparent\\]([\\s\\S]*?)\\[/color\\]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(black|darkGray|lightGray|white|gray|red|green|blue|cyan|yellow|magenta|orange|purple|brown|clear)\\]([\\s\\S]*?)\\[/color\\]" withString:@"<font color=\"$1\">$2</font>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.*?)\\]([\\s\\S]*?)\\[/color\\]" withString:@"<font color=\"purple\">$2</font>" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    ubb = [ubb stringByReplacingOccurrencesOfString:@"(\\[color=.*?\\])|(\\[/color\\])" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.*?)\\](.*?)\\[/color\\]" withString:@"$2" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     //ubb = [ubb stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     
-    //NSLog(@"AFTER: ==== %@", ubb);
+    NSLog(@"AFTER: ==== %@", ubb);
     
-    ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[.*?\\]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
+    //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[.*?\\]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
 
     ubb = [ubb stringByReplacingOccurrencesOfString:@"^(<img.*?/>)(?!$)" withString:@"$1\r" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(?<!^)(<img.*?/>)$" withString:@"\r$1" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
