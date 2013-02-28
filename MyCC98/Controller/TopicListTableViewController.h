@@ -16,5 +16,6 @@
 @property (nonatomic) NSInteger currPageNum;
 @property (nonatomic) NSInteger totalPageNum;
 
+- (IBAction)newpostButtonClicked:(id)sender;
 
 @end

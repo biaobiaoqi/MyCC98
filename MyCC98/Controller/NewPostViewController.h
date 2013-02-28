@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString *boardId;
 @property (nonatomic, retain) IBOutlet UITextView *textview;
 @property (nonatomic, retain) IBOutlet UITextField *titleField;
-@property (nonatomic) NSInteger postMode;
+@property (nonatomic) NSInteger postMode; //0:reply 1:quote 2:newpost
 
 - (IBAction)submitButtonClicked:(id)sender;
 - (IBAction)cancelButtonClicked:(id)sender;

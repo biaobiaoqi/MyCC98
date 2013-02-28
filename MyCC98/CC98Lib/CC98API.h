@@ -43,6 +43,9 @@
                         data:(NSDictionary*)postData
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)newPostWithBoardId:(NSString*)boardId data:(NSDictionary*)postData
+                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)getAvatarUrlWithUserName:(NSString*)username
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;

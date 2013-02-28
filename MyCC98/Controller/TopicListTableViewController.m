@@ -8,6 +8,7 @@
 
 #import "TopicListTableViewController.h"
 #import "PostListTableViewController.h"
+#import "NewPostViewController.h"
 #import "TopicCell.h"
 #import "CCTopicEntity.h"
 #import "SVPullToRefresh.h"
@@ -38,6 +39,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIButton *newpostButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [newpostButton addTarget:self action:@selector(newpostButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [newpostButton setBackgroundImage:[UIImage imageNamed:@"newpost"] forState:UIControlStateNormal];
+    UIBarButtonItem *newpostButtonItem = [[UIBarButtonItem alloc] initWithCustomView:newpostButton];
+    [self.navigationItem setRightBarButtonItem:newpostButtonItem];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -203,6 +210,15 @@
     nextViewController.topicName = entity.topicName;
     
     [self.navigationController pushViewController:nextViewController animated:YES];
+}
+
+- (IBAction)newpostButtonClicked:(id)sender
+{
+    UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    NewPostViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"NewPost"];
+    nextViewController.boardId = boardInfo.boardId;
+    nextViewController.postMode = 2;
+    [self presentViewController:nextViewController animated:YES completion:nil];
 }
 
 @end

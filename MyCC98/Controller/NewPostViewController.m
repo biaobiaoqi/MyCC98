@@ -84,20 +84,33 @@
     NSLog(@"passwd: %@", pw16);
     NSLog(@"title: %@", [self.titleField text]);
     NSDictionary* postData;
-    postData = [NSDictionary dictionaryWithObjectsAndKeys:
-                 @"", @"upfilerename",
-                 postEntity.replyId, @"followup",
-                 topicId, @"rootID",
-                 @"1", @"star",
-                 @"bbs1", @"TotalUseTable",
-                 uid, @"username",
-                 pw16, @"passwd",
-                 postEntity.replyId, @"ReplyId",
-                 [self.titleField text], @"subject",
-                 @"face7.gif", @"Expression",
-                 [NSString stringWithFormat:@"%@\n[right][color=gray]From [url=dispbbs.asp?boardID=598&ID=4111850&page=1]MyCC98[/url] via iPhone[/color][/right]", [self.textview text]], @"Content",
-                 @"yes", @"signflag",
-                 nil];
+    if (postMode == 0 || postMode == 1) {
+        postData = [NSDictionary dictionaryWithObjectsAndKeys:
+                    @"", @"upfilerename",
+                    postEntity.replyId, @"followup",
+                    topicId, @"rootID",
+                    @"1", @"star",
+                    @"bbs1", @"TotalUseTable",
+                    uid, @"username",
+                    pw16, @"passwd",
+                    postEntity.replyId, @"ReplyId",
+                    [self.titleField text], @"subject",
+                    @"face7.gif", @"Expression",
+                    [NSString stringWithFormat:@"%@\n[right][color=gray]From [url=dispbbs.asp?boardID=598&ID=4111850&page=1]MyCC98[/url] via iPhone[/color][/right]", [self.textview text]], @"Content",
+                    @"yes", @"signflag",
+                    nil];
+    } else if (postMode == 2) {
+        postData = [NSDictionary dictionaryWithObjectsAndKeys:
+                    @"", @"upfilerename",
+                    uid, @"username",
+                    pw16, @"passwd",
+                    [self.titleField text], @"subject",
+                    @"face7.gif", @"Expression",
+                    [NSString stringWithFormat:@"%@\n[right][color=gray]From [url=dispbbs.asp?boardID=598&ID=4111850&page=1]MyCC98[/url] via iPhone[/color][/right]", [self.textview text]], @"Content",
+                    @"yes", @"signflag",
+                    nil];
+    }
+    
     if (postMode == 0) {
         [[CC98API sharedInstance] replyTopicWithBoardId:boardId topicId:topicId data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //NSLog(@"success");
@@ -110,6 +123,16 @@
         }];
     } else if (postMode == 1) {
         [[CC98API sharedInstance] replyPostWithBoardId:boardId replyId:postEntity.replyId topicId:topicId bm:[NSString stringWithFormat:@"%d", postEntity.bm] data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //NSLog(@"success");
+            NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"html: %@", html);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@", error);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+    } else if (postMode == 2) {
+        [[CC98API sharedInstance] newPostWithBoardId:boardId data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //NSLog(@"success");
             NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSLog(@"html: %@", html);
