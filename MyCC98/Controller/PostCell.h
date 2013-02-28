@@ -13,7 +13,9 @@
 @interface PostCell : UITableViewCell
 
 @property (nonatomic) CGFloat cellHeight;
+@property (nonatomic, retain) PostListTableViewController* controller;
 
 -(void)setUBBCode:(CCPostEntity*)ubb rowNum:(NSInteger)rowNum controller:(PostListTableViewController*)ctrl;
+- (void) imageTapped:(UITapGestureRecognizer *)gr;
 
 @end

@@ -13,9 +13,11 @@
 #import <OHAttributedLabel/OHASBasicHTMLParser.h>
 #import "CC98API.h"
 #import "NSDate+CCDateUtil.h"
+#import "ShowImageViewController.h"
 
 @implementation PostCell
 @synthesize cellHeight;
+@synthesize controller;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -144,10 +146,26 @@
             [image setImageWithURL:imageurl];
             image.contentMode = UIViewContentModeScaleAspectFill;
             image.clipsToBounds = YES;
+            
+            image.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
+            [image addGestureRecognizer:tap];
+            
             [self.contentView addSubview:image];
             cellHeight += 130;
         }
     }
+}
+
+- (void) imageTapped:(UITapGestureRecognizer *)gr
+{
+    UIImageView *imageview = (UIImageView *)gr.view;
+    UIImage *image = imageview.image;
+    UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    ShowImageViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"ShowImage"];
+    nextViewController.image = image;
+    nextViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self.controller presentViewController:nextViewController animated:YES completion:nil];
 }
 
 @end

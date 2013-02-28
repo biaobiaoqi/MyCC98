@@ -147,6 +147,7 @@
     CCPostEntity *entity = [items objectAtIndex:indexPath.row];
     
     [cell setUBBCode:entity rowNum:indexPath.row controller:self];
+    cell.controller = self;
     
     return cell;
 }
