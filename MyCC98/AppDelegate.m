@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CC98Store.h"
+#import "Flurry.h"
 
 @implementation AppDelegate
 
@@ -48,6 +49,11 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{
+    [Flurry startSession:@"R2FSD968C79VK943FGSF"];
 }
 
 - (void)saveContext
