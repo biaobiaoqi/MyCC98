@@ -25,6 +25,7 @@
 -(void)updatePostListWithEntity:(NSMutableArray*)array topicId:(NSString*)topicId pageNum:(NSInteger)pageNum;
 -(NSMutableArray*)getPostListWithTopicId:(NSString*)topicId;
 -(NSInteger)getPostListMaxPageNumWithTopicId:(NSString*)topicId;
+-(NSInteger)getPostListLastUpdateNumWithTopicId:(NSString*)topicId;
 
 -(void)updateHotTopic:(NSMutableArray*)array;
 -(NSMutableArray*)getHotTopic;

@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PostListTableViewController.h"
+#import "PostListViewController.h"
 #import "CCPostEntity.h"
 
 @interface PostCell : UITableViewCell
 
 @property (nonatomic) CGFloat cellHeight;
-@property (nonatomic, retain) PostListTableViewController* controller;
+@property (nonatomic, retain) PostListViewController* controller;
 
--(void)setUBBCode:(CCPostEntity*)ubb rowNum:(NSInteger)rowNum controller:(PostListTableViewController*)ctrl;
+-(void)setUBBCode:(CCPostEntity*)ubb rowNum:(NSInteger)rowNum;
 - (void) imageTapped:(UITapGestureRecognizer *)gr;
 
 @end

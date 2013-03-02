@@ -7,7 +7,7 @@
 //
 
 #import "TopicListTableViewController.h"
-#import "PostListTableViewController.h"
+#import "PostListViewController.h"
 #import "NewPostViewController.h"
 #import "TopicCell.h"
 #import "CCTopicEntity.h"
@@ -203,7 +203,7 @@
     
     UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     
-    PostListTableViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"PostList"];
+    PostListViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"PostList"];
     
     nextViewController.topicId = entity.topicId;
     nextViewController.boardId = entity.boardId;

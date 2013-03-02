@@ -35,7 +35,7 @@
     // Configure the view for the selected state
 }
 
--(void)setUBBCode:(CCPostEntity*)entity rowNum:(NSInteger)rowNum controller:(PostListTableViewController*)ctrl
+-(void)setUBBCode:(CCPostEntity*)entity rowNum:(NSInteger)rowNum
 {
     //NSLog(@"%d", self.subviews.count);
     cellHeight = 0;
@@ -108,7 +108,7 @@
     //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[color=(.*?)\\](.*?)\\[/color\\]" withString:@"$2" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     //ubb = [ubb stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
     
-    NSLog(@"AFTER: ==== %@", ubb);
+    //NSLog(@"AFTER: ==== %@", ubb);
     
     //ubb = [ubb stringByReplacingOccurrencesOfString:@"\\[.*?\\]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
 

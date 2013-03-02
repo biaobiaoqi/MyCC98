@@ -7,7 +7,7 @@
 //
 
 #import "HotTopicTableViewController.h"
-#import "PostListTableViewController.h"
+#import "PostListViewController.h"
 #import "SVPullToRefresh.h"
 #import "CC98API.h"
 #import "CC98Parser.h"
@@ -150,7 +150,7 @@
     
     UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     
-    PostListTableViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"PostList"];
+    PostListViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"PostList"];
     
     nextViewController.topicId = entity.topicId;
     nextViewController.boardId = entity.boardId;

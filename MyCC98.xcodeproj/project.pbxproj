@@ -23,7 +23,6 @@
 		BF3BD7A316BA932900114346 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD75A16BA932900114346 /* LoginViewController.m */; };
 		BF3BD7A416BA932900114346 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD75C16BA932900114346 /* MenuViewController.m */; };
 		BF3BD7A516BA932900114346 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD75E16BA932900114346 /* PostCell.m */; };
-		BF3BD7A616BA932900114346 /* PostListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD76016BA932900114346 /* PostListTableViewController.m */; };
 		BF3BD7A716BA932900114346 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD76216BA932900114346 /* ProfileViewController.m */; };
 		BF3BD7A816BA932900114346 /* RVPNSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD76416BA932900114346 /* RVPNSwitchCell.m */; };
 		BF3BD7A916BA932900114346 /* SettingsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD76616BA932900114346 /* SettingsNavigationController.m */; };
@@ -38,6 +37,8 @@
 		BF79B53A16DB6D3A00B25996 /* HotTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF79B53916DB6D3A00B25996 /* HotTopicCell.m */; };
 		BF79B53D16DB77D500B25996 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF79B53C16DB77D400B25996 /* AboutViewController.m */; };
 		BF95688B16DBBDD00081FBB3 /* UIImage+CCImageScale.m in Sources */ = {isa = PBXBuildFile; fileRef = BF95688A16DBBDD00081FBB3 /* UIImage+CCImageScale.m */; };
+		BFC3657916E185C600D488C7 /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC3657816E185C600D488C7 /* PostListViewController.m */; };
+		BFC3657B16E18DA400D488C7 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BFC3657A16E18DA400D488C7 /* refresh.png */; };
 		BFD661A616BA928B00665FBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD661A516BA928B00665FBA /* UIKit.framework */; };
 		BFD661A816BA928B00665FBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD661A716BA928B00665FBA /* Foundation.framework */; };
 		BFD661AA16BA928B00665FBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD661A916BA928B00665FBA /* CoreGraphics.framework */; };
@@ -88,8 +89,6 @@
 		BF3BD75C16BA932900114346 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		BF3BD75D16BA932900114346 /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		BF3BD75E16BA932900114346 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
-		BF3BD75F16BA932900114346 /* PostListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListTableViewController.h; sourceTree = "<group>"; };
-		BF3BD76016BA932900114346 /* PostListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListTableViewController.m; sourceTree = "<group>"; };
 		BF3BD76116BA932900114346 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		BF3BD76216BA932900114346 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		BF3BD76316BA932900114346 /* RVPNSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RVPNSwitchCell.h; sourceTree = "<group>"; };
@@ -117,6 +116,9 @@
 		BF79B53C16DB77D400B25996 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		BF95688916DBBDD00081FBB3 /* UIImage+CCImageScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CCImageScale.h"; sourceTree = "<group>"; };
 		BF95688A16DBBDD00081FBB3 /* UIImage+CCImageScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CCImageScale.m"; sourceTree = "<group>"; };
+		BFC3657716E185C600D488C7 /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
+		BFC3657816E185C600D488C7 /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
+		BFC3657A16E18DA400D488C7 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		BFD661A116BA928B00665FBA /* MyCC98.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCC98.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD661A516BA928B00665FBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BFD661A716BA928B00665FBA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -220,8 +222,8 @@
 				BF3BD76C16BA932900114346 /* TopicListTableViewController.m */,
 				BF3BD75D16BA932900114346 /* PostCell.h */,
 				BF3BD75E16BA932900114346 /* PostCell.m */,
-				BF3BD75F16BA932900114346 /* PostListTableViewController.h */,
-				BF3BD76016BA932900114346 /* PostListTableViewController.m */,
+				BFC3657716E185C600D488C7 /* PostListViewController.h */,
+				BFC3657816E185C600D488C7 /* PostListViewController.m */,
 				BF27D68F16D8E108003FED3D /* NewPostViewController.h */,
 				BF27D69016D8E108003FED3D /* NewPostViewController.m */,
 				BFEE1D3E16DB4486006B24DA /* WebViewController.h */,
@@ -281,6 +283,7 @@
 		BFD661AE16BA928B00665FBA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BFC3657A16E18DA400D488C7 /* refresh.png */,
 				BF6EE25616DEFC5900D88B69 /* newpost.png */,
 				BFEE1D3616DB0FF3006B24DA /* logo_s.png */,
 				BFEE1D3716DB0FF3006B24DA /* logo.png */,
@@ -356,6 +359,7 @@
 				BFEE1D3816DB0FF3006B24DA /* logo_s.png in Resources */,
 				BFEE1D3916DB0FF3006B24DA /* logo.png in Resources */,
 				BF6EE25716DEFC5900D88B69 /* newpost.png in Resources */,
+				BFC3657B16E18DA400D488C7 /* refresh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,7 +417,6 @@
 				BF3BD7A316BA932900114346 /* LoginViewController.m in Sources */,
 				BF3BD7A416BA932900114346 /* MenuViewController.m in Sources */,
 				BF3BD7A516BA932900114346 /* PostCell.m in Sources */,
-				BF3BD7A616BA932900114346 /* PostListTableViewController.m in Sources */,
 				BF3BD7A716BA932900114346 /* ProfileViewController.m in Sources */,
 				BF3BD7A816BA932900114346 /* RVPNSwitchCell.m in Sources */,
 				BF3BD7A916BA932900114346 /* SettingsNavigationController.m in Sources */,
@@ -430,6 +433,7 @@
 				BF79B53D16DB77D500B25996 /* AboutViewController.m in Sources */,
 				BF95688B16DBBDD00081FBB3 /* UIImage+CCImageScale.m in Sources */,
 				BF6EE25A16DF14E200D88B69 /* ShowImageViewController.m in Sources */,
+				BFC3657916E185C600D488C7 /* PostListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

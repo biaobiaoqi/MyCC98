@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 YANN. All rights reserved.
 //
 
-#import "PostListTableViewController.h"
+#import "PostListViewController.h"
 #import "NewPostViewController.h"
 #import "WebViewController.h"
 #import "PostCell.h"
@@ -16,12 +16,13 @@
 #import "CC98API.h"
 #import "CC98Parser.h"
 #import "CC98UrlManager.h"
+#import "MBProgressHUD.h"
 
-@interface PostListTableViewController ()
+@interface PostListViewController ()
 
 @end
 
-@implementation PostListTableViewController
+@implementation PostListViewController
 //@synthesize topicInfo;
 @synthesize topicId;
 @synthesize boardId;
@@ -29,15 +30,8 @@
 @synthesize items;
 @synthesize currPageNum;
 @synthesize totalPageNum;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize lastUpdateNum;
+@synthesize refreshButton;
 
 - (void)viewDidLoad
 {
@@ -51,9 +45,10 @@
     self.navigationItem.title = topicName;
     
     items = [[CC98Store sharedInstance] getPostListWithTopicId:topicId];
-    //currPageNum = [[CC98Store sharedInstance] getPostListMaxPageNumWithTopicId:topicInfo.topicId] + 1;
-    
-    __weak PostListTableViewController *weakSelf = self;
+    currPageNum = [[CC98Store sharedInstance] getPostListMaxPageNumWithTopicId:topicId] + 1;
+    lastUpdateNum = [[CC98Store sharedInstance] getPostListLastUpdateNumWithTopicId:topicId];
+    NSLog(@"lastupdate:%d", lastUpdateNum);
+    __weak PostListViewController *weakSelf = self;
     
     // setup pull to refresh
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -62,6 +57,11 @@
         [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicId boardId:weakSelf.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             weakSelf.items = [[CC98Parser sharedInstance] parsePostList:responseObject];
+            NSMutableArray *insertion = [[NSMutableArray alloc] init];
+            for (int i=0; i<weakSelf.items.count; ++i) {
+                [insertion addObject:[NSIndexPath indexPathForRow:i+weakSelf.items.count inSection:0]];
+            }
+            weakSelf.lastUpdateNum = [insertion count];
             weakSelf.totalPageNum = [[CC98Parser sharedInstance] parseTotalPageNumInPostList:responseObject];
             //NSLog(@"%d", weakSelf.totalPageNum);
             if (weakSelf.totalPageNum == 1) {
@@ -69,6 +69,9 @@
             } else {
                 weakSelf.tableView.showsInfiniteScrolling = YES;
             }
+            weakSelf.refreshButton.hidden = NO;
+            weakSelf.refreshButton.enabled = YES;
+            
             [[CC98Store sharedInstance] updatePostListWithEntity:weakSelf.items topicId:weakSelf.topicId pageNum:weakSelf.currPageNum];
             [weakSelf.tableView reloadData];
             [weakSelf.tableView.pullToRefreshView stopAnimating];
@@ -89,7 +92,7 @@
             }
             //NSLog(@"%d", weakSelf.currPageNum);
             NSMutableArray *array = [[CC98Parser sharedInstance] parsePostList:responseObject];
-            [[CC98Store sharedInstance] updatePostListWithEntity:array topicId:weakSelf.topicId pageNum:weakSelf.currPageNum];
+            [[CC98Store sharedInstance] updatePostListWithEntity:array topicId:weakSelf.topicId pageNum:weakSelf.currPageNum-1];
             //NSLog(@"%d", array.count);
             NSMutableArray *insertion = [[NSMutableArray alloc] init];
             for (int i=0; i<array.count; ++i) {
@@ -99,6 +102,7 @@
             [weakSelf.tableView beginUpdates];
             [weakSelf.tableView insertRowsAtIndexPaths:insertion withRowAnimation:UITableViewRowAnimationTop];
             [weakSelf.tableView endUpdates];
+            weakSelf.lastUpdateNum = [insertion count];
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
             //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -146,7 +150,7 @@
     }
     CCPostEntity *entity = [items objectAtIndex:indexPath.row];
     
-    [cell setUBBCode:entity rowNum:indexPath.row controller:self];
+    [cell setUBBCode:entity rowNum:indexPath.row];
     cell.controller = self;
     
     return cell;
@@ -253,6 +257,55 @@
 {
     PostCell *cell = (PostCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.cellHeight;
+}
+
+- (IBAction)refreshButtonClicked:(id)sender
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"正在更新...";
+    self.currPageNum--;
+    NSLog(@"pagenum: %d", self.currPageNum);
+    self.tableView.showsInfiniteScrolling = YES;
+    [[CC98API sharedInstance] getPostListWithTopicId:self.topicId boardId:self.boardId pageNum:self.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.currPageNum++;
+        self.totalPageNum = [[CC98Parser sharedInstance] parseTotalPageNumInPostList:responseObject];
+        NSLog(@"pagenum: %d/%d", self.currPageNum, self.totalPageNum);
+        if (self.currPageNum > self.totalPageNum) {
+            self.tableView.showsInfiniteScrolling = NO;
+        }
+        //NSLog(@"%d", weakSelf.currPageNum);
+        NSMutableArray *array = [[CC98Parser sharedInstance] parsePostList:responseObject];
+        if ([array count] == lastUpdateNum) {
+            NSLog(@"equal");
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        } else {
+            NSLog(@"notequal");
+            
+            for (int i=0; i<lastUpdateNum; ++i) {
+                [array removeObjectAtIndex:0];
+            }
+            [[CC98Store sharedInstance] updatePostListWithEntity:array topicId:self.topicId pageNum:self.currPageNum-1];
+            //NSLog(@"%d", array.count);
+            NSMutableArray *insertion = [[NSMutableArray alloc] init];
+            for (int i=0; i<array.count; ++i) {
+                [insertion addObject:[NSIndexPath indexPathForRow:i+self.items.count inSection:0]];
+            }
+            NSLog(@"insert num: %d", [insertion count]);
+            [self.items addObjectsFromArray:array];
+            
+            [self.tableView beginUpdates];
+            [self.tableView insertRowsAtIndexPaths:insertion withRowAnimation:UITableViewRowAnimationTop];
+            [self.tableView endUpdates];
+            lastUpdateNum = [array count] + lastUpdateNum;
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        //[self.tableView.infiniteScrollingView stopAnimating];
+        //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
+    }];
+
 }
 
 @end

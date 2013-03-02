@@ -275,6 +275,22 @@
     
     //add array
     for (CCPostEntity *entity in array) {
+        /*NSEntityDescription* en = [NSEntityDescription entityForName:@"Posts" inManagedObjectContext:managedObjectContext];
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:en];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"postId == %@", entity.postId];
+        [request setPredicate:predicate];
+        
+        NSArray *items = [managedObjectContext executeFetchRequest:request error:&error];
+        
+        for (NSManagedObject *managedObject in items) {
+            [managedObjectContext deleteObject:managedObject];
+        }*/
+
+        
+        
         NSManagedObject *new = [NSEntityDescription insertNewObjectForEntityForName:@"Posts" inManagedObjectContext:managedObjectContext];
         [new setValue:entity.postId forKey:@"postId"];
         [new setValue:entity.postTitle forKey:@"postTitle"];
@@ -367,6 +383,24 @@
             num = [[[objects objectAtIndex:0] valueForKey:@"maxPageNum"] intValue];
         }
     }
+    return num;
+}
+
+-(NSInteger)getPostListLastUpdateNumWithTopicId:(NSString*)topicId
+{
+    NSInteger maxPage = [self getPostListMaxPageNumWithTopicId:topicId];
+    //NSLog(@"maxpage:%d", maxPage);
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Posts" inManagedObjectContext:managedObjectContext];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicId == %@ && pageNum == %d",topicId,  maxPage];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSUInteger num = [managedObjectContext countForFetchRequest:request error:&error];
+    //NSLog(@"nummm: %d", num);
     return num;
 }
 
