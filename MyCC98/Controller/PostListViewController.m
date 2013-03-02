@@ -47,7 +47,7 @@
     items = [[CC98Store sharedInstance] getPostListWithTopicId:topicId];
     currPageNum = [[CC98Store sharedInstance] getPostListMaxPageNumWithTopicId:topicId] + 1;
     lastUpdateNum = [[CC98Store sharedInstance] getPostListLastUpdateNumWithTopicId:topicId];
-    NSLog(@"lastupdate:%d", lastUpdateNum);
+    //NSLog(@"lastupdate:%d", lastUpdateNum);
     __weak PostListViewController *weakSelf = self;
     
     // setup pull to refresh
@@ -56,7 +56,7 @@
         
         [[CC98API sharedInstance] getPostListWithTopicId:weakSelf.topicId boardId:weakSelf.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            weakSelf.items = [[CC98Parser sharedInstance] parsePostList:responseObject];
+            weakSelf.items = [[CC98Parser sharedInstance] parsePostList:responseObject boardId:weakSelf.boardId];
             NSMutableArray *insertion = [[NSMutableArray alloc] init];
             for (int i=0; i<weakSelf.items.count; ++i) {
                 [insertion addObject:[NSIndexPath indexPathForRow:i+weakSelf.items.count inSection:0]];
@@ -91,7 +91,7 @@
                 weakSelf.tableView.showsInfiniteScrolling = NO;
             }
             //NSLog(@"%d", weakSelf.currPageNum);
-            NSMutableArray *array = [[CC98Parser sharedInstance] parsePostList:responseObject];
+            NSMutableArray *array = [[CC98Parser sharedInstance] parsePostList:responseObject boardId:weakSelf.boardId];
             [[CC98Store sharedInstance] updatePostListWithEntity:array topicId:weakSelf.topicId pageNum:weakSelf.currPageNum-1];
             //NSLog(@"%d", array.count);
             NSMutableArray *insertion = [[NSMutableArray alloc] init];
@@ -264,22 +264,22 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在更新...";
     self.currPageNum--;
-    NSLog(@"pagenum: %d", self.currPageNum);
+    //NSLog(@"pagenum: %d", self.currPageNum);
     self.tableView.showsInfiniteScrolling = YES;
     [[CC98API sharedInstance] getPostListWithTopicId:self.topicId boardId:self.boardId pageNum:self.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.currPageNum++;
         self.totalPageNum = [[CC98Parser sharedInstance] parseTotalPageNumInPostList:responseObject];
-        NSLog(@"pagenum: %d/%d", self.currPageNum, self.totalPageNum);
+        //NSLog(@"pagenum: %d/%d", self.currPageNum, self.totalPageNum);
         if (self.currPageNum > self.totalPageNum) {
             self.tableView.showsInfiniteScrolling = NO;
         }
         //NSLog(@"%d", weakSelf.currPageNum);
-        NSMutableArray *array = [[CC98Parser sharedInstance] parsePostList:responseObject];
+        NSMutableArray *array = [[CC98Parser sharedInstance] parsePostList:responseObject boardId:self.boardId];
         if ([array count] == lastUpdateNum) {
-            NSLog(@"equal");
+            //NSLog(@"equal");
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         } else {
-            NSLog(@"notequal");
+            //NSLog(@"notequal");
             
             for (int i=0; i<lastUpdateNum; ++i) {
                 [array removeObjectAtIndex:0];
@@ -290,7 +290,7 @@
             for (int i=0; i<array.count; ++i) {
                 [insertion addObject:[NSIndexPath indexPathForRow:i+self.items.count inSection:0]];
             }
-            NSLog(@"insert num: %d", [insertion count]);
+            //NSLog(@"insert num: %d", [insertion count]);
             [self.items addObjectsFromArray:array];
             
             [self.tableView beginUpdates];

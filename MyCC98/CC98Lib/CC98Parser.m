@@ -135,7 +135,7 @@
 
 }
 
--(NSMutableArray*)parseTopicList:(NSData*)htmlData
+-(NSMutableArray*)parseTopicList:(NSData*)htmlData boardId:(NSString*)boardId
 {
     //NSLog(@"I'm here!");
     NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
@@ -158,7 +158,8 @@
                                           error:nil];
     NSArray *postListArray = [postListRegex matchesInString:webcontent options:0 range:NSMakeRange(0, webcontent.length)];
     //NSLog(@"%@", webcontent);
-    //NSLog(@"======%d", postListArray.count);
+    NSLog(@"======%d", postListArray.count);
+    
     for (int i=0; i<postListArray.count; ++i) {
         NSTextCheckingResult *postListResult = [postListArray objectAtIndex:i];
         NSString *topic = [webcontent substringWithRange:postListResult.range];
@@ -181,13 +182,20 @@
                                              error:nil];
         NSRange topicIdRange = [topicIdRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
         NSString *topicId = [topic substringWithRange:topicIdRange];
+        //NSLog(@"topicId:%@", topicId);
         
-        NSRegularExpression *topicAuthorRegex = [[NSRegularExpression alloc]
+        NSString *topicAuthor;
+        if ([boardId isEqual: @"182"]) {
+            topicAuthor = @"匿名";
+        } else {
+            NSRegularExpression *topicAuthorRegex = [[NSRegularExpression alloc]
                                                  initWithPattern:POST_LIST_POST_AUTHOR_NAME_REGEX
                                                  options:NSRegularExpressionCaseInsensitive
                                                  error:nil];
-        NSRange topicAuthorRange = [topicAuthorRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
-        NSString *topicAuthor = [topic substringWithRange:topicAuthorRange];
+            NSRange topicAuthorRange = [topicAuthorRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
+            topicAuthor = [topic substringWithRange:topicAuthorRange];
+        }
+        //NSLog(@"topicAuthor:%@", topicAuthor);
         
         NSRegularExpression *lastReplyAuthorRegex = [[NSRegularExpression alloc]
                                                      initWithPattern:POST_LIST_LAST_REPLY_AUTHOR_REGEX
@@ -195,6 +203,7 @@
                                                      error:nil];
         NSRange lastReplyAuthorRange = [lastReplyAuthorRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
         NSString *lastReplyAuthor = [topic substringWithRange:lastReplyAuthorRange];
+        //NSLog(@"1");
         
         NSRegularExpression *topicPageNumRegex = [[NSRegularExpression alloc]
                                                   initWithPattern:POST_LIST_POST_PAGE_NUMBER_REGEX
@@ -209,6 +218,7 @@
         {
             topicPageNum = [topic substringWithRange:topicPageNumRange];
         }
+        //NSLog(@"1");
         
         NSRegularExpression *boardIdRegex = [[NSRegularExpression alloc]
                                              initWithPattern:POST_LIST_POST_BOARD_ID_REGEX
@@ -216,6 +226,7 @@
                                              error:nil];
         NSRange boardIdRange = [boardIdRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
         NSString *boardId = [topic substringWithRange:boardIdRange];
+        //NSLog(@"1");
         
         
         CCTopicEntity *entity = [CCTopicEntity alloc];
@@ -266,15 +277,23 @@
 }
 
 
--(NSMutableArray*)parsePostList:(NSData*)htmlData
+-(NSMutableArray*)parsePostList:(NSData*)htmlData boardId:(NSString*)boardId
 {
     NSMutableArray *postlist = [[NSMutableArray alloc] init];
     
     TFHpple *parser = [TFHpple hppleWithHTMLData:htmlData];
     
     NSArray *PostContentArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/blockquote/table/tr/td/span"];
-    NSArray *PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/a"];
-    NSArray *PostBmArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/table/tr[position()=1]/td[position()=1]/a[position()=5]"];
+    NSArray *PostAuthorArray;
+    NSArray *PostBmArray;
+    if ([boardId isEqual: @"182"]) {
+        PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/font/b"];
+        PostBmArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/table/tr[position()=1]/td[position()=1]/a[position()=2]"];
+    } else {
+        PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/a/font/b"];
+        PostBmArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/table/tr[position()=1]/td[position()=1]/a[position()=5]"];
+    }
+    
     NSArray *PostTimeArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=2]/td[position()=1]/text()[position()=2]"];
     //NSLog(@"===============%d", PostAuthorArray.count);
     for (int i=0; i<PostContentArray.count; ++i) {
@@ -298,7 +317,7 @@
         entity.postContent = [entity.postContent stringByReplacingOccurrencesOfString:@"\n" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [entity.postContent length])];
         entity.postContent = [entity.postContent stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [entity.postContent length])];
         
-        entity.postAuthor = [[[[[PostAuthorArray objectAtIndex:i] firstChild] firstChild] firstChild] content];
+        entity.postAuthor = [[[PostAuthorArray objectAtIndex:i] firstChild] content];
         
         NSString *postTimeString = [[PostTimeArray objectAtIndex:i] content];
         postTimeString = [postTimeString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

@@ -65,7 +65,7 @@
         weakSelf.currPageNum = 1;
         
         [[CC98API sharedInstance] getTopicListWithBoardId:weakSelf.boardInfo.boardId pageNum:weakSelf.currPageNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            weakSelf.items = [[CC98Parser sharedInstance] parseTopicList:responseObject];
+            weakSelf.items = [[CC98Parser sharedInstance] parseTopicList:responseObject boardId:weakSelf.boardInfo.boardId];
             weakSelf.totalPageNum = [[CC98Parser sharedInstance] parseTotalPageNumInTopicList:responseObject];
             if (weakSelf.totalPageNum == 1) {
                 weakSelf.tableView.showsInfiniteScrolling = NO;
@@ -91,7 +91,7 @@
                 weakSelf.tableView.showsInfiniteScrolling = NO;
             }
             //NSLog(@"%d", weakSelf.currPageNum);
-            NSMutableArray *array = [[CC98Parser sharedInstance] parseTopicList:responseObject];
+            NSMutableArray *array = [[CC98Parser sharedInstance] parseTopicList:responseObject boardId:weakSelf.boardInfo.boardId];
             [[CC98Store sharedInstance] updateTopicListWithEntity:array boardId:weakSelf.boardInfo.boardId pageNum:weakSelf.currPageNum];
             //NSLog(@"%d", array.count);
             NSMutableArray *insertion = [[NSMutableArray alloc] init];

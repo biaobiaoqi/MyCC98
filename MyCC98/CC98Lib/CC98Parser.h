@@ -14,9 +14,9 @@
 
 -(NSMutableArray*)parseAllBoardList:(NSData*)html;
 -(NSMutableArray*)parsePersonalBoardList:(NSData*)htmlData;
--(NSMutableArray*)parseTopicList:(NSData*)htmlData;
+-(NSMutableArray*)parseTopicList:(NSData*)htmlData boardId:(NSString*)boardId;
 -(NSInteger)parseTotalPageNumInTopicList:(NSData*)htmlData;
--(NSMutableArray*)parsePostList:(NSData*)htmlData;
+-(NSMutableArray*)parsePostList:(NSData*)htmlData boardId:(NSString*)boardId;
 -(NSInteger)parseTotalPageNumInPostList:(NSData*)htmlData;
 -(NSString*)parseUserAvatarUrl:(NSData*)htmlData;
 -(NSMutableArray*)parseHottopicList:(NSData*)htmlData;
