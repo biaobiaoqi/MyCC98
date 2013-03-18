@@ -11,6 +11,7 @@
 #import "CC98API.h"
 #import "CC98Parser.h"
 #import "MBProgressHUD.h"
+#import "GAI.h"
 
 @interface LoginViewController ()
 
@@ -31,6 +32,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [[[GAI sharedInstance] defaultTracker] sendView:@"Login Screen"];
 }
 
 - (void)didReceiveMemoryWarning

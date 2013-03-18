@@ -10,6 +10,7 @@
 #import "RVPNSwitchCell.h"
 #import "CC98API.h"
 #import "MBProgressHUD.h"
+#import "GAI.h"
 
 @interface SettingsTableViewController ()
 
@@ -29,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [[[GAI sharedInstance] defaultTracker] sendView:@"Settings Screen"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import "GAI.h"
 
 @interface WebViewController ()
 
@@ -29,6 +30,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [[[GAI sharedInstance] defaultTracker] sendView:@"Web Screen"];
+    
     [webview loadRequest:[NSURLRequest requestWithURL:url]];
     webview.scalesPageToFit = YES;
 }

@@ -16,6 +16,7 @@
 #import "CC98Store.h"
 #import "CC98Parser.h"
 #import "MBProgressHUD.h"
+#import "GAI.h"
 
 @interface TopicListTableViewController ()
 
@@ -39,6 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[[GAI sharedInstance] defaultTracker] sendView:@"TopicList Screen"];
     
     UIButton *newpostButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [newpostButton addTarget:self action:@selector(newpostButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

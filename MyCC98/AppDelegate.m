@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "CC98Store.h"
-#import "Flurry.h"
 #import "GAI.h"
 
 @implementation AppDelegate
@@ -21,6 +20,17 @@
 {
     // Override point for customization after application launch.
     [CC98Store sharedInstance].managedObjectContext = self.managedObjectContext;
+    
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 30;
+    // Optional: set debug to YES for extra debugging information.
+    [GAI sharedInstance].debug = NO;
+    // Create tracker instance.
+    //id<GAITracker> tracker =
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-39155007-1"];
+    
     return YES;
 }
 							
@@ -54,17 +64,7 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
-    [Flurry startSession:@"R2FSD968C79VK943FGSF"];
     
-    // Optional: automatically send uncaught exceptions to Google Analytics.
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-    [GAI sharedInstance].dispatchInterval = 20;
-    // Optional: set debug to YES for extra debugging information.
-    [GAI sharedInstance].debug = YES;
-    // Create tracker instance.
-    //id<GAITracker> tracker =
-    [[GAI sharedInstance] trackerWithTrackingId:@"UA-39155007-1"];
 }
 
 - (void)saveContext

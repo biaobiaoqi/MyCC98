@@ -7,6 +7,7 @@
 //
 
 #import "ShowImageViewController.h"
+#import "GAI.h"
 
 @interface ShowImageViewController ()
 
@@ -30,6 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[[GAI sharedInstance] defaultTracker] sendView:@"ShowImage Screen"];
 	// Do any additional setup after loading the view.
     [imageview setImage:image];
     //imageview.contentMode = UIViewContentModeScaleAspectFill;

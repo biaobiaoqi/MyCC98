@@ -15,6 +15,7 @@
 #import "CC98Store.h"
 #import "CC98API.h"
 #import "CC98Parser.h"
+#import "GAI.h"
 
 @interface BoardListTableViewController ()
 
@@ -39,6 +40,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[[GAI sharedInstance] defaultTracker] sendView:@"BoardList Screen"];
+    
     personalBoards = [[CC98Store sharedInstance] getPersonalBoardList];
     allBoards = [[CC98Store sharedInstance] getAllBoardList];
     // Uncomment the following line to preserve selection between presentations.

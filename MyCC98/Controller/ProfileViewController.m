@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "GAI.h"
 
 @interface ProfileViewController ()
 
@@ -27,6 +28,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [[[GAI sharedInstance] defaultTracker] sendView:@"Profile Screen"];
 }
 
 - (void)didReceiveMemoryWarning

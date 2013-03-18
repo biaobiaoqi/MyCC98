@@ -9,6 +9,7 @@
 #import "MenuViewController.h"
 #import "ECSlidingViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "GAI.h"
 
 @interface MenuViewController ()
 
@@ -41,6 +42,7 @@
     sectionItems2 = [NSArray arrayWithObjects:@"设置", @"关于", nil];
     sections = [NSArray arrayWithObjects:@"常用", @"更多", nil];
     
+    [[[GAI sharedInstance] defaultTracker] sendView:@"Menu Screen"];
 }
 
 - (void)viewWillAppear:(BOOL)animated

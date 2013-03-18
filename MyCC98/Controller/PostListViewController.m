@@ -17,6 +17,7 @@
 #import "CC98Parser.h"
 #import "CC98UrlManager.h"
 #import "MBProgressHUD.h"
+#import "GAI.h"
 
 @interface PostListViewController ()
 
@@ -36,6 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[[GAI sharedInstance] defaultTracker] sendView:@"PostList Screen"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

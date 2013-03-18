@@ -14,6 +14,7 @@
 #import "CC98Store.h"
 #import "CCHotTopicEntity.h"
 #import "HotTopicCell.h"
+#import "GAI.h"
 
 @interface HotTopicTableViewController ()
 
@@ -34,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [[[GAI sharedInstance] defaultTracker] sendView:@"HotTopic Screen"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
