@@ -18,6 +18,7 @@
 @implementation PostCell
 @synthesize cellHeight;
 @synthesize controller;
+@synthesize photos;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -117,6 +118,9 @@
     ubb = [ubb stringByReplacingOccurrencesOfString:@"(?<!^)(<img.*?/>)(?!$)" withString:@"\r$1\r" options:NSRegularExpressionSearch range:NSMakeRange(0, [ubb length])];
 
     NSArray *array = [ubb componentsSeparatedByString:@"\r"];
+    
+    self.photos = [NSMutableArray array];
+    
     for (NSString *string in array) {
         //NSLog(@"result: %@", string);
         NSRegularExpression *regex = [[NSRegularExpression alloc]
@@ -151,6 +155,9 @@
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
             [image addGestureRecognizer:tap];
             
+            [image setTag:[photos count]];
+            [photos addObject:[MWPhoto photoWithURL:imageurl]];
+            
             [self.contentView addSubview:image];
             cellHeight += 130;
         }
@@ -160,12 +167,33 @@
 - (void) imageTapped:(UITapGestureRecognizer *)gr
 {
     UIImageView *imageview = (UIImageView *)gr.view;
-    UIImage *image = imageview.image;
+    NSInteger imagetag = [imageview tag];
+    /*UIImage *image = imageview.image;
     UIStoryboard *board=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     ShowImageViewController *nextViewController =[board instantiateViewControllerWithIdentifier:@"ShowImage"];
     nextViewController.image = image;
     nextViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self.controller presentViewController:nextViewController animated:YES completion:nil];
+    [self.controller presentViewController:nextViewController animated:YES completion:nil];*/
+    
+    // Create & present browser
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    // Set options
+    browser.wantsFullScreenLayout = YES; // Decide if you want the photo browser full screen, i.e. whether the status bar is affected (defaults to YES)
+    browser.displayActionButton = YES; // Show action button to save, copy or email photos (defaults to NO)
+    [browser setInitialPageIndex:imagetag]; // Example: allows second image to be presented first
+    // Present
+    UINavigationController *navBar = [[UINavigationController alloc] initWithRootViewController:browser];
+    [self.controller presentViewController:navBar animated:YES completion:nil];
+}
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.photos.count;
+}
+
+- (MWPhoto *)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < self.photos.count)
+        return [self.photos objectAtIndex:index];
+    return nil;
 }
 
 @end
