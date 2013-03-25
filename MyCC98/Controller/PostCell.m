@@ -13,7 +13,6 @@
 #import <OHAttributedLabel/OHASBasicHTMLParser.h>
 #import "CC98API.h"
 #import "NSDate+CCDateUtil.h"
-#import "ShowImageViewController.h"
 
 @implementation PostCell
 @synthesize cellHeight;

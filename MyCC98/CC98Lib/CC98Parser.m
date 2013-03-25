@@ -142,8 +142,8 @@
     NSMutableArray *topiclist = [[NSMutableArray alloc] init];
     TFHpple *parser = [TFHpple hppleWithHTMLData:htmlData];
     
-    NSArray *topicNameArray = [parser searchWithXPathQuery:@"//html/body/form[@name='batch']/table/form/tbody/tr[position()>2]/td[position()=2]/a/span"];
-    NSArray *replyNumArray = [parser searchWithXPathQuery:@"//html/body/form[@name='batch']/table/form/tbody/tr[position()>2]/td[position()=4]"];
+    NSArray *topicNameArray = [parser searchWithXPathQuery:@"//html/body/form[@name='batch']/table/tbody/tr[position()>2]/td[position()=2]/a/span"];
+    NSArray *replyNumArray = [parser searchWithXPathQuery:@"//html/body/form[@name='batch']/table/tbody/tr[position()>2]/td[position()=4]"];
     
     NSMutableString *webcontent = [NSMutableString stringWithString:html];
     NSRegularExpression *trim = [[NSRegularExpression alloc]
