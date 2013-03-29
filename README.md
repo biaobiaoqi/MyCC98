@@ -2,6 +2,7 @@ MyCC98
 ======
 
 This is an iPhone client of CC98 in Zhejiang University.  
+
 Due to the network condition of Zhejiang University, you can NOT have access to CC98 server outside of 
 Zhejiang University.  
 Due to the fact that the developer is poor in money, and can't afford Apple's Developer fee, the app 
