@@ -16,4 +16,4 @@ auther financially, please contact sysande@gmail.com or donate to this e-mail ad
 扫描下面的二维码或者直接下载ipa文件。如果您愿意捐赠，请联系sysande@gmail.com或直接转账到该邮箱的支付宝
 账户。
 
-![Imgur](http://i.imgur.com/n7XGyWB)
+![Imgur](http://i.imgur.com/n7XGyWB.png)
