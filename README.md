@@ -20,6 +20,7 @@ Prerequisites:
 
 Screenshots 截图  
 ![Screenshot](http://i.imgur.com/aV5RvSw.png)  
+~~~
 ![Screenshot](http://i.imgur.com/eKQc7hR.png)  
 ![Screenshot](http://i.imgur.com/xyi7rne.png)  
 ![Screenshot](http://i.imgur.com/B0vzM4E.png)  
