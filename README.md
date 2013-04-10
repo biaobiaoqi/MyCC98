@@ -16,3 +16,7 @@ Prerequisites:
 3. 要求iOS 6.0.0或以上。
 
 ![QR Code](http://i.imgur.com/n7XGyWB.png)
+
+
+Screenshots 截图
+[Imgur](http://i.imgur.com/Sts9Ozg)
