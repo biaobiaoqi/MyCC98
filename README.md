@@ -19,4 +19,4 @@ Prerequisites:
 
 
 Screenshots 截图  
-![Imgur](http://i.imgur.com/Sts9Ozg.png)
+![Imgur](http://i.imgur.com/aV5RvSw.png)
