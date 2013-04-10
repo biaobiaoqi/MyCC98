@@ -18,5 +18,5 @@ Prerequisites:
 ![QR Code](http://i.imgur.com/n7XGyWB.png)
 
 
-Screenshots 截图
-![Imgur](http://i.imgur.com/Sts9Ozg)
+Screenshots 截图  
+![Imgur](http://i.imgur.com/Sts9Ozg.png)
