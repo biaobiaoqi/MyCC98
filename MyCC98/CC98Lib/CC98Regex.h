@@ -16,6 +16,7 @@
 #define P_BOARD_NAME_REGEX @"(?<=<font color=\"#000066\">).*?(?=</font></a>)"
 #define P_BOARD_ID_REGEX @"(?<=<a href=\"list.asp\\?boardid=)[0-9]+(?=\">)"
 
+#define POST_CONTENT_INFO_REGEX @"(?<=<title>).*?(?=&raquo;)|(?<=&page=\\d{1,5}>).+?(?=</a>)|(?<=本主题贴数 <b>).{0,10}?(?=</b>)"
 
 #define P_BOARD_OUTER_WRAAPER_REGEX @"var customboards_disp = new Array[\\s\\S]*var customboards_order=customboards\\.split"
 
