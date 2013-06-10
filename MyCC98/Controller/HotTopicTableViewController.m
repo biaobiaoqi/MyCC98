@@ -7,6 +7,7 @@
 //
 
 #import "HotTopicTableViewController.h"
+#import "ECSlidingViewController.h"
 #import "PostListViewController.h"
 #import "SVPullToRefresh.h"
 #import "CC98API.h"
@@ -160,6 +161,12 @@
     nextViewController.topicName = entity.topicName;
     
     [self.navigationController pushViewController:nextViewController animated:YES];
+}
+
+
+- (IBAction)revealMenu:(id)sender
+{
+    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 @end
