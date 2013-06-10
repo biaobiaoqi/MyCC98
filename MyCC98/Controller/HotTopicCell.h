@@ -11,5 +11,7 @@
 @interface HotTopicCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *title;
+@property (nonatomic, weak) IBOutlet UILabel *author;
+@property (nonatomic, weak) IBOutlet UILabel *boardname;
 
 @end

@@ -99,6 +99,8 @@
     
     CCHotTopicEntity *topicEntity = [items objectAtIndex:indexPath.row];
     cell.title.text = topicEntity.topicName;
+    cell.author.text = [NSString stringWithFormat:@"作者：%@", topicEntity.postAuthor];
+    cell.boardname.text = [NSString stringWithFormat:@"版块：%@", topicEntity.boardName];
     //NSLog(@"boardId %@", topicEntity.boardId);
     
     return cell;

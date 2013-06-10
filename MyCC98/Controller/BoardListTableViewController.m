@@ -64,9 +64,8 @@
     
     // setup pull to refresh
     [self.tableView addPullToRefreshWithActionHandler:^{
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakSelf.navigationController.view animated:YES];
-        //hud.mode = MBProgressHUDModeCustomView;
-        hud.labelText = @"Loading";
+        //MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakSelf.navigationController.view animated:YES];
+        //hud.labelText = @"Loading";
         [[CC98API sharedInstance] getBoardStatWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             weakSelf.allBoards = [[CC98Parser sharedInstance] parseAllBoardList:responseObject];
             [[CC98Store sharedInstance] updateAllBoardList:weakSelf.allBoards];
@@ -84,7 +83,7 @@
                     [alert show];
                 }
                 [weakSelf.tableView.pullToRefreshView stopAnimating];
-                [MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
+                //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
             }];
             //NSLog(@"pull refre");
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -95,7 +94,7 @@
                 [alert show];
             }
             [weakSelf.tableView.pullToRefreshView stopAnimating];
-            [MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
+            //[MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
         }];
     }];
     

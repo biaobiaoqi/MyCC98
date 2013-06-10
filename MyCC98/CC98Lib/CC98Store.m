@@ -426,6 +426,8 @@
         [new setValue:entity.topicName forKey:@"topicName"];
         [new setValue:entity.topicId forKey:@"topicId"];
         [new setValue:entity.boardId forKey:@"boardId"];
+        [new setValue:entity.boardName forKey:@"boardName"];
+        [new setValue:entity.postAuthor forKey:@"postAuthor"];
         [managedObjectContext save:&error];
     }
     
@@ -454,6 +456,8 @@
             topicEntity.topicName = [result valueForKey:@"topicName"];
             topicEntity.topicId = [result valueForKey:@"topicId"];
             topicEntity.boardId = [result valueForKey:@"boardId"];
+            topicEntity.boardName = [result valueForKey:@"boardName"];
+            topicEntity.postAuthor = [result valueForKey:@"postAuthor"];
             //NSLog(@"%@", [result valueForKey:@"topicName"]);
             [hottopic addObject:topicEntity];
         }

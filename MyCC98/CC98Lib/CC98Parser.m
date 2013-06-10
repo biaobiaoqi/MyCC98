@@ -13,32 +13,8 @@
 #import "CCPostEntity.h"
 #import "CCHotTopicEntity.h"
 #import "NSString+CCStringUtil.h"
-
-#define P_BOARD_OUTER_WRAAPER_REGEX @"var customboards_disp = new Array[\\s\\S]*var customboards_order=customboards\\.split"
-#define P_BOARD_SINGLE_BOARD_WRAPPER_REGEX @"</a>-->[\\s\\S]*?(?=</td></tr></table></TD>)"
-#define P_BOARD_NAME_REGEX @"(?<=<font color=#000066>).*?(?=</font>)"
-#define P_BOARD_ID_REGEX @"(?<=<a href=\"list.asp\\?boardid=)[0-9]+(?=\">)"
-
-#define POST_LIST_POST_TYPE_REGEX @"(?<=alt=).*?(?=></TD>)"
-#define POST_LIST_POST_NAME_REGEX @"(?<=最后跟贴：\">).*?(?=</a>)"
-#define POST_LIST_POST_ID_REGEX @"(?<=&ID=)\\d{1,10}?(?=&page=)"
-#define POST_LIST_POST_BOARD_ID_REGEX @"(?<=dispbbs.asp\\?boardID=)\\d{1,10}?(?=&ID=)"
-#define POST_LIST_POST_PAGE_NUMBER_REGEX @"(?<=<font color=#FF0000>).{1,6}?(?=</font></a>.?</b>\\])"
-#define POST_LIST_POST_AUTHOR_NAME_REGEX @"(?<=target=\"_blank\">).{1,15}(?=</a>)|(?<=<td width=80 nowrap class=tablebody2>).{1,15}?(?=</td>)"
-#define POST_LIST_REPLY_NUM_REGEX @"(?<=<td width=\\* nowrap class=tablebody1>).*?(?=</td>)"
-#define POST_LIST_LAST_REPLY_TIME_REGEX @"(?<=#bottom\">).*?(?=</a>)"
-#define POST_LIST_LAST_REPLY_AUTHOR_REGEX @"(?<=usr\":\").*?(?=\")"
-#define POST_LIST_POST_ENTITY_REGEX @"(?<=<tr style=\"vertical-align: middle;\">).*?(?=;</script>)"
-
-#define USER_PROFILE_AVATAR_REGEX @"(?<=&nbsp;\\<img src=).*?(?= )"
-
-#define HOT_TOPIC_WRAPPER @"&nbsp;<a href=\".*?(</td></tr><TR><TD align=middle|</td></tr><!--data)"
-#define HOT_TOPIC_NAME_REGEX @"(?<=\\<font color=#000066>).*?(?=\\</font>)"
-#define HOT_TOPIC_ID_REGEX @"(?<=&id=).*?(?=\" )"
-#define HOT_TOPIC_BOARD_ID_REGEX @"(?<=boardid=)\\d{0,5}?(?=&id=)"
-#define HOT_TOPIC_BOARD_NAME_WITH_AUTHOR_REGEX @"(?<=target=\"_blank\">).{0,30}?(?=</a></td><td height=20)"
-#define HOT_TOPIC_POST_TIME_REGEX @"(?<=\">).{5,18}?(?=</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)"
-#define HOT_TOPIC_CLICK_REGEX @"(?<=align=middle class=tablebody\\d>).*?(?=</td>)"
+#import "CCRegexParser.h"
+#import "CC98Regex.h"
 
 @implementation CC98Parser
 
@@ -58,81 +34,38 @@
 }
 
 
--(NSMutableArray*)parseAllBoardList:(NSData*)html
+-(NSMutableArray*)parseAllBoardList:(NSData*)htmlData
 {
     NSMutableArray *boardlist = [[NSMutableArray alloc] init];
+    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    html = [CCRegexParser removeBlankInString:html];
+    NSArray *contentList = [CCRegexParser matchesInString:html Regex:TODAY_BOARD_ENTITY_REGEX];
     
-    TFHpple *parser = [TFHpple hppleWithHTMLData:html];
-    
-    NSArray *boardNameArray = [parser searchWithXPathQuery:@"//html/body/table[position()=5]/tr[position()>1]/td[position()=1]/a"];
-    
-    //NSLog(@"===============%d", PostAuthorArray.count);
-    for (int i=0; i<boardNameArray.count; ++i) {
-        TFHppleElement *element = [boardNameArray objectAtIndex:i];
-        //NSLog(@"%@", [element description]);
+    for (NSString *string in contentList) {
         CCBoardEntity *entity = [CCBoardEntity alloc];
-        NSString *href = [[element attributes] objectForKey:@"href"];
-        
-        //NSLog(@"%@", content);
-        entity.boardId = [href stringByReplacingOccurrencesOfString:@".*boardid=(\\d+)" withString:@"$1"  options:NSRegularExpressionSearch range:NSMakeRange(0, [href length])];
-        entity.boardName = [[element firstChild] content];
-        //NSLog(@"~~~~~~~~~~~~~%@", entity.boardId);
-        //NSLog(@"~~~~~~~~~~~~~%@", entity.boardName);
+        entity.boardId = [CCRegexParser firstMatchInString:string Regex:TODAY_BOARD_ID_REGEX];
+        entity.boardName = [CCRegexParser firstMatchInString:string Regex:TODAY_BOARD_NAME_REGEX];
         [boardlist addObject:entity];
     }
+    
     return boardlist;
 }
 
 -(NSMutableArray*)parsePersonalBoardList:(NSData*)htmlData
 {
-    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@", html);
-    
     NSMutableArray *boardlist = [[NSMutableArray alloc] init];
+    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    html = [CCRegexParser removeBlankInString:html];
+    NSArray *board = [CCRegexParser matchesInString:html Regex:P_BOARD_SINGLE_BOARD_WRAPPER_REGEX];
     
-    NSRegularExpression *boardInfoRegex = [[NSRegularExpression alloc]
-                                           initWithPattern:P_BOARD_OUTER_WRAAPER_REGEX
-                                           options:NSRegularExpressionCaseInsensitive
-                                           error:nil];
-    NSRange boardInfoRange = [boardInfoRegex rangeOfFirstMatchInString:html options:0 range:NSMakeRange(0, html.length)];
-    if (boardInfoRange.location == NSNotFound) {
-        return boardlist;
-    }
-    NSString *boardInfo = [html substringWithRange:boardInfoRange];
-    //NSLog(@"%@", boardInfo);
-    NSRegularExpression *boardRegex = [[NSRegularExpression alloc]
-                                       initWithPattern:P_BOARD_SINGLE_BOARD_WRAPPER_REGEX
-                                       options:NSRegularExpressionCaseInsensitive
-                                       error:nil];
-    NSArray *boardArray = [boardRegex matchesInString:boardInfo options:0 range:NSMakeRange(0, boardInfo.length)];
-    for (NSTextCheckingResult *boardResult in boardArray) {
-        NSString *board = [boardInfo substringWithRange:boardResult.range];
-        //NSLog(@"\n\n=====================%@", board);
-        NSRegularExpression *boardNameRegex = [[NSRegularExpression alloc]
-                                               initWithPattern:P_BOARD_NAME_REGEX
-                                               options:NSRegularExpressionCaseInsensitive
-                                               error:nil];
-        NSRange boardNameRange = [boardNameRegex rangeOfFirstMatchInString:board options:0 range:NSMakeRange(0, board.length)];
-        NSString *boardName = [board substringWithRange:boardNameRange];
-        
-        NSRegularExpression *boardIdRegex = [[NSRegularExpression alloc]
-                                             initWithPattern:P_BOARD_ID_REGEX
-                                             options:NSRegularExpressionCaseInsensitive
-                                             error:nil];
-        NSRange boardIdRange = [boardIdRegex rangeOfFirstMatchInString:board options:0 range:NSMakeRange(0, board.length)];
-        NSString *boardId = [board substringWithRange:boardIdRange];
-        
+    for (NSString *string in board) {
         CCBoardEntity *entity = [CCBoardEntity alloc];
-        entity.boardId = boardId;
-        entity.boardName = boardName;
-        //NSLog(@"%@", lastReplyTimeInDate);
+        entity.boardId = [CCRegexParser firstMatchInString:string Regex:P_BOARD_ID_REGEX];
+        entity.boardName = [[CCRegexParser firstMatchInString:string Regex:P_BOARD_NAME_REGEX] stringByDecodingHTMLEntities];
         [boardlist addObject:entity];
-        
-        //NSLog(@"%@ %@ %@ %@", boardName, boardId, boardIntro, boardMaster);
-        
     }
+    
     return boardlist;
-
 }
 
 -(NSMutableArray*)parseTopicList:(NSData*)htmlData boardId:(NSString*)boardId
@@ -405,46 +338,24 @@
 
 -(NSMutableArray*)parseHottopicList:(NSData*)htmlData
 {
-    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
     NSMutableArray *hottopiclist = [[NSMutableArray alloc] init];
+    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    html = [CCRegexParser removeBlankInString:html];
+    NSArray *topicList = [CCRegexParser matchesInString:html Regex:HOT_TOPIC_WRAPPER];
     
-    NSRegularExpression *topicListRegex = [[NSRegularExpression alloc]
-                                           initWithPattern:HOT_TOPIC_WRAPPER
-                                           options:NSRegularExpressionCaseInsensitive
-                                           error:nil];
-    NSArray *topicListArray = [topicListRegex matchesInString:html options:0 range:NSMakeRange(0, html.length)];
-    for (NSTextCheckingResult *topicListResult in topicListArray) {
-        NSString *topic = [html substringWithRange:topicListResult.range];
-        //NSLog(@"%@", topic);
-        
-        NSRegularExpression *topicNameRegex = [[NSRegularExpression alloc]
-                                               initWithPattern:HOT_TOPIC_NAME_REGEX
-                                               options:NSRegularExpressionCaseInsensitive
-                                               error:nil];
-        NSRange topicNameRange = [topicNameRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
-        NSString *topicName = [topic substringWithRange:topicNameRange];
-        //NSLog(@"%@", topicName);
-        
-        NSRegularExpression *topicIdRegex = [[NSRegularExpression alloc]
-                                             initWithPattern:HOT_TOPIC_ID_REGEX
-                                             options:NSRegularExpressionCaseInsensitive
-                                             error:nil];
-        NSRange topicIdRange = [topicIdRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
-        NSString *topicId = [topic substringWithRange:topicIdRange];
-        //NSLog(@"%@", topicId);
-        
-        NSRegularExpression *boardIdRegex = [[NSRegularExpression alloc]
-                                             initWithPattern:HOT_TOPIC_BOARD_ID_REGEX
-                                             options:NSRegularExpressionCaseInsensitive
-                                             error:nil];
-        NSRange boardIdRange = [boardIdRegex rangeOfFirstMatchInString:topic options:0 range:NSMakeRange(0, topic.length)];
-        NSString *boardId = [topic substringWithRange:boardIdRange];
-        
-        
+    for (NSString *topic in topicList) {
         CCHotTopicEntity *entity = [CCHotTopicEntity alloc];
-        entity.topicName = topicName;
-        entity.topicId = topicId;
-        entity.boardId = boardId;
+        entity.topicName = [CCRegexParser firstMatchInString:topic Regex:HOT_TOPIC_NAME_REGEX];
+        entity.topicId = [CCRegexParser firstMatchInString:topic Regex:HOT_TOPIC_ID_REGEX];
+        entity.boardId = [CCRegexParser firstMatchInString:topic Regex:HOT_TOPIC_BOARD_ID_REGEX];
+        
+        NSArray *bList = [CCRegexParser matchesInString:topic Regex:HOT_TOPIC_BOARD_NAME_WITH_AUTHOR_REGEX];
+        entity.boardName = [bList objectAtIndex:0];
+        if (bList.count < 2) {
+            entity.postAuthor = @"匿名";
+        } else {
+            entity.postAuthor = [bList objectAtIndex:1];
+        }
         
         [hottopiclist addObject:entity];
     }

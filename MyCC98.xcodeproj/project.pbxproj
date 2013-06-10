@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		961537D7176589300098DA6E /* CCRegexParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 961537D6176589300098DA6E /* CCRegexParser.m */; };
+		961537DD17659CFF0098DA6E /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 961537DC17659CFF0098DA6E /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BF27D69116D8E108003FED3D /* NewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF27D69016D8E108003FED3D /* NewPostViewController.m */; };
 		BF3BD73F16BA931E00114346 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF3BD73D16BA931E00114346 /* MainStoryboard.storyboard */; };
 		BF3BD79816BA932900114346 /* CC98API.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3BD74316BA932900114346 /* CC98API.m */; };
@@ -57,6 +59,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		961537D4176583AD0098DA6E /* CC98Regex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CC98Regex.h; sourceTree = "<group>"; };
+		961537D51765892F0098DA6E /* CCRegexParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRegexParser.h; sourceTree = "<group>"; };
+		961537D6176589300098DA6E /* CCRegexParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRegexParser.m; sourceTree = "<group>"; };
+		961537DB17659CFE0098DA6E /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		961537DC17659CFF0098DA6E /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		BF27D68F16D8E108003FED3D /* NewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostViewController.h; sourceTree = "<group>"; };
 		BF27D69016D8E108003FED3D /* NewPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPostViewController.m; sourceTree = "<group>"; };
 		BF3BD73E16BA931E00114346 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -160,6 +167,8 @@
 		BF3BD74116BA932900114346 /* CC98Lib */ = {
 			isa = PBXGroup;
 			children = (
+				961537DB17659CFE0098DA6E /* GTMNSString+HTML.h */,
+				961537DC17659CFF0098DA6E /* GTMNSString+HTML.m */,
 				BF3BD74216BA932900114346 /* CC98API.h */,
 				BF3BD74316BA932900114346 /* CC98API.m */,
 				BF3BD74416BA932900114346 /* CC98Parser.h */,
@@ -182,6 +191,9 @@
 				BF79B53616DB68B100B25996 /* CCHotTopicEntity.m */,
 				BF95688916DBBDD00081FBB3 /* UIImage+CCImageScale.h */,
 				BF95688A16DBBDD00081FBB3 /* UIImage+CCImageScale.m */,
+				961537D4176583AD0098DA6E /* CC98Regex.h */,
+				961537D51765892F0098DA6E /* CCRegexParser.h */,
+				961537D6176589300098DA6E /* CCRegexParser.m */,
 			);
 			path = CC98Lib;
 			sourceTree = "<group>";
@@ -428,6 +440,8 @@
 				BF79B53D16DB77D500B25996 /* AboutViewController.m in Sources */,
 				BF95688B16DBBDD00081FBB3 /* UIImage+CCImageScale.m in Sources */,
 				BFC3657916E185C600D488C7 /* PostListViewController.m in Sources */,
+				961537D7176589300098DA6E /* CCRegexParser.m in Sources */,
+				961537DD17659CFF0098DA6E /* GTMNSString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
