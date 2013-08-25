@@ -53,7 +53,7 @@
     dispatch_once(&oncePredicate, ^{
         sharedInstance = [[self alloc] init];
     });
-
+    
     return sharedInstance;
 }
 
@@ -132,7 +132,7 @@
         
     }
     return boardlist;
-    
+
 }
 
 -(NSMutableArray*)parseTopicList:(NSData*)htmlData boardId:(NSString*)boardId
