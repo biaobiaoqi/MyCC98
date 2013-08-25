@@ -69,6 +69,7 @@
             [[CC98API sharedInstance] getIndexWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
                 weakSelf.personalBoards = [[CC98Parser sharedInstance] parsePersonalBoardList:responseObject];
                 [[CC98Store sharedInstance] updatePersonalBoardList:weakSelf.personalBoards];
+                weakSelf.personalBoards = [[CC98Store sharedInstance] getPersonalBoardList];//As the board name is unicode,instead of UTF8, a store and get process can make it showing in the rigtht way.
                 [weakSelf.tableView reloadData];
                 [weakSelf.tableView.pullToRefreshView stopAnimating];
                 [MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];

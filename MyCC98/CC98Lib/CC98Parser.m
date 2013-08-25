@@ -14,9 +14,9 @@
 #import "CCHotTopicEntity.h"
 #import "NSString+CCStringUtil.h"
 
-#define P_BOARD_OUTER_WRAAPER_REGEX @"var customboards_disp = new Array[\\s\\S]*var customboards_order=customboards\\.split"
-#define P_BOARD_SINGLE_BOARD_WRAPPER_REGEX @"</a>-->[\\s\\S]*?(?=</td></tr></table></TD>)"
-#define P_BOARD_NAME_REGEX @"(?<=<font color=#000066>).*?(?=</font>)"
+#define P_BOARD_OUTER_WRAAPER_REGEX @"<!--版面名字-->[\\s\\S]*</table>"
+#define P_BOARD_SINGLE_BOARD_WRAPPER_REGEX @"</a>-->[\\s\\S]*?(?=</td>)"
+#define P_BOARD_NAME_REGEX @"(?<=<font color=\"#000066\">).*?(?=</font></a>)"
 #define P_BOARD_ID_REGEX @"(?<=<a href=\"list.asp\\?boardid=)[0-9]+(?=\">)"
 
 #define POST_LIST_POST_TYPE_REGEX @"(?<=alt=).*?(?=></TD>)"
@@ -53,10 +53,9 @@
     dispatch_once(&oncePredicate, ^{
         sharedInstance = [[self alloc] init];
     });
-    
+
     return sharedInstance;
 }
-
 
 -(NSMutableArray*)parseAllBoardList:(NSData*)html
 {
@@ -83,10 +82,11 @@
     return boardlist;
 }
 
+
 -(NSMutableArray*)parsePersonalBoardList:(NSData*)htmlData
 {
     NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@", html);
+    NSLog(@"%@", html);
     
     NSMutableArray *boardlist = [[NSMutableArray alloc] init];
     
@@ -124,7 +124,9 @@
         
         CCBoardEntity *entity = [CCBoardEntity alloc];
         entity.boardId = boardId;
+
         entity.boardName = boardName;
+                              
         //NSLog(@"%@", lastReplyTimeInDate);
         [boardlist addObject:entity];
         
@@ -132,8 +134,8 @@
         
     }
     return boardlist;
-
 }
+
 
 -(NSMutableArray*)parseTopicList:(NSData*)htmlData boardId:(NSString*)boardId
 {
