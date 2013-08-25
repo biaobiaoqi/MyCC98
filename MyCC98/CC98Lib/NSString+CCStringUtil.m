@@ -9,6 +9,8 @@
 #import "NSString+CCStringUtil.h"
 #import <CommonCrypto/CommonDigest.h>
 
+#import "GTMNSString+HTML.h"
+
 
 @implementation NSString (CCStringUtil)
 
@@ -44,6 +46,11 @@
     [formatter setPMSymbol:@"PM"];
     [formatter setDateFormat:@"M/d/yyyy h:mm:ss aaa"];
     return [formatter dateFromString:self];
+}
+
+- (NSString *)stringByDecodingHTMLEntities
+{
+    return [NSString stringWithString:[self gtm_stringByUnescapingFromHTML]];
 }
 
 @end

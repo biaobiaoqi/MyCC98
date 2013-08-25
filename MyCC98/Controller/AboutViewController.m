@@ -9,6 +9,7 @@
 #import "AboutViewController.h"
 #import "ECSlidingViewController.h"
 #import "MenuViewController.h"
+#import "GAI.h"
 
 @interface AboutViewController ()
 
@@ -29,6 +30,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [[[GAI sharedInstance] defaultTracker] sendView:@"About Screen"];
 }
 
 - (void)didReceiveMemoryWarning

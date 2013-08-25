@@ -13,4 +13,5 @@
 - (NSString*) md5_32;
 - (NSString*) md5_16;
 - (NSDate*) convertToDate;
+- (NSString *)stringByDecodingHTMLEntities;
 @end

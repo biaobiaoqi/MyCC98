@@ -13,6 +13,7 @@
 #import "UIImage+CCImageScale.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
+#import "GAI.h"
 
 @interface NewPostViewController ()
 
@@ -39,6 +40,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[[GAI sharedInstance] defaultTracker] sendView:@"NewPost Screen"];
+    
 	// Do any additional setup after loading the view.
     [[self.textview layer] setBorderColor:[[UIColor blackColor] CGColor]];
     [[self.textview layer] setBorderWidth:1];
@@ -96,7 +100,7 @@
                     postEntity.replyId, @"ReplyId",
                     [self.titleField text], @"subject",
                     @"face7.gif", @"Expression",
-                    [NSString stringWithFormat:@"%@\n[right][color=gray]From [url=dispbbs.asp?boardID=598&ID=4111850&page=1]MyCC98[/url] via iPhone[/color][/right]", [self.textview text]], @"Content",
+                    [NSString stringWithFormat:@"%@", [self.textview text]], @"Content",
                     @"yes", @"signflag",
                     nil];
     } else if (postMode == 2) {
@@ -106,11 +110,11 @@
                     pw16, @"passwd",
                     [self.titleField text], @"subject",
                     @"face7.gif", @"Expression",
-                    [NSString stringWithFormat:@"%@\n[right][color=gray]From [url=dispbbs.asp?boardID=598&ID=4111850&page=1]MyCC98[/url] via iPhone[/color][/right]", [self.textview text]], @"Content",
+                    [NSString stringWithFormat:@"%@", [self.textview text]], @"Content",
                     @"yes", @"signflag",
                     nil];
     }
-    
+    //\n[right][color=gray]From iPhone via [url=dispbbs.asp?boardID=598&ID=4111850&page=1]MyCC98[/url][/color][/right]
     if (postMode == 0) {
         [[CC98API sharedInstance] replyTopicWithBoardId:boardId topicId:topicId data:postData success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //NSLog(@"success");

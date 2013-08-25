@@ -7,6 +7,7 @@
 //
 
 #import "HotTopicTableViewController.h"
+#import "ECSlidingViewController.h"
 #import "PostListViewController.h"
 #import "SVPullToRefresh.h"
 #import "CC98API.h"
@@ -14,6 +15,7 @@
 #import "CC98Store.h"
 #import "CCHotTopicEntity.h"
 #import "HotTopicCell.h"
+#import "GAI.h"
 
 @interface HotTopicTableViewController ()
 
@@ -34,7 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [[[GAI sharedInstance] defaultTracker] sendView:@"HotTopic Screen"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -98,6 +100,8 @@
     
     CCHotTopicEntity *topicEntity = [items objectAtIndex:indexPath.row];
     cell.title.text = topicEntity.topicName;
+    cell.author.text = [NSString stringWithFormat:@"作者：%@", topicEntity.postAuthor];
+    cell.boardname.text = [NSString stringWithFormat:@"版块：%@", topicEntity.boardName];
     //NSLog(@"boardId %@", topicEntity.boardId);
     
     return cell;
@@ -157,6 +161,12 @@
     nextViewController.topicName = entity.topicName;
     
     [self.navigationController pushViewController:nextViewController animated:YES];
+}
+
+
+- (IBAction)revealMenu:(id)sender
+{
+    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 @end

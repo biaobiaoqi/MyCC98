@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSMutableArray *items;
 
+- (IBAction)revealMenu:(id)sender;
+
 @end
