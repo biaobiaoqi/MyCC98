@@ -57,6 +57,7 @@
     return sharedInstance;
 }
 
+
 -(NSMutableArray*)parseAllBoardList:(NSData*)html
 {
     NSMutableArray *boardlist = [[NSMutableArray alloc] init];
@@ -82,11 +83,10 @@
     return boardlist;
 }
 
-
 -(NSMutableArray*)parsePersonalBoardList:(NSData*)htmlData
 {
     NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", html);
+    //NSLog(@"%@", html);
     
     NSMutableArray *boardlist = [[NSMutableArray alloc] init];
     
@@ -124,9 +124,7 @@
         
         CCBoardEntity *entity = [CCBoardEntity alloc];
         entity.boardId = boardId;
-
         entity.boardName = boardName;
-                              
         //NSLog(@"%@", lastReplyTimeInDate);
         [boardlist addObject:entity];
         
@@ -134,8 +132,8 @@
         
     }
     return boardlist;
+    
 }
-
 
 -(NSMutableArray*)parseTopicList:(NSData*)htmlData boardId:(NSString*)boardId
 {
@@ -286,7 +284,6 @@
     TFHpple *parser = [TFHpple hppleWithHTMLData:htmlData];
     
     NSArray *PostContentArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/blockquote/table/tr/td/span"];
-    //
     NSArray *PostAuthorArray;
     NSArray *PostBmArray;
     if ([boardId isEqual: @"182"]) {
@@ -319,6 +316,7 @@
         //pre proccess "<br>" flags
         entity.postContent = [entity.postContent stringByReplacingOccurrencesOfString:@"\n" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [entity.postContent length])];
         entity.postContent = [entity.postContent stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [entity.postContent length])];
+        
         entity.postAuthor = [[[PostAuthorArray objectAtIndex:i] firstChild] content];
         
         NSString *postTimeString = [[PostTimeArray objectAtIndex:i] content];
