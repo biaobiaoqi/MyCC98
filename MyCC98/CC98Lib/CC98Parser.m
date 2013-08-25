@@ -142,8 +142,8 @@
     NSMutableArray *topiclist = [[NSMutableArray alloc] init];
     TFHpple *parser = [TFHpple hppleWithHTMLData:htmlData];
     
-    NSArray *topicNameArray = [parser searchWithXPathQuery:@"//html/body/form[@name='batch']/table/form/tbody/tr[position()>2]/td[position()=2]/a/span"];
-    NSArray *replyNumArray = [parser searchWithXPathQuery:@"//html/body/form[@name='batch']/table/form/tbody/tr[position()>2]/td[position()=4]"];
+    NSArray *topicNameArray = [parser searchWithXPathQuery:@"//html/body/form[@name='batch']/table/tbody/tr[position()>2]/td[position()=2]/a/span"];
+    NSArray *replyNumArray = [parser searchWithXPathQuery:@"//html/body/form[@name='batch']/table/tbody/tr[position()>2]/td[position()=4]"];
     
     NSMutableString *webcontent = [NSMutableString stringWithString:html];
     NSRegularExpression *trim = [[NSRegularExpression alloc]
@@ -284,13 +284,14 @@
     TFHpple *parser = [TFHpple hppleWithHTMLData:htmlData];
     
     NSArray *PostContentArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/blockquote/table/tr/td/span"];
+    //
     NSArray *PostAuthorArray;
     NSArray *PostBmArray;
     if ([boardId isEqual: @"182"]) {
-        PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/font/b"];
+        PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/span/b"];
         PostBmArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/table/tr[position()=1]/td[position()=1]/a[position()=2]"];
     } else {
-        PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/a/font/b"];
+        PostAuthorArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=1]/table/tr[position()=1]/td[position()=1]/a/span/b"];
         PostBmArray = [parser searchWithXPathQuery:@"//html/body/table[@cellpadding='5']/tbody/tr[position()=1]/td[position()=2]/table/tr[position()=1]/td[position()=1]/a[position()=5]"];
     }
     
@@ -316,7 +317,6 @@
         //pre proccess "<br>" flags
         entity.postContent = [entity.postContent stringByReplacingOccurrencesOfString:@"\n" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [entity.postContent length])];
         entity.postContent = [entity.postContent stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [entity.postContent length])];
-        
         entity.postAuthor = [[[PostAuthorArray objectAtIndex:i] firstChild] content];
         
         NSString *postTimeString = [[PostTimeArray objectAtIndex:i] content];
